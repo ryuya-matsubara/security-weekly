@@ -1,0 +1,320 @@
+{
+  "sources_version": "1.0.0",
+  "updated_on": "2026-10-23",
+  "languages": [
+    "ja",
+    "en"
+  ],
+  "scope_note": "調査対象の初期リスト。全URLの継続取得を保証するものではない。各実行で到達性・期間内更新・取得制限を記録する。RSSは任意の発見手段で、日々の収集は初期版では行わない。",
+  "sources": [
+    {
+      "id": "jpcert_alert",
+      "name": "JPCERT/CC 注意喚起",
+      "url": "https://www.jpcert.or.jp/at/",
+      "tier": "official",
+      "priority": "core",
+      "purpose": "国内向け注意喚起と公式対策",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "jpcert_weekly",
+      "name": "JPCERT/CC Weekly Report",
+      "url": "https://www.jpcert.or.jp/wr/",
+      "tier": "official",
+      "priority": "core",
+      "purpose": "国内外の重要情報と関連リンク",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "ipa",
+      "name": "IPA 情報セキュリティ",
+      "url": "https://www.ipa.go.jp/security/",
+      "tier": "official",
+      "priority": "core",
+      "purpose": "国内の脅威・注意喚起・ガイド",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "jvn",
+      "name": "JVN",
+      "url": "https://jvn.jp/",
+      "tier": "official",
+      "priority": "core",
+      "purpose": "国内で調整された脆弱性情報",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "cisa_kev",
+      "name": "CISA Known Exploited Vulnerabilities",
+      "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "tier": "official",
+      "priority": "core",
+      "purpose": "対象期間の追加・更新と悪用状況",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "cisa_advisories",
+      "name": "CISA Cybersecurity Advisories",
+      "url": "https://www.cisa.gov/news-events/cybersecurity-advisories",
+      "tier": "official",
+      "priority": "rotation",
+      "purpose": "政府機関の技術的注意喚起",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "ncsc",
+      "name": "UK NCSC",
+      "url": "https://www.ncsc.gov.uk/",
+      "tier": "official",
+      "priority": "rotation",
+      "purpose": "政策・防御指針",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "sans",
+      "name": "SANS NewsBites",
+      "url": "https://www.sans.org/newsletters/newsbites",
+      "tier": "curation",
+      "priority": "core",
+      "purpose": "専門家が選別した重要ニュース",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "tldrsec",
+      "name": "tl;dr sec",
+      "url": "https://tldrsec.com/",
+      "tier": "curation",
+      "priority": "core",
+      "purpose": "研究・ツール・講演・専門家の知見",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "bleeping",
+      "name": "BleepingComputer",
+      "url": "https://www.bleepingcomputer.com/",
+      "tier": "media",
+      "priority": "core",
+      "purpose": "インシデント・脆弱性の発見",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "thehackernews",
+      "name": "The Hacker News",
+      "url": "https://thehackernews.com/",
+      "tier": "media",
+      "priority": "core",
+      "purpose": "国内外の話題の発見",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "securityweek",
+      "name": "SecurityWeek",
+      "url": "https://www.securityweek.com/",
+      "tier": "media",
+      "priority": "rotation",
+      "purpose": "業界動向・インシデント",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "itmedia_security",
+      "name": "ITmedia エンタープライズ セキュリティ",
+      "url": "https://www.itmedia.co.jp/enterprise/subtop/security/",
+      "tier": "media",
+      "priority": "core",
+      "purpose": "日本語圏の話題の発見",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "msrc",
+      "name": "Microsoft Security Response Center",
+      "url": "https://msrc.microsoft.com/blog/",
+      "tier": "vendor",
+      "priority": "rotation",
+      "purpose": "Windows等の公式発表",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "aws_security",
+      "name": "AWS Security Blog",
+      "url": "https://aws.amazon.com/blogs/security/",
+      "tier": "vendor",
+      "priority": "rotation",
+      "purpose": "クラウド運用・認証・防御",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "google_security",
+      "name": "Google Security Blog",
+      "url": "https://security.googleblog.com/",
+      "tier": "vendor",
+      "priority": "rotation",
+      "purpose": "製品・研究の公式発信",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "projectzero",
+      "name": "Google Project Zero",
+      "url": "https://projectzero.google/",
+      "tier": "research",
+      "priority": "rotation",
+      "purpose": "脆弱性研究・新手法",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "jpcert_eyes",
+      "name": "JPCERT/CC Eyes",
+      "url": "https://blogs.jpcert.or.jp/",
+      "tier": "research",
+      "priority": "rotation",
+      "purpose": "国内の脅威分析・技術知見",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "usenix",
+      "name": "USENIX",
+      "url": "https://www.usenix.org/",
+      "tier": "research",
+      "priority": "rotation",
+      "purpose": "Security等の論文と講演",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "schneier",
+      "name": "Schneier on Security",
+      "url": "https://www.schneier.com/",
+      "tier": "expert",
+      "priority": "rotation",
+      "purpose": "専門家の分析・意見",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "troyhunt",
+      "name": "Troy Hunt",
+      "url": "https://www.troyhunt.com/",
+      "tier": "expert",
+      "priority": "rotation",
+      "purpose": "漏えい・認証・本人の週次発信",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "miessler",
+      "name": "Daniel Miessler",
+      "url": "https://danielmiessler.com/",
+      "tier": "expert",
+      "priority": "rotation",
+      "purpose": "セキュリティとAI・業界の見解",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "github_advisories",
+      "name": "GitHub Advisory Database",
+      "url": "https://github.com/advisories",
+      "tier": "community",
+      "priority": "rotation",
+      "purpose": "OSS脆弱性の一次資料への入口",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "github_tools",
+      "name": "GitHub",
+      "url": "https://github.com/",
+      "tier": "community",
+      "priority": "rotation",
+      "purpose": "検索で見つかったツールの公式リポジトリを個別確認",
+      "access": "public_web_or_search",
+      "rss_url": null
+    }
+  ],
+  "experts": [
+    {
+      "name": "Bruce Schneier",
+      "expertise": "セキュリティ技術・政策の論考",
+      "official_url": "https://www.schneier.com/",
+      "x_handle": null
+    },
+    {
+      "name": "Troy Hunt",
+      "expertise": "Have I Been Pwnedの運営・データ漏えい",
+      "official_url": "https://www.troyhunt.com/",
+      "x_handle": null
+    },
+    {
+      "name": "Daniel Miessler",
+      "expertise": "セキュリティ・AIの研究と発信",
+      "official_url": "https://danielmiessler.com/",
+      "x_handle": null
+    },
+    {
+      "name": "Clint Gibler",
+      "expertise": "tl;dr secの編集・AppSec関連の発信",
+      "official_url": "https://tldrsec.com/",
+      "x_handle": null
+    }
+  ],
+  "x_policy": {
+    "mode": "public_web_search_only",
+    "paid_api": false,
+    "account_resolution": "本人の公式サイトからリンクをたどって確認。未確認のハンドルを補完しない。",
+    "coverage": "検索に出る公開投稿のみ。網羅性・反応数の継続取得は保証しない。"
+  },
+  "discovery_queries": [
+    {
+      "topic": "vulnerability",
+      "ja": "セキュリティ 脆弱性 悪用 注意喚起 {start} {end}",
+      "en": "security vulnerability actively exploited advisory {start} {end}"
+    },
+    {
+      "topic": "incident",
+      "ja": "サイバー攻撃 情報漏えい 調査報告 {start} {end}",
+      "en": "cyberattack data breach incident investigation {start} {end}"
+    },
+    {
+      "topic": "defense",
+      "ja": "セキュリティ 防御 認証 クラウド 新手法 {start} {end}",
+      "en": "security defense identity cloud detection new technique {start} {end}"
+    },
+    {
+      "topic": "research_tools",
+      "ja": "セキュリティ 研究 発表 ツール {start} {end}",
+      "en": "security research paper open source tool released {start} {end}"
+    },
+    {
+      "topic": "policy",
+      "ja": "サイバーセキュリティ 政策 標準 ガイドライン {start} {end}",
+      "en": "cybersecurity policy standard guidance {start} {end}"
+    },
+    {
+      "topic": "expert_views",
+      "ja": "セキュリティ 研究者 見解 講演 {start} {end}",
+      "en": "cybersecurity researcher analysis talk opinion {start} {end}"
+    }
+  ],
+  "extra_discovery": [
+    "site:x.com {person_or_topic} {start} {end}",
+    "{product} security advisory {start} {end}"
+  ],
+  "query_notes": "日付や検索式はサービスに合わせて調整。検索の期間フィルターだけに依存せず、本文の日付を確認する。"
+}
