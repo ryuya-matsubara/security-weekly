@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0.0",
+  "policy_version": "1.0.0",
+  "sources_version": "1.0.0",
+  "is_example": true,
+  "report_id": "security-weekly-2026-10-19",
+  "title": "表示用サンプル：実際のニュースではありません",
+  "period": {
+    "start": "2026-10-19T00:00:00+09:00",
+    "end_exclusive": "2026-10-26T00:00:00+09:00",
+    "timezone": "Asia/Tokyo"
+  },
+  "generated_at": "2026-10-26T07:30:00+09:00",
+  "status": "partial",
+  "spec": {
+    "repository": "ryuya-matsubara/security-weekly",
+    "branch": "main",
+    "commit_sha": "0000000000000000000000000000000000000000",
+    "files": [
+      {
+        "path": "spec/research-policy.md",
+        "blob_sha": "0000000000000000000000000000000000000000"
+      },
+      {
+        "path": "spec/sources.json",
+        "blob_sha": "0000000000000000000000000000000000000000"
+      },
+      {
+        "path": "spec/report.schema.json",
+        "blob_sha": "0000000000000000000000000000000000000000"
+      },
+      {
+        "path": "spec/sample-report.json",
+        "blob_sha": "0000000000000000000000000000000000000000"
+      }
+    ]
+  },
+  "summary": "これは閲覧画面の開発と文章形式の説明に使う架空のサンプルです。実在する事件・研究・発言を報告したものではありません。SHA、日時、出典も実行記録として使用できません。",
+  "top_article_ids": [
+    "a001",
+    "a002"
+  ],
+  "articles": [
+    {
+      "id": "a001",
+      "headline": "【架空例】サンプル製品で認証に関する問題が修正",
+      "category": "vulnerability",
+      "tags": [
+        "認証",
+        "ネットワーク"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "架空のサンプル製品に関する公式注意喚起を扱う場合の表示例です。概要には何が起きたかと影響を短く書き、詳細には確認した根拠と不確実な点を分けて記載します。実際の対策情報ではありません。",
+      "details": "これは脆弱性ニュースを掲載する際の書き方を示す架空例です。実際の週報では、ベンダーの公式アドバイザリを読み、問題の内容・影響する構成・修正情報を確認してから記載します。悪用の有無を確認できなければ、悪用されているとは書きません。CVEやバージョンが不明なら推測で補完せず、確認できた情報へのリンクを添えます。本例の製品・執筆者・URLには実在のニュースとしての意味はありません。",
+      "implications": [
+        "実際の週報では、読者が確認すべき対象や条件を公式情報に基づいて説明する。"
+      ],
+      "uncertainties": [
+        "架空例のため影響製品・悪用状況は存在しない。"
+      ],
+      "author": {
+        "name": "架空の製品セキュリティチーム",
+        "affiliation": "架空のサンプル組織",
+        "expertise": "製品の開発当事者という設定",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "公式アドバイザリ（架空）",
+      "published_at": "2026-10-21T10:00:00+09:00",
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "架空例では公開日時が対象期間内という設定。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "公式注意喚起を確認した場合の説明例。実際の重要性を主張するものではない。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "架空の公式アドバイザリ",
+          "url": "https://example.com/s1",
+          "publisher": "架空のサンプル組織",
+          "author": "架空の執筆者",
+          "role": "primary",
+          "published_at": "2026-10-21T10:00:00+09:00",
+          "updated_at": null,
+          "accessed_at": "2026-10-26T07:00:00+09:00",
+          "read_status": "page_read",
+          "notes": "表示用の架空データ。実際に取得した資料ではない。"
+        }
+      ]
+    },
+    {
+      "id": "a002",
+      "headline": "【架空例】研究者が新しい検知手法を解説",
+      "category": "research_tools",
+      "tags": [
+        "検知",
+        "研究"
+      ],
+      "content_type": "mixed",
+      "priority": "medium",
+      "summary": "研究発表と著者の見解を紹介する場合の架空例です。何が新しいかを説明し、研究条件で示された結果と、現場での有効性が未確認な点を分けて書きます。実際の研究成果ではありません。",
+      "details": "実際の週報では、研究者の原文や論文・コードを確認し、既存手法との違いと適用条件を整理します。著者が期待する効果と、実験で示された事実を区別します。専門家の発信という理由で採用する場合も、関連分野の実績を確認し、知名度だけで正しさを保証しません。この記事はその説明形式を示す架空データで、ダウンロードしたり実行したりするツールはありません。",
+      "implications": [
+        "実際の週報では、導入条件と限界を簡潔に説明する。"
+      ],
+      "uncertainties": [
+        "現場での有効性に関する説明形式を示す架空例。"
+      ],
+      "author": {
+        "name": "架空の研究者",
+        "affiliation": null,
+        "expertise": "架空の検知研究",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "研究ブログ（架空）",
+      "published_at": "2026-10-21T10:00:00+09:00",
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "架空例では発表日時が対象期間内という設定。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "novelty",
+          "explanation": "新規性は原典で既存手法との違いを確認して説明する、という形式の例。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "架空の研究記事",
+          "url": "https://example.com/s1",
+          "publisher": "架空のサンプル組織",
+          "author": "架空の執筆者",
+          "role": "paper",
+          "published_at": "2026-10-21T10:00:00+09:00",
+          "updated_at": null,
+          "accessed_at": "2026-10-26T07:00:00+09:00",
+          "read_status": "page_read",
+          "notes": "表示用の架空データ。実際に取得した資料ではない。"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "source_checks": [
+      {
+        "source_id": "jpcert_alert",
+        "name": "JPCERT/CC 注意喚起",
+        "url": "https://www.jpcert.or.jp/at/",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "サンプル作成のため実調査は未実施。ライブ週報ではcore全件の実際の確認状況を記録する。"
+      }
+    ],
+    "searches": [],
+    "limitations": [
+      "表示用サンプル。実調査・定期実行・機械検証を行った記録ではない。"
+    ]
+  },
+  "validation": {
+    "machine_validation": "not_run",
+    "editorial_review": "not_run",
+    "notes": [
+      "is_example=trueのファイルを実ニュースとして取り込まないこと。",
+      "全ゼロSHAは例示用。ライブ出力では実際に取得したSHAが必要。"
+    ]
+  }
+}
