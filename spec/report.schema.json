@@ -1,0 +1,761 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ryuya-matsubara/security-weekly/blob/main/spec/report.schema.json",
+  "title": "Security Weekly Report 1.0.0",
+  "description": "日本語の週報交換形式。JSON Schema単独ではID間参照・出典の真偽・期間計算は検証できない。research-policy.mdの意味上の規則も適用する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "sources_version",
+    "is_example",
+    "report_id",
+    "title",
+    "period",
+    "generated_at",
+    "status",
+    "spec",
+    "summary",
+    "top_article_ids",
+    "articles",
+    "coverage",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "is_example": {
+      "type": "boolean"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^security-weekly-[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end_exclusive",
+        "timezone"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end_exclusive": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timezone": {
+          "const": "Asia/Tokyo"
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "complete",
+        "partial",
+        "no_update"
+      ]
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "branch",
+        "commit_sha",
+        "files"
+      ],
+      "properties": {
+        "repository": {
+          "const": "ryuya-matsubara/security-weekly"
+        },
+        "branch": {
+          "const": "main"
+        },
+        "commit_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "blob_sha"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "enum": [
+                  "spec/research-policy.md",
+                  "spec/sources.json",
+                  "spec/report.schema.json",
+                  "spec/sample-report.json"
+                ]
+              },
+              "blob_sha": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              }
+            }
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "top_article_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 3,
+      "uniqueItems": true
+    },
+    "articles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/article"
+      },
+      "maxItems": 20
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_checks",
+        "searches",
+        "limitations"
+      ],
+      "properties": {
+        "source_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceCheck"
+          }
+        },
+        "searches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/search"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "machine_validation",
+        "editorial_review",
+        "notes"
+      ],
+      "properties": {
+        "machine_validation": {
+          "type": "string",
+          "enum": [
+            "passed",
+            "failed",
+            "not_run"
+          ]
+        },
+        "editorial_review": {
+          "type": "string",
+          "enum": [
+            "completed",
+            "not_run"
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "affiliation",
+        "expertise",
+        "evidence_source_ids"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affiliation": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expertise": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "url",
+        "publisher",
+        "author",
+        "role",
+        "published_at",
+        "updated_at",
+        "accessed_at",
+        "read_status",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "reporting",
+            "analysis",
+            "original_post",
+            "paper",
+            "tool"
+          ]
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "accessed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "read_status": {
+          "type": "string",
+          "enum": [
+            "page_read",
+            "snippet_only",
+            "unavailable"
+          ]
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "explanation",
+        "source_ids",
+        "metric"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "importance",
+            "attention",
+            "expertise",
+            "novelty",
+            "relevance"
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "metric": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "value",
+                "source_id",
+                "captured_at"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "captured_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "article": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "headline",
+        "category",
+        "tags",
+        "content_type",
+        "priority",
+        "summary",
+        "details",
+        "implications",
+        "uncertainties",
+        "author",
+        "speakers",
+        "medium",
+        "published_at",
+        "updated_at",
+        "event_date",
+        "period_basis",
+        "update_note",
+        "cve_ids",
+        "reasons",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^a[0-9]{3}$"
+        },
+        "headline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "vulnerability",
+            "incident",
+            "defense_operations",
+            "research_tools",
+            "policy_standards",
+            "expert_opinion"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "content_type": {
+          "type": "string",
+          "enum": [
+            "facts",
+            "opinion",
+            "mixed"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "details": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implications": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "author": {
+          "$ref": "#/$defs/person"
+        },
+        "speakers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/person"
+          }
+        },
+        "medium": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "event_date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "period_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "update_note": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cve_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CVE-[0-9]{4}-[0-9]{4,}$"
+          },
+          "uniqueItems": true
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reason"
+          },
+          "minItems": 1
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "sourceCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "name",
+        "url",
+        "status",
+        "method",
+        "checked_at",
+        "evidence_urls",
+        "notes"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "checked_with_candidates",
+            "checked_no_candidates",
+            "access_failed",
+            "search_only",
+            "not_checked"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "web_page",
+            "rss",
+            "web_search",
+            "not_attempted"
+          ]
+        },
+        "checked_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_urls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          }
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "search": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "language",
+        "query",
+        "searched_at",
+        "reviewed_urls",
+        "notes"
+      ],
+      "properties": {
+        "topic": {
+          "type": "string",
+          "enum": [
+            "vulnerability",
+            "incident",
+            "defense",
+            "research_tools",
+            "policy",
+            "expert_views",
+            "x",
+            "follow_up"
+          ]
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "ja",
+            "en",
+            "mixed"
+          ]
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1
+        },
+        "searched_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviewed_urls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          }
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "no_update"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "articles": {
+            "maxItems": 0
+          },
+          "top_article_ids": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}
