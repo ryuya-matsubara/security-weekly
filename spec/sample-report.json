@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0.0",
-  "policy_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "policy_version": "1.0.1",
   "sources_version": "1.0.0",
   "is_example": true,
   "report_id": "security-weekly-2026-10-19",
@@ -177,11 +177,10 @@
     ],
     "searches": [],
     "limitations": [
-      "表示用サンプル。実調査・定期実行・機械検証を行った記録ではない。"
+      "表示用サンプル。実調査・定期実行を行った記録ではない。"
     ]
   },
   "validation": {
-    "machine_validation": "not_run",
     "editorial_review": "not_run",
     "notes": [
       "is_example=trueのファイルを実ニュースとして取り込まないこと。",

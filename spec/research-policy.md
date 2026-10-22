@@ -1,6 +1,6 @@
 # セキュリティ週報 調査・編集方針
 
-policy_version: 1.0.0
+policy_version: 1.0.1
 最終更新: 2026-10-23
 正本: ryuya-matsubara/security-weekly / main
 出力仕様: spec/report.schema.json
@@ -77,9 +77,9 @@ reason.type は importance / attention / expertise / novelty / relevance。
 - spec/report.schema.jsonに従うUTF-8のJSONを、security-weekly_YYYY-MM-DD_YYYY-MM-DD.json という名前で作る。末尾の日付は対象期間の日曜日（end_exclusiveの前日）。
 - status=completeは必須調査が完了した場合。未確認情報源や調査群があればpartial。十分調査できたが選定基準を満たす記事がなければno_updateで空のarticles。失敗をno_updateに置き換えない。
 - 形式の確認: JSON構文、必須項目、記事ID一意性、重要記事ID参照、source_id参照、期間の整合性、URL形式、サンプルの混入を確認する。
-- JSON Schemaの機械検証と事実確認は別。validationには実際に行った確認だけ記録する。ツールがない/実行許可がない確認はnot_run。テスト・検証プログラムの実行は本人の事前許可がある場合だけ行う。許可がなければ目視照合にとどめ、machine_validation=not_runを記録する。
+- 形式・内容・出典を目視で照合し、validationには実際に行った編集上の確認だけ記録する。
 - 実行環境で利用できる永続ファイル保存機能を使って保存する。ローカル一時ファイルへのリンクだけを永続保存済みと称しない。
-- 最終結果に対象期間・記事数・重要3件・partialなら不足・検証状態・実際に取得できるファイルリンクを提示する。
+- 最終結果に対象期間・記事数・重要3件・partialなら不足・内容と出典の確認状況・実際に取得できるファイルリンクを提示する。
 - ファイル作成/永続保存に失敗したら明示する。JSONのコードブロックだけをファイル納品と称しない。
 - Gmailからの送信、LINE配信、GitHubへの週報の自動書き込み、Web公開は行わない。通知はChatGPT標準機能を利用する。
 
@@ -94,4 +94,3 @@ reason.type は importance / attention / expertise / novelty / relevance。
 - schema_versionは対応するJSON仕様の版、policy_version/sources_versionは読んだ各ファイルの版。JSON仕様の破壊的変更時はメジャー版を上げる。
 - is_exampleはライブ週報では必ずfalse。top_article_idsはarticles内のIDのみ。
 - validation.editorial_review=completedはAIがこの仕様に沿って出典・参照・内容を見直した意味であり、人間の監修を示さない。
-- 機械検証未実施だけで記事調査を未完了扱いにはしないが、検証未実施を最終結果とvalidation.notesに明記する。

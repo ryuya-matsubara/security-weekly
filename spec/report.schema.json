@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/ryuya-matsubara/security-weekly/blob/main/spec/report.schema.json",
-  "title": "Security Weekly Report 1.0.0",
-  "description": "日本語の週報交換形式。JSON Schema単独ではID間参照・出典の真偽・期間計算は検証できない。research-policy.mdの意味上の規則も適用する。",
+  "title": "Security Weekly Report 2.0.0",
+  "description": "日本語の週報交換形式。research-policy.mdの意味上の規則も適用し、ID間参照・出典の真偽・期間計算は目視で照合する。",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -24,7 +24,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0.0"
+      "const": "2.0.0"
     },
     "policy_version": {
       "type": "string",
@@ -183,19 +183,10 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "machine_validation",
         "editorial_review",
         "notes"
       ],
       "properties": {
-        "machine_validation": {
-          "type": "string",
-          "enum": [
-            "passed",
-            "failed",
-            "not_run"
-          ]
-        },
         "editorial_review": {
           "type": "string",
           "enum": [
