@@ -1,0 +1,2 @@
+# security-weekly
+ChatGPTが毎週セキュリティに関するまとめを調査するための仕様を格納
