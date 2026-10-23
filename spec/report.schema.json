@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/ryuya-matsubara/security-weekly/blob/main/spec/report.schema.json",
-  "title": "Security Weekly Report 2.0.0",
-  "description": "日本語の週報交換形式。research-policy.mdの意味上の規則も適用し、ID間参照・出典の真偽・期間計算は目視で照合する。",
+  "title": "Security Weekly Report 3.0.0",
+  "description": "日本語のITセキュリティ週報交換形式。掲載対象はITセキュリティに関する内容に限り、掲載理由は重要度・注目度のみ。research-policy.mdの意味上の規則も適用し、ID間参照・出典の真偽・期間計算は目視で照合する。",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -24,7 +24,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "2.0.0"
+      "const": "3.0.0"
     },
     "policy_version": {
       "type": "string",
@@ -140,14 +140,16 @@
         "minLength": 1
       },
       "maxItems": 3,
-      "uniqueItems": true
+      "uniqueItems": true,
+      "description": "重要度・注目度の根拠を比較して選んだピックアップ記事のID。最大3件。掲載件数が少ない場合に3件まで増やさない。"
     },
     "articles": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/article"
       },
-      "maxItems": 20
+      "maxItems": 20,
+      "description": "最低・目標件数は設けず、採用条件を満たす記事のみ。十分調査して該当がなければstatus=no_updateと空配列。"
     },
     "coverage": {
       "type": "object",
@@ -368,15 +370,14 @@
           "type": "string",
           "enum": [
             "importance",
-            "attention",
-            "expertise",
-            "novelty",
-            "relevance"
-          ]
+            "attention"
+          ],
+          "description": "importance=重要度、attention=注目度。少なくとも一方の高さを具体的根拠で説明する。"
         },
         "explanation": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "出典で確認した事実・指標と、それが重要度または注目度が高いという判断につながる理由。"
         },
         "source_ids": {
           "type": "array",
@@ -590,7 +591,8 @@
           "items": {
             "$ref": "#/$defs/reason"
           },
-          "minItems": 1
+          "minItems": 1,
+          "description": "重要度または注目度が高いと判断した具体的理由と出典。少なくとも1件。ITセキュリティであること自体や、専門性・新規性・関連性は理由の観点に含めない。"
         },
         "sources": {
           "type": "array",

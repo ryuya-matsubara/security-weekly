@@ -94,7 +94,7 @@ function readReport(text, entry) {
   }
   need(isObject(report));
   if (report.is_example === true) throw new ReportError('このファイルは表示用サンプルです。実際の週報としては表示できません。', 'example');
-  if (report.schema_version !== '2.0.0') throw new ReportError('この週報は未対応のデータ形式です。閲覧画面の更新が必要です。', 'version');
+  if (!['2.0.0', '3.0.0'].includes(report.schema_version)) throw new ReportError('この週報は未対応のデータ形式です。閲覧画面の更新が必要です。', 'version');
   need(report.is_example === false && isString(report.title) && isString(report.summary));
   need(['complete', 'partial', 'no_update'].includes(report.status));
   need(isObject(report.period) && report.period.timezone === 'Asia/Tokyo');
@@ -125,6 +125,10 @@ function readReport(text, entry) {
     need(objectArray(article.reasons) && article.reasons.length > 0);
     for (const reason of article.reasons) {
       need(isString(reason.type) && isString(reason.explanation) && stringArray(reason.source_ids));
+      if (report.schema_version === '3.0.0') {
+        need(['importance', 'attention'].includes(reason.type));
+        need(reason.explanation.trim().length > 0 && reason.source_ids.length > 0);
+      }
       need(reason.source_ids.every(id => sourceIds.has(id)));
       need(reason.metric === null || isObject(reason.metric));
     }

@@ -4,7 +4,10 @@ const CATEGORIES = {
   vulnerability: '脆弱性', incident: 'インシデント', defense_operations: '防御・運用',
   research_tools: '研究・ツール', policy_standards: '政策・標準', expert_opinion: '専門家の見解',
 };
-const REASONS = { importance: '重要性', attention: '注目度', expertise: '専門性', novelty: '新規性', relevance: 'インフラとの関連' };
+const REASONS = { importance: '重要度', attention: '注目度' };
+function selectionReasons(article) {
+  return article.reasons.filter(reason => Object.hasOwn(REASONS, reason.type));
+}
 const CONTENT_TYPES = { facts: '事実', opinion: '意見', mixed: '事実と意見を含む' };
 const CHECK_STATUSES = {
   checked_with_candidates: '候補あり', checked_no_candidates: '該当候補なし',
@@ -205,10 +208,10 @@ function createCard(article, index = null) {
   title.append(articleLink(article, article.headline));
   const badges = node('div', null, 'badges');
   if (article.content_type !== 'facts') badges.append(badge(CONTENT_TYPES[article.content_type], 'opinion'));
-  const reasonNames = [...new Set(article.reasons.map(reason => REASONS[reason.type] || reason.type))];
+  const reasonNames = [...new Set(selectionReasons(article).map(reason => REASONS[reason.type]))];
   card.append(top, title);
   if (badges.childNodes.length) card.append(badges);
-  card.append(node('p', article.summary, 'card-summary'), node('p', `掲載理由：${reasonNames.join('・')}`, 'reason-labels'));
+  card.append(node('p', article.summary, 'card-summary'), node('p', reasonNames.length ? `掲載理由：${reasonNames.join('・')}` : '重要度・注目度の判断理由は未記録', 'reason-labels'));
   const footer = node('div', null, 'card-footer');
   footer.append(node('span', article.author.name, 'card-author'), articleLink(article, '詳しく読む →'));
   card.append(footer);
@@ -274,7 +277,7 @@ function renderCards() {
   const words = normalize(filters.query).trim().split(/\s+/).filter(Boolean);
   const articles = state.data.report.articles.filter(article => {
     if (filters.category && article.category !== filters.category) return false;
-    if (filters.reason && !article.reasons.some(reason => reason.type === filters.reason)) return false;
+    if (filters.reason && !selectionReasons(article).some(reason => reason.type === filters.reason)) return false;
     if (filters.tag && !article.tags.includes(filters.tag)) return false;
     const text = normalize([
       article.headline, article.summary, article.details, article.author.name, article.author.affiliation || '',
@@ -364,9 +367,11 @@ function renderDetail(id) {
   section(parent, '実務への示唆', article.implications.length ? listOf(article.implications) : null);
   section(parent, '未確認事項・留意点', article.uncertainties.length ? listOf(article.uncertainties) : null);
   const reasons = node('div');
-  for (const reason of article.reasons) {
+  const selectedReasons = selectionReasons(article);
+  if (!selectedReasons.length) reasons.append(node('p', 'この過去記事には、重要度・注目度の判断理由が記録されていません。'));
+  for (const reason of selectedReasons) {
     const block = node('div', null, 'reason-block');
-    block.append(node('h3', REASONS[reason.type] || reason.type), node('p', reason.explanation));
+    block.append(node('h3', `${REASONS[reason.type]}が高いと判断した理由`), node('p', reason.explanation));
     if (reason.metric) block.append(node('p', `${reason.metric.name || '指標'}：${reason.metric.value ?? '不明'}（${formatDate(reason.metric.captured_at, true)}時点）`));
     const links = node('div', null, 'reason-links');
     for (const sourceId of reason.source_ids) {
