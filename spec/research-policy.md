@@ -1,6 +1,6 @@
 # セキュリティ週報 調査・編集方針
 
-policy_version: 1.0.2
+policy_version: 1.0.3
 最終更新: 2026-10-23
 正本: ryuya-matsubara/security-weekly / main
 出力仕様: spec/report.schema.json
@@ -74,11 +74,11 @@ reason.type は importance / attention / expertise / novelty / relevance。
 - 出典URLは実際に取得結果で確認したものだけ。架空URL、追跡トークン入り私的URL、検索ツール内部参照IDをJSONの出典に書かない。
 
 ## 出力・保存
-- spec/report.schema.jsonに従うUTF-8のJSONを、security-weekly_YYYY-MM-DD_YYYY-MM-DD.json という名前で作り、ryuya-matsubara/security-weekly の main ブランチの output/ に保存する。末尾の日付は対象期間の日曜日（end_exclusiveの前日）。
+- spec/report.schema.jsonに従うUTF-8のJSONを、YYYYMMDD_security-weekly.json という名前で作り、ryuya-matsubara/security-weekly の main ブランチの output/ に保存する。YYYYMMDDは対象期間の初日（period.start）をAsia/Tokyoの年月日で表し、ハイフンを入れない。例: 2026年10月19日〜25日が対象なら20261019_security-weekly.json。実行日や対象期間の最終日を使わない。
 - status=completeは必須調査が完了した場合。未確認情報源や調査群があればpartial。十分調査できたが選定基準を満たす記事がなければno_updateで空のarticles。失敗をno_updateに置き換えない。
 - 形式の確認: JSON構文、必須項目、記事ID一意性、重要記事ID参照、source_id参照、期間の整合性、URL形式、サンプルの混入を確認する。
 - 形式・内容・出典を目視で照合し、validationには実際に行った編集上の確認だけ記録する。
-- GitHub連携を使い、output/security-weekly_YYYY-MM-DD_YYYY-MM-DD.json をコミットする。同じ対象期間のファイルがある場合は更新し、過去の内容はGitの履歴に残す。内容が同じなら新しいコミットは不要。
+- GitHub連携を使い、output/YYYYMMDD_security-weekly.json をコミットする。同じ対象期間のファイルがある場合は更新し、過去の内容はGitの履歴に残す。内容が同じなら新しいコミットは不要。
 - 保存直前にmainの最新コミットを取得し、その版を基に対象JSONだけを追加・更新する。仕様の取得時点以降に加わった変更を消さない。force pushは行わず、競合した場合は最新のmainを取得し直して対象JSONだけを適用する。
 - 保存後は保存先コミットから対象ファイルを読み戻し、内容を照合してから保存成功と報告する。週報内のspec.commit_shaは、出力の保存先コミットではなく、調査開始時に取得した仕様のコミットを記録する。
 - 最終結果に対象期間・記事数・重要3件・partialなら不足・内容と出典の確認状況・保存先のGitHubファイルリンクと保存先コミットSHAを提示する。

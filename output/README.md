@@ -3,8 +3,10 @@
 ChatGPTの定期タスクが生成したセキュリティ週報を、このフォルダに保存します。
 
 - ブランチ: main
-- ファイル名: security-weekly_YYYY-MM-DD_YYYY-MM-DD.json
-- 前の日付は対象期間の月曜日、後の日付は日曜日です。
+- ファイル名: YYYYMMDD_security-weekly.json
+- 文字コード: UTF-8
+- YYYYMMDDは対象期間の初日をAsia/Tokyoの年月日で表します（ハイフンなし）。
+- 例: 2026年10月19日〜25日の週報は20261019_security-weekly.jsonです。
 - 同じ週を再作成した場合は同じファイルを更新し、過去の内容はGitの履歴に残します。
 - 保存したJSONはGitHubからダウンロードし、閲覧画面へ手動インポートします。
 

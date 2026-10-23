@@ -9,7 +9,6 @@ ChatGPTが毎週セキュリティ情報を調査し、iPhoneで手動インポ�
 | [情報源リスト](spec/sources.json) | 公式機関、メディア、研究、専門家、補足検索 |
 | [JSON仕様](spec/report.schema.json) | JSON Schema Draft 2020-12による週報の形式 |
 | [完成例](spec/sample-report.json) | 架空の表示用サンプル。実ニュースではありません |
-| [実行プロンプト](prompts/task-prompt.md) | 定期タスクへ保存する実行指示 |
 | [設定手順](docs/setup.md) | GitHub接続、スケジュール登録、通知、ダウンロード |
 | [出力フォルダ](output/) | 毎週生成したJSON週報の保存先 |
 
@@ -19,14 +18,14 @@ ChatGPTが毎週セキュリティ情報を調査し、iPhoneで手動インポ�
 
 固定情報源＋補足検索＋原典確認の方式です。Xは検索で確認できる公開投稿を補助的に利用します。全Web・Xの網羅や、すべてのページの取得を保証しません。実際の調査範囲と不足はJSONに残します。
 
-週報の自動公開やGmail/LINE送信は行いません。生成したJSONはmainブランチのoutput/security-weekly_YYYY-MM-DD_YYYY-MM-DD.jsonに保存します。同じ週の再作成は同じファイルを更新し、過去の内容はGitの履歴に残します。ChatGPT標準の完了通知から保存先のGitHubリンクを開き、JSONをダウンロードして、今後作る閲覧画面へ手動インポートする想定です。
+週報の自動公開やGmail/LINE送信は行いません。生成したJSONはmainブランチのoutput/YYYYMMDD_security-weekly.jsonに保存します。ファイル名の日付は対象期間の初日を日本時間のYYYYMMDDで表します。同じ週の再作成は同じファイルを更新し、過去の内容はGitの履歴に残します。ChatGPT標準の完了通知から保存先のGitHubリンクを開き、JSONをダウンロードして、今後作る閲覧画面へ手動インポートする想定です。
 
 ## 開始するには
-[設定手順](docs/setup.md)を読み、[実行プロンプト](prompts/task-prompt.md)の全文を定期タスクに登録してください。
+[設定手順](docs/setup.md)に従い、ChatGPTのスケジュール画面に実行指示を登録してください。実行プロンプトはChatGPT側で管理し、このリポジトリには保存しません。
 初期提案は毎週月曜07:00（Asia/Tokyo）。このリポジトリにファイルを置くだけではタスクは作成されません。
 
 このリポジトリ作成時点では、定期タスクは未登録です。GitHubへのアクセスとファイル保存の可否は、定期実行環境に依存します。
 
 ## 版の管理
-現行のschema_versionは2.0.0、policy_versionは1.0.2、sources_versionは1.0.0です。
+現行のschema_versionは2.0.0、policy_versionは1.0.3、sources_versionは1.0.0です。
 仕様の更新は次回の取得時に反映されます。ファイルパスや起動手順を変更するときは、タスクの保存済みプロンプトも更新してください。
