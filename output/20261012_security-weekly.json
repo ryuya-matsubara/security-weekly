@@ -1,0 +1,1549 @@
+{
+  "schema_version": "2.0.0",
+  "policy_version": "1.0.4",
+  "sources_version": "1.0.0",
+  "is_example": false,
+  "report_id": "security-weekly-2026-10-12",
+  "title": "セキュリティ週報：2026年10月12日〜18日",
+  "period": {
+    "start": "2026-10-12T00:00:00+09:00",
+    "end_exclusive": "2026-10-19T00:00:00+09:00",
+    "timezone": "Asia/Tokyo"
+  },
+  "generated_at": "2026-10-23T01:03:33.308Z",
+  "status": "partial",
+  "spec": {
+    "repository": "ryuya-matsubara/security-weekly",
+    "branch": "main",
+    "commit_sha": "03e19cfc0024284b520e95b8489be282500e1c50",
+    "files": [
+      {
+        "path": "spec/research-policy.md",
+        "blob_sha": "880cada18944aff865a149aa33464fead25135a7"
+      },
+      {
+        "path": "spec/sources.json",
+        "blob_sha": "538a25ee8a5c2cd23d4425bf8c818557daca1eea"
+      },
+      {
+        "path": "spec/report.schema.json",
+        "blob_sha": "69976f066b66d91c8952a445fa46e4b501691abe"
+      },
+      {
+        "path": "spec/sample-report.json",
+        "blob_sha": "fd6b41d8a0742a82a453a02a818fb95331970b96"
+      }
+    ]
+  },
+  "summary": "境界機器・WAFの悪用確認とSaaS連携IDの侵害を優先し、API防御、Linuxの復元研究、AWSの検知運用、専門家の見解など12件を掲載した。CISA KEV全件とX原文の確認に制限がありpartial。日付と新規事項を原典で確認し、期間後の続報や架空サンプルは採用していない。",
+  "top_article_ids": [
+    "a001",
+    "a002",
+    "a003"
+  ],
+  "articles": [
+    {
+      "tags": [
+        "WAF",
+        "Linux",
+        "Windows",
+        "侵害調査"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "implications": [
+        "製品版と統計機能の有効状態を確認し、診断情報の保全と修正を一連の作業として計画する。"
+      ],
+      "uncertainties": [
+        "個別環境での侵害有無や被害件数は未確認。利用条件の例外は公式の対象表を参照する。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-106931"
+      ],
+      "id": "a001",
+      "headline": "SiteGuardの統計機能に悪用確認済みの脆弱性、更新前の証拠保全を案内",
+      "category": "vulnerability",
+      "summary": "EGセキュアソリューションズは、SiteGuard Server Editionの統計機能でOSコマンドが実行される脆弱性と悪用を公表した。修正版やパッチを適用する前に「診断情報」を保存するよう求めている。",
+      "details": "10月14日の公式発表によると、CVE-2026-106931は統計機能が有効な対象版に影響し、rootまたはSYSTEM権限でコマンドを実行される可能性がある。修正はApache・Nginx・IIS版のVer8.00 Update5、FreeBSD版のVer7.00 Update6で提供される。対象には版や構成による例外がある。JPCERT/CCも注意喚起し、更新によって痕跡が消える可能性を説明している。更新だけで侵害有無を判断せず、案内に従って証拠を保全し、侵害調査を検討する必要がある。",
+      "author": {
+        "name": "EGセキュアソリューションズ",
+        "affiliation": "EGセキュアソリューションズ",
+        "expertise": "対象製品の開発者",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "ベンダー公式注意喚起・JPCERT/CC",
+      "period_basis": "ベンダー公表とJPCERT/CCの注意喚起はいずれも2026-10-14。公開時刻は不明。",
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "開発者が悪用確認とroot/SYSTEM権限への影響を明示し、更新前の保全を求めている。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "サーバに組み込むWAFのため、Web基盤の更新・侵害調査と直接関係する。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "SiteGuard Server EditionにおけるOSコマンドインジェクションの脆弱性(緊急)",
+          "url": "https://www.eg-secure.co.jp/siteguard/news/alert-202610-1",
+          "publisher": "EGセキュアソリューションズ",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-14。本文・対象版・修正版・保全案内を確認。"
+        },
+        {
+          "id": "s2",
+          "title": "SiteGuard Server Editionの脆弱性に関する注意喚起",
+          "url": "https://www.jpcert.or.jp/at/2026/at260032.html",
+          "publisher": "JPCERT/CC",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開・最終更新2026-10-14。開発者の発表に基づく公的注意喚起。独立した悪用観測数には数えない。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "VPN",
+        "Active Directory",
+        "認証情報",
+        "フォレンジック"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "implications": [
+        "更新に加え、VPNと連携するディレクトリの資格情報・権限・外部ログを調査対象に含める。"
+      ],
+      "uncertainties": [
+        "Ivantiの詳細アドバイザリ本文は取得できなかったため、全ブランチの修正表は再掲しない。",
+        "権限昇格の修正状況は対象期間時点の報告に限定。全顧客への被害規模は不明。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": "2026-10-03",
+      "update_note": "期間前からの攻撃について、10月13日に脆弱性連鎖と侵入後の調査結果を新規公開。",
+      "cve_ids": [
+        "CVE-2026-104935"
+      ],
+      "id": "a002",
+      "headline": "Ivanti Connect Secureのゼロデイ連鎖を調査、認証情報の窃取も確認",
+      "category": "vulnerability",
+      "summary": "VolexityはIvanti Connect Secureの認証回避・コード実行・権限昇格を組み合わせた攻撃を報告した。機器への侵入だけでなく、Active Directory関連の認証情報を狙う行動とログ改変が確認されている。",
+      "details": "10月13日の調査報告では、当時更新済みだった22.8R2.4の機器が侵害されていた。認証回避と遠隔コード実行はCVE-2026-104935として修正されたが、別の権限昇格は報告時点で修正予定だった。攻撃者はLDAP用資格情報などを取得し、LAPSのパスワードやBitLocker回復キーを探索したという。Webシェルを常設せず、処理のたびに脆弱性を再利用しログを改変していたため、機器内の簡単な確認だけでは侵害を見落とし得る。報告はメモリやネットワークを含む調査を推奨している。",
+      "author": {
+        "name": "Charlie Gardner、Sean Koessel、Steven Adair、Volexity Volcano Team",
+        "affiliation": "Volexity",
+        "expertise": "侵害を調査した当事者",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "調査当事者の技術ブログ",
+      "period_basis": "原典の公開日2026-10-13。侵害観測開始は2026-10-03で期間外だが、期間内の新規調査公表を採用。",
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "調査当事者が実悪用と資格情報の窃取を確認している。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "expertise",
+          "explanation": "Volexityがメモリ・ディスク等の調査から攻撃連鎖を再構成した。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "A Series of Unauthenticated Events: Chained Exploitation of Ivanti Connect Secure Zero-Days",
+          "url": "https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/",
+          "publisher": "Volexity",
+          "author": "Charlie Gardner、Sean Koessel、Steven Adair、Volexity Volcano Team",
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-13。調査本文を確認。攻撃者の動機やAI利用の推定は確定事実として採用しない。"
+        },
+        {
+          "id": "s2",
+          "title": "Attacker Chains Three Ivanti Connect Secure Zero-Days for Root Access, Only Two Patched So Far",
+          "url": "https://thehackernews.com/2026/10/attacker-chains-three-ivanti-connect.html?m=1",
+          "publisher": "The Hacker News",
+          "author": "Swati Khandelwal",
+          "role": "reporting",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-13。本文を確認。主にVolexityとIvantiに依拠した報道で、独立した侵害観測数には数えない。"
+        },
+        {
+          "id": "s3",
+          "title": "Security Advisory Ivanti Connect Secure (CVE-2026-104935)",
+          "url": "https://hub.ivanti.com/s/article/Security-Advisory-Ivanti-Connect-Secure-CVE-2026-104935?language=en_US",
+          "publisher": "Ivanti",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "unavailable",
+          "notes": "公開日は本文で未確認。原典からリンクをたどったが取得エラー。影響版の細部は未確認。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "Microsoft 365",
+        "Entra ID",
+        "SaaS",
+        "バックアップ"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "implications": [
+        "自社と管理顧客のテナントでアプリ資格情報・ロール・同意・監査ログを確認し、バックアップ停止の業務影響も評価する。"
+      ],
+      "uncertainties": [
+        "全顧客の被害規模と個別テナントへの影響は未確定。",
+        "10月19日以降の復旧状況や攻撃者帰属は本週の事実に含めない。"
+      ],
+      "speakers": [],
+      "published_at": "2026-10-16T17:47:00Z",
+      "updated_at": "2026-10-18T01:00:00Z",
+      "event_date": null,
+      "update_note": "初報に加え、対象期間内の接続無効化・停止サービス・テナント調査案内をまとめた。",
+      "cve_ids": [],
+      "id": "a003",
+      "headline": "ConnectWise Cloud BackupのアプリIDが侵害され、Microsoft 365の調査を要請",
+      "category": "incident",
+      "summary": "ConnectWiseはCloud Backupに関連するアプリケーションIDへの不正アクセスを受けて接続とサービスを停止した。保存済みバックアップに関する説明と、顧客の稼働中テナントへの影響は分けて確認する必要がある。",
+      "details": "10月16日17:47 UTCの初報後、期間内に当たる18日01:00 UTCの更新で、7つのアプリケーションIDの無効化や証明書失効を説明した。既存トークンや別IDに作られたアクセスは追加調査が必要で、接続停止が過去の変更を取り消すわけではない。同時点では定期バックアップや復元も利用できず、既存アーカイブへのアクセス被害の証拠はないとしていた。BleepingComputerも顧客テナントの侵害を報道している。週報では日本時間の期間外に当たる18日16:00 UTC以降の更新を期間内の続報として扱わない。",
+      "author": {
+        "name": "ConnectWise",
+        "affiliation": "ConnectWise",
+        "expertise": "対象サービスの運営者",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "運営元のインシデント更新",
+      "period_basis": "初報は日本時間2026-10-17 02:47。採用する更新は2026-10-18 10:00 JSTまで。ページには期間後の更新も含まれる。",
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "バックアップ・復元の停止と、顧客環境に付与されたアプリ権限への影響が公式に説明されている。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "SaaS連携のサービスプリンシパルと複数顧客を管理するMSPの権限管理に関わる。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Cloud Backup (formerly known as SkyKick) Service Interruption",
+          "url": "https://www.connectwise.com/company/trust/advisories",
+          "publisher": "ConnectWise",
+          "author": null,
+          "role": "primary",
+          "published_at": "2026-10-16T17:47:00Z",
+          "updated_at": "2026-10-18T01:00:00Z",
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "初報2026-10-16 17:47 UTC、採用更新2026-10-18 01:00 UTC。履歴の該当節を読んだ。ページ全体の最新更新日時とは区別する。"
+        },
+        {
+          "id": "s2",
+          "title": "Hackers breach Microsoft 365 tenants via ConnectWise supply-chain attack",
+          "url": "https://www.bleepingcomputer.com/news/security/hackers-breach-microsoft-365-tenants-via-connectwise-supply-chain-attack/",
+          "publisher": "BleepingComputer",
+          "author": "Ionut Ilascu",
+          "role": "reporting",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-17、掲載時刻のタイムゾーンは未確認。本文を確認。被害件数は報道の観測範囲であり全体数ではないため要約では数値を使用しない。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "API",
+        "Android",
+        "認証・認可",
+        "AI"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "implications": [
+        "モバイルアプリからしか利用しない想定のAPIも、直接アクセスを受ける前提で認可とログを点検する。"
+      ],
+      "uncertainties": [
+        "公表された各社の漏えい事案と、この手法との個別の対応関係は未確認。"
+      ],
+      "speakers": [
+        {
+          "name": "JPCERT/CC 攻撃インフラ調査チーム",
+          "affiliation": "JPCERT/CC",
+          "expertise": "攻撃元インフラの調査",
+          "evidence_source_ids": [
+            "s2"
+          ]
+        }
+      ],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "update_note": "国内の連続不正アクセスに関する既存の注意喚起に、手法の説明と攻撃インフラ調査の新規情報が加わった。",
+      "cve_ids": [],
+      "id": "a004",
+      "headline": "公開アプリからAPIを調べるA2B攻撃、NICTとJPCERT/CCが対策を提示",
+      "category": "defense_operations",
+      "summary": "NICTは公開Androidアプリの解析で接続先APIを特定し、バックエンドの弱点を狙うA2B攻撃を注意喚起した。JPCERT/CCも攻撃インフラの調査結果を公表し、サーバ側の認証・認可と秘密情報の扱いを見直すよう促している。",
+      "details": "NICTの10月13日の発表は、アプリ自体に脆弱性がなくてもサーバ側の欠陥が情報漏えいにつながることを説明する。侵害確認、脆弱性点検、暫定緩和の三つを推奨している。15日のJPCERT/CCの調査では、APK解析やAPIの脆弱性調査、AI利用に関する痕跡を確認したと報告した。対策として、長期の秘密情報をアプリへ埋め込まず、サーバで利用者と操作を認証・認可し、レート制限やリダイレクト後の宛先検証を行う。両発表は関連する話題として一つに統合し、全ての国内漏えい事案の原因とは断定しない。",
+      "author": {
+        "name": "NICT 脅威情報分析チームLETTICE",
+        "affiliation": "情報通信研究機構",
+        "expertise": "脅威の共同調査・分析",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "研究機関の注意喚起・CSIRTの調査ブログ",
+      "period_basis": "NICT公開日2026-10-13、JPCERT/CC調査公表日2026-10-15。いずれも時刻不明。",
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "NICTが国内漏えいの原因の一つとして特定し、具体的な点検と緩和策を提示した。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "バックエンドの認証・認可、秘密情報、API監視の設計に直結する。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "【注意喚起】相次ぐ情報漏えい、その原因の一つは「アプリ解析からのサーバ攻撃」",
+          "url": "https://www.nict.go.jp/press/2026/10/13-1.html",
+          "publisher": "NICT",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-13。発表本文を確認。Android以外への広がりは可能性として述べられている。"
+        },
+        {
+          "id": "s2",
+          "title": "連続不正アクセス事案の攻撃手法に関する調査",
+          "url": "https://blogs.jpcert.or.jp/ja/2026/10/web_api_attacks.html",
+          "publisher": "JPCERT/CC",
+          "author": "攻撃インフラ調査チーム",
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-15。本文・対策の記述を確認。NICTの発表への参照もあり、完全に独立した事件として数えない。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "Windows",
+        "Windows Server",
+        "パッチ管理"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "implications": [
+        "端末とサーバの対象更新を洗い出し、悪用確認済みの項目を優先して適用状況を管理する。"
+      ],
+      "uncertainties": [
+        "個別CVEページの全影響版・緩和策を精査したものではなく、製品ごとの最終判断には公式ガイドの確認が必要。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-96951"
+      ],
+      "id": "a005",
+      "headline": "Microsoftの10月更新、悪用済みWindows Shellの脆弱性も修正",
+      "category": "vulnerability",
+      "summary": "Microsoftは10月13日（米国時間）に月例更新を公開した。JPCERT/CCはWindows Shellのセキュリティ機能回避について悪用確認を伝えており、製品別の影響と既知の問題を確認して適用を進める必要がある。",
+      "details": "対象週の公式月例案内にはWindows、Windows Server、Officeなどの修正が含まれる。JPCERT/CCの14日の注意喚起は、CVE-2026-96951が悪用されていることをMicrosoftが公表したと説明している。修正件数の多さだけで自環境の危険性を判断せず、利用製品、公開面、悪用状況、適用条件で優先順位を付けたい。月例案内は各更新の既知の問題も確認するよう求める。ここでは確認できた悪用済みの項目を中心に扱い、集計方法で異なる脆弱性総数は断定しない。",
+      "author": {
+        "name": "Microsoft Security Response Center",
+        "affiliation": "Microsoft",
+        "expertise": "製品のセキュリティ対応",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "ベンダー公式月例案内・JPCERT/CC",
+      "period_basis": "公式案内の更新公開日は2026-10-13米国時間。国内注意喚起は2026-10-14で対象期間内。",
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "JPCERT/CCがMicrosoftの悪用確認を明示している。",
+          "source_ids": [
+            "s2"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "Windows端末・サーバ群の定例更新と例外管理に関わる。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "2026 年 10 月のセキュリティ更新プログラム (月例)",
+          "url": "https://www.microsoft.com/en-us/msrc/blog/2026/10/202610-security-update",
+          "publisher": "Microsoft",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "更新公開日2026-10-13米国時間。本文の製品一覧と既知の問題の案内を確認。公開の正確な時刻は未確認。"
+        },
+        {
+          "id": "s2",
+          "title": "2026年10月マイクロソフトセキュリティ更新プログラムに関する注意喚起",
+          "url": "https://www.jpcert.or.jp/at/2026/at260031.html",
+          "publisher": "JPCERT/CC",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開・最終更新2026-10-14。CVE-2026-96951の悪用確認の記載を確認。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "メール",
+        "Cisco",
+        "境界機器"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "implications": [
+        "OSの版だけでなくスキャナー版と適用済み状態を確認し、侵害が疑われれば公式の復旧手順へ分岐する。"
+      ],
+      "uncertainties": [
+        "悪用の被害規模は未確認。検出ログに痕跡がないことだけで未侵害と判断しない。"
+      ],
+      "speakers": [],
+      "published_at": "2026-10-14T16:00:00Z",
+      "updated_at": null,
+      "event_date": null,
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-76519"
+      ],
+      "id": "a006",
+      "headline": "Cisco Secure Email Gatewayの添付処理に重大な欠陥、スキャナー更新も確認",
+      "category": "vulnerability",
+      "summary": "CiscoはSecure Email Gatewayの添付ファイル処理に、未認証で任意ファイルを書き込みroot権限のコマンド実行に至る脆弱性を公表した。影響は機能設定とContent Scanner Toolsの版にも依存する。",
+      "details": "10月14日16:00 GMTのアドバイザリはCVE-2026-76519を扱う。影響条件は、脆弱なAsyncOS上でFile Reputationがメールポリシーに割り当てられ、Content Scanner Toolsが25.3.0.5525未満であること。Ciscoは修正版AsyncOSとスキャナーパッケージの更新を案内し、スキャナーの更新だけなら再起動を要しないとする。侵害が疑われる場合には更新前の証拠保全が必要で、機器内の痕跡が消され得るため外部ログとの突き合わせも推奨する。クラウド型と自社設置型では対応主体が異なる。",
+      "author": {
+        "name": "Cisco PSIRT",
+        "affiliation": "Cisco",
+        "expertise": "対象製品のセキュリティ対応",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "公式セキュリティアドバイザリ",
+      "period_basis": "公式初公開2026-10-14 16:00 GMT（日本時間10月15日01:00）。",
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "Ciscoが未認証のroot実行への影響と、疑わしい活動を検出した顧客への連絡を説明している。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "メール検査の境界機器自体の保守と外部ログ保存に関わる。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Cisco Secure Email Gateway Arbitrary File Write Vulnerability",
+          "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-esa-afw-zqYJkjxp",
+          "publisher": "Cisco",
+          "author": null,
+          "role": "primary",
+          "published_at": "2026-10-14T16:00:00Z",
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "初公開2026-10-14 16:00 GMT。影響条件・修正表・スキャナー更新・侵害調査案内を確認。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "GitLab",
+        "CI/CD",
+        "OSS"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "implications": [
+        "自己管理型のブランチと導入方式を確認し、現在の公式修正表を基に更新先を決める。"
+      ],
+      "uncertainties": [
+        "19.3.4から19.3.5への訂正が行われた正確な日時は未確認。現行ページの修正情報として区別して記載した。",
+        "世界全体の悪用状況は未確認。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-97229"
+      ],
+      "id": "a007",
+      "headline": "GitLab、CI/CDの正規表現処理で未認証コード実行につながる問題を修正",
+      "category": "vulnerability",
+      "summary": "GitLabは10月12日の臨時修正で、CI/CD設定の細工した正規表現から未認証のコード実行につながる問題などに対応した。自己管理型の利用者には、該当ブランチの修正版への更新を推奨している。",
+      "details": "公式の現行リリースノートはCVE-2026-97229を整数オーバーフローと正規表現検証の問題として説明する。GitLab.comとDedicatedは修正済みとされ、自己管理型には更新を求める。現行ページは修正版を19.4.2、19.3.5、19.2.8とし、19.3.4ではOna連携時のマージリクエスト表示に不具合があったと補足する。一方、ブログ一覧や初期の紹介には19.3.4が残っている。本文の訂正状況を優先し、初期案内の番号だけを機械的に適用しないことが重要だ。実悪用の有無はこの調査で確認していない。",
+      "author": {
+        "name": "GitLab",
+        "affiliation": "GitLab",
+        "expertise": "対象OSSの開発・運営者",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "公式パッチリリースノート",
+      "period_basis": "リリースノートが2026-10-12の公開を明記。現在の本文には19.3.5への訂正を含むため、訂正日時は推測しない。",
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "公式が未認証コード実行とCriticalの深刻度を説明し、自己管理型の更新を強く推奨している。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "ソース管理とCI/CD基盤の侵害防止に関わる。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "GitLab Critical Patch Release: 19.4.2, 19.3.5, 19.2.8",
+          "url": "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-2-released/",
+          "publisher": "GitLab",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "リリース日2026-10-12、訂正日時不明。現行本文・CVE・影響範囲・訂正注記を確認。"
+        },
+        {
+          "id": "s2",
+          "title": "Product articles - GitLab Blog",
+          "url": "https://about.gitlab.com/blog/categories/product/",
+          "publisher": "GitLab",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "一覧の個別公開日時は未確認。見出しは19.3.4のままだが、リンク先の現行本文は19.3.5。発見用の一覧として使用。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "Linux",
+        "ランサムウェア",
+        "OSS",
+        "復旧"
+      ],
+      "content_type": "facts",
+      "priority": "medium",
+      "implications": [
+        "本番導入を即断せず、記録対象・保存する機密情報・復元条件を確認して防御の追加案として検討する。"
+      ],
+      "uncertainties": [
+        "本調査ではコード実行・性能測定を行っていない。未知の実ランサムウェアへの復元可能性は保証されない。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "update_note": null,
+      "cve_ids": [],
+      "id": "a008",
+      "headline": "KDDI総合研究所、Linux向け復元支援ツールMementoをOSS公開",
+      "category": "research_tools",
+      "summary": "KDDI総合研究所は、Linuxで暗号化鍵の元となる疑似乱数を事前に記録し、被害後のファイル復元に利用するMementoを公開した。模擬ランサムウェアで成果を示したが、あらゆる攻撃からの復旧を保証するものではない。",
+      "details": "10月16日の発表によると、Mementoは記録と復号の二段階で動作する。ランサムウェアが利用する乱数取得経路を監視し、記録から鍵候補を生成して復元を試す。発表ではQilinとBabukを模擬した安全なプログラムで実験し、復元に成功した条件と処理時間を報告している。Babukでは追加の公開鍵候補の特定も必要だった。実運用では事前の記録、対応する実行環境、攻撃の暗号方式などが制約になる。従来のバックアップや侵入防止を置き換える完成した万能策とせず、公開コードと適用条件を評価する研究成果として位置付けたい。",
+      "author": {
+        "name": "KDDI総合研究所",
+        "affiliation": "KDDI総合研究所",
+        "expertise": "ツールの研究・開発元",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "研究機関の発表・公式リポジトリ",
+      "period_basis": "発表日2026-10-16。10月19日以降の学会発表の実施結果は含めない。",
+      "reasons": [
+        {
+          "type": "novelty",
+          "explanation": "Linux向けの乱数記録と鍵再生成による復元支援をOSSとして公開した。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "Linuxサーバの復旧設計に関する新しい検討材料になる。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Linuxシステム向けランサムウエア対策ツールをOSSとして公開",
+          "url": "https://www.kddi-research.jp/topics/2026/101601.html",
+          "publisher": "KDDI総合研究所",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-16。模擬検証と必要条件を確認。実際のマルウェアは取得していない。"
+        },
+        {
+          "id": "s2",
+          "title": "KDDIR-SEC/memento",
+          "url": "https://github.com/KDDIR-SEC/memento",
+          "publisher": "KDDI総合研究所",
+          "author": null,
+          "role": "tool",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "この調査ではリポジトリの初公開日時を確定していない。発表から公式コードへリンクをたどり公開ページを確認。実行・検証は未実施。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "AWS",
+        "GuardDuty",
+        "EKS",
+        "検知"
+      ],
+      "content_type": "facts",
+      "priority": "medium",
+      "implications": [
+        "既存の検知ルールや対応手順で、攻撃兆候と資産の露出・機密性を一緒に確認できるか見直す。"
+      ],
+      "uncertainties": [
+        "自環境での検知精度や費用効果は未確認。サービスの有効化条件と提供範囲は導入時に確認が必要。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "update_note": null,
+      "cve_ids": [],
+      "id": "a009",
+      "headline": "AWS、GuardDutyの攻撃シーケンス検出を運用に取り込む方法を解説",
+      "category": "defense_operations",
+      "summary": "AWSは、GuardDutyで複数の弱い兆候を関連付ける検出に、脆弱性や到達性などの情報を加える運用方法を解説した。新機能の初公開ではなく、既存の拡張をインシデント対応に生かすための案内である。",
+      "details": "10月12日の記事は、5月20日から利用されている五種類の追加指標を説明する。Inspectorの脆弱性・悪性パッケージ、VPC Reachability Analyzerの到達性、Security Hubの設定、Macieの機密データ情報などを組み合わせる。単にCVEがあるだけでは悪用の証拠にならず、実行時の不審な活動と資産の状態を結び付ける点が中心だ。利用には対応サービスの有効化が前提となる。記事の公開日と機能提供開始日を区別し、今週始まった機能としては紹介しない。",
+      "author": {
+        "name": "Aman Khare、Kyle Koeller",
+        "affiliation": "AWS",
+        "expertise": "対象サービスの運用解説の執筆者",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "AWS Security Blog",
+      "period_basis": "記事の公開日2026-10-12。機能開始日は本文で2026-05-20とされており、記事の新規解説を対象とする。",
+      "reasons": [
+        {
+          "type": "relevance",
+          "explanation": "EC2・ECS・EKSを含むAWS環境の検知と優先順位付けの実務に関係する。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "expertise",
+          "explanation": "AWSの公式ブログが必要サービスと指標の意味を具体的に解説している。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "GuardDuty Extended Threat Detection has added five new indicators to surface attack sequences",
+          "url": "https://aws.amazon.com/blogs/security/guardduty-extended-threat-detection-has-added-five-new-indicators-to-surface-attack-sequences/",
+          "publisher": "AWS",
+          "author": "Aman Khare、Kyle Koeller",
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-12。本文の概要・指標一覧・前提条件を確認。機能の初発表と誤認しない。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "AI",
+        "データ漏えい",
+        "ソーシャルエンジニアリング"
+      ],
+      "content_type": "opinion",
+      "priority": "medium",
+      "implications": [
+        "編集上の示唆：AI利用の有無、攻撃の自律性、実被害を裏付ける証拠を分けて報告する。"
+      ],
+      "uncertainties": [
+        "動画全編の内容は確認していない。記事本文で確認した意見だけを対象とする。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "update_note": null,
+      "cve_ids": [],
+      "id": "a010",
+      "headline": "Troy Hunt、AIによる漏えいの脅威を語る際は観測した証拠を重視すべきと指摘",
+      "category": "expert_opinion",
+      "summary": "Have I Been Pwnedを運営するTroy Huntは、AIを情報漏えいの中心的脅威として誇張する語り方に疑問を示した。電話を使う詐欺など自身が見ている事例と、AIに関する予測を分けて論じる必要があるという見解だ。",
+      "details": "10月13日のWeekly Update 525の本文でHuntは、AIの将来をめぐる極端な評価に触れたうえで、漏えい分野の議論には現在の証拠が必要だと述べている。彼が共有してきた事例では電話を使う攻撃が見られる一方、自身はAIが主導した漏えいを確認していないという説明である。これは本人の観測と評価であり、AIが一切使われていないという世界全体の結論ではない。本週報のAPI攻撃調査とは観測対象やAI利用の意味が異なるため、単純な賛否として統合しない。",
+      "author": {
+        "name": "Troy Hunt",
+        "affiliation": null,
+        "expertise": "Have I Been Pwnedの運営者",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "本人ブログ",
+      "period_basis": "本人記事の公開日2026-10-13。公開時刻は不明。",
+      "reasons": [
+        {
+          "type": "expertise",
+          "explanation": "本人ブログとプロフィールにより、漏えいサービス運営者としての当事者性を確認できる。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "脅威評価を観測事実と予測に分ける際の論点を提供する。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Weekly Update 525: AI Data Breach Hyperbole",
+          "url": "https://www.troyhunt.com/weekly-update-525/",
+          "publisher": "Troy Hunt",
+          "author": "Troy Hunt",
+          "role": "original_post",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-13。本文のみを要約。世界全体でのAI悪用不在を裏付ける資料としては扱わない。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "暗号",
+        "AI",
+        "リスク評価"
+      ],
+      "content_type": "opinion",
+      "priority": "medium",
+      "implications": [
+        "編集上の示唆：将来予測と実証済みの解読を区別し、この見解だけを根拠に暗号方式の安全性を断定しない。"
+      ],
+      "uncertainties": [
+        "リンク先X投稿の原文・日時・本人アカウントの裏付けは未確認。反応数は採用しない。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "update_note": null,
+      "cve_ids": [],
+      "id": "a011",
+      "headline": "Bruce Schneier、AI暗号解析の将来について暗号設計の安全余裕に期待",
+      "category": "expert_opinion",
+      "summary": "Bruce SchneierはAIによる暗号解析の将来に関する短い論考で、暗号設計者が確保してきた安全余裕への期待を示した。既存の暗号方式が破られたという実証報告ではなく、今後の能力に関する本人の見解として扱う。",
+      "details": "10月14日の本人投稿は、AIが人間を大きく上回る暗号解析を行う可能性について、Matthew Greenの発言を紹介し、自身はより楽観的だと述べる。理由は暗号設計者が余裕を持たせて設計する傾向への信頼で、詳しい考察は今後まとめたいとしている。今回読めた本人原文は短く、新しい攻撃の実験条件や性能、方式別の安全性を証明する資料はない。リンクされたX投稿は本文を取得できなかったため、Greenの主張を独立した確認済み記事として掲載しない。",
+      "author": {
+        "name": "Bruce Schneier",
+        "affiliation": null,
+        "expertise": "暗号・セキュリティ分野の著者",
+        "evidence_source_ids": [
+          "s1",
+          "s2"
+        ]
+      },
+      "medium": "本人ブログ",
+      "period_basis": "ブログに2026-10-14 10:24 AMと表示。タイムゾーンが不明なためpublished_atはnull。",
+      "reasons": [
+        {
+          "type": "expertise",
+          "explanation": "本人ブログの原文と本人ニュースレターの著者紹介を確認した。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "The Future of AI Cryptanalysis",
+          "url": "https://www.schneier.com/blog/archives/2026/10/the-future-of-ai-cryptanalysis.html",
+          "publisher": "Schneier on Security",
+          "author": "Bruce Schneier",
+          "role": "original_post",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-14 10:24 AM、タイムゾーン不明。本人の短い本文だけを対象とし、コメント欄の主張は採用しない。"
+        },
+        {
+          "id": "s2",
+          "title": "Crypto-Gram October 15, 2026",
+          "url": "https://www.schneier.com/crypto-gram/archives/2026/1015.html",
+          "publisher": "Schneier on Security",
+          "author": "Bruce Schneier",
+          "role": "original_post",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "発行日2026-10-15。本人の執筆・専門性と当該投稿へのリンクを確認。古い転載記事は今週の発表として扱わない。"
+        }
+      ]
+    },
+    {
+      "tags": [
+        "IPA",
+        "初動対応",
+        "国内"
+      ],
+      "content_type": "facts",
+      "priority": "medium",
+      "implications": [
+        "インシデント対応計画の連絡先に公式窓口を加え、疑わしい事象が発生した際の相談経路を明確にする。"
+      ],
+      "uncertainties": [
+        "具体的な支援の範囲・所要時間・現在の受付条件は発表だけでは確定できない。"
+      ],
+      "speakers": [],
+      "published_at": null,
+      "updated_at": null,
+      "event_date": "2026-10-16",
+      "update_note": null,
+      "cve_ids": [],
+      "id": "a012",
+      "headline": "IPA、不正アクセスの被害が疑われる企業・組織向けに特別相談窓口を開設",
+      "category": "defense_operations",
+      "summary": "IPAは10月16日、不正アクセスによる漏えいが相次ぐ状況を受けて特別相談窓口を開設した。実際に被害を受けた組織だけでなく、その可能性がある事象が発生している企業・組織も初動支援の対象となる。",
+      "details": "公式発表では、情報漏えいインシデント発生時の初動対応を支援する窓口として位置付けられている。被害の疑いを含む事象がある組織からの依頼に対応するという案内であり、被害を完全に確定するまで相談を待つ必要はない。発表は、幅広い業種で不正アクセス被害の公表が続く状況を背景として挙げる。一方、この窓口の開設自体が個別組織の侵害や特定の攻撃原因を証明するわけではない。利用する場合はIPAの特設サイトにある現在の受付方法と支援内容を確認したい。",
+      "author": {
+        "name": "情報処理推進機構（IPA）",
+        "affiliation": "IPA",
+        "expertise": "公的な情報セキュリティ支援機関",
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "medium": "公式プレス発表",
+      "period_basis": "公開日・窓口開設日ともに2026-10-16。公開時刻不明。",
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "被害または被害の疑いがある組織の初動支援を公的機関が新たに案内した。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        },
+        {
+          "type": "relevance",
+          "explanation": "国内組織のエスカレーション先を具体化する実務情報になる。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "プレス発表 不正アクセス特別相談窓口の開設について",
+          "url": "https://www.ipa.go.jp/pressrelease/2026/press20261016.html",
+          "publisher": "IPA",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T01:00:42.791Z",
+          "read_status": "page_read",
+          "notes": "公開日2026-10-16。公式本文で対象と初動対応支援の説明を確認。"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "source_checks": [
+      {
+        "source_id": "jpcert_alert",
+        "name": "JPCERT/CC 注意喚起",
+        "url": "https://www.jpcert.or.jp/at/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.jpcert.or.jp/at/",
+          "https://www.jpcert.or.jp/at/2026/at260031.html",
+          "https://www.jpcert.or.jp/at/2026/at260032.html"
+        ],
+        "notes": "一覧と期間内のMicrosoft・SiteGuard注意喚起本文を確認。サイト全件の精査ではない。"
+      },
+      {
+        "source_id": "jpcert_weekly",
+        "name": "JPCERT/CC Weekly Report",
+        "url": "https://www.jpcert.or.jp/wr/",
+        "status": "checked_no_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.jpcert.or.jp/wr/",
+          "https://www.jpcert.or.jp/wr/2026/wr261015.html"
+        ],
+        "notes": "対象週発行の10月15日号を確認。収録対象は10月4〜10日のため、そこで扱う古い発表を今週のニュースとして再掲載しない。"
+      },
+      {
+        "source_id": "ipa",
+        "name": "IPA 情報セキュリティ",
+        "url": "https://www.ipa.go.jp/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.ipa.go.jp/security/",
+          "https://www.ipa.go.jp/pressrelease/2026/press20261016.html"
+        ],
+        "notes": "トップページ取得では動的な新着欄が十分表示されず、サイト指定検索で補完し相談窓口の一次発表を確認。"
+      },
+      {
+        "source_id": "jvn",
+        "name": "JVN",
+        "url": "https://jvn.jp/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://jvn.jp/"
+        ],
+        "notes": "新着一覧の10月15〜16日項目を確認。選定記事はベンダーやJPCERT/CCの原典で確認し、JVN一覧の全履歴を確認したとはしない。"
+      },
+      {
+        "source_id": "cisa_kev",
+        "name": "CISA Known Exploited Vulnerabilities",
+        "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+        ],
+        "notes": "カタログ本文が403 Forbidden。サイト指定検索で当該週の追加告知を一部発見したが、全追加・更新の確認はできずpartial。"
+      },
+      {
+        "source_id": "sans",
+        "name": "SANS NewsBites",
+        "url": "https://www.sans.org/newsletters/newsbites",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.sans.org/newsletters/newsbites",
+          "https://www.sans.org/newsletters/newsbites/xxviii-77"
+        ],
+        "notes": "10月16日号を発見・選定の入口として確認し、Microsoft・Cisco・Ivantiは原典へ移動。編集者コメントを事実と混同しない。"
+      },
+      {
+        "source_id": "tldrsec",
+        "name": "tl;dr sec",
+        "url": "https://tldrsec.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://tldrsec.com/",
+          "https://tldrsec.com/archive",
+          "https://tldrsec.com/p/tldr-sec-350"
+        ],
+        "notes": "トップページは429だったがアーカイブは取得でき、10月15日号の研究・ツール候補を確認。個別ツールの評価と実行は行っていない。"
+      },
+      {
+        "source_id": "bleeping",
+        "name": "BleepingComputer",
+        "url": "https://www.bleepingcomputer.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.bleepingcomputer.com/",
+          "https://www.bleepingcomputer.com/news/security/hackers-breach-microsoft-365-tenants-via-connectwise-supply-chain-attack/"
+        ],
+        "notes": "期間内のConnectWise報道本文を確認。ホームの最新記事には対象期間後のものもあり除外。"
+      },
+      {
+        "source_id": "thehackernews",
+        "name": "The Hacker News",
+        "url": "https://thehackernews.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://thehackernews.com/",
+          "https://thehackernews.com/2026/10/attacker-chains-three-ivanti-connect.html?m=1"
+        ],
+        "notes": "期間指定・サイト指定検索で補完し10月13日Ivanti報道を確認。自動検索ページに古い記事が混在したため実際の本文日付を優先。"
+      },
+      {
+        "source_id": "itmedia_security",
+        "name": "ITmedia エンタープライズ セキュリティ",
+        "url": "https://www.itmedia.co.jp/enterprise/subtop/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.itmedia.co.jp/enterprise/subtop/security/",
+          "https://www.itmedia.co.jp/enterprise/subtop/archive/"
+        ],
+        "notes": "セキュリティトップと10月アーカイブの対象期間を確認。Microsoft等の候補を原典で扱い、一覧の見出しのみで別記事を水増ししない。"
+      },
+      {
+        "source_id": "aws_security",
+        "name": "AWS Security Blog",
+        "url": "https://aws.amazon.com/blogs/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://aws.amazon.com/blogs/security/guardduty-extended-threat-detection-has-added-five-new-indicators-to-surface-attack-sequences/"
+        ],
+        "notes": "vendor枠。10月12日付GuardDuty運用解説の本文を確認。"
+      },
+      {
+        "source_id": "jpcert_eyes",
+        "name": "JPCERT/CC Eyes",
+        "url": "https://blogs.jpcert.or.jp/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://blogs.jpcert.or.jp/ja/",
+          "https://blogs.jpcert.or.jp/ja/2026/10/web_api_attacks.html"
+        ],
+        "notes": "research枠。10月15日調査本文をNICTのA2B注意喚起と関連付けて確認。"
+      },
+      {
+        "source_id": "schneier",
+        "name": "Schneier on Security",
+        "url": "https://www.schneier.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.schneier.com/crypto-gram/archives/2026/1015.html",
+          "https://www.schneier.com/blog/archives/2026/10/the-future-of-ai-cryptanalysis.html"
+        ],
+        "notes": "expert枠、本人1人目。対象週の本人発信を確認。ニュースレターの期間前の記事は新規記事として扱わない。"
+      },
+      {
+        "source_id": "troyhunt",
+        "name": "Troy Hunt",
+        "url": "https://www.troyhunt.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.troyhunt.com/",
+          "https://www.troyhunt.com/weekly-update-525/"
+        ],
+        "notes": "expert枠、本人2人目。10月13日の本文と本人プロフィールを確認。動画全編は未確認。"
+      },
+      {
+        "source_id": "github_tools",
+        "name": "GitHub",
+        "url": "https://github.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://github.com/KDDIR-SEC/memento"
+        ],
+        "notes": "community枠。KDDI総合研究所の発表から公式ツールの公開リポジトリへ移動して確認。コード実行は行わない。"
+      },
+      {
+        "source_id": "extra_eg_secure",
+        "name": "EGセキュアソリューションズ",
+        "url": "https://www.eg-secure.co.jp/siteguard/news/alert-202610-1",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.eg-secure.co.jp/siteguard/news/alert-202610-1"
+        ],
+        "notes": "選定候補の一次資料として本文の日付・主張・対象条件を確認。詳細な留保は該当記事のsourcesとuncertaintiesに記録。"
+      },
+      {
+        "source_id": "extra_volexity",
+        "name": "Volexity",
+        "url": "https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/"
+        ],
+        "notes": "選定候補の一次資料として本文の日付・主張・対象条件を確認。詳細な留保は該当記事のsourcesとuncertaintiesに記録。"
+      },
+      {
+        "source_id": "extra_connectwise",
+        "name": "ConnectWise Trust Center",
+        "url": "https://www.connectwise.com/company/trust/advisories",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.connectwise.com/company/trust/advisories"
+        ],
+        "notes": "選定候補の一次資料として本文の日付・主張・対象条件を確認。詳細な留保は該当記事のsourcesとuncertaintiesに記録。"
+      },
+      {
+        "source_id": "extra_nict",
+        "name": "NICT",
+        "url": "https://www.nict.go.jp/press/2026/10/13-1.html",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.nict.go.jp/press/2026/10/13-1.html"
+        ],
+        "notes": "選定候補の一次資料として本文の日付・主張・対象条件を確認。詳細な留保は該当記事のsourcesとuncertaintiesに記録。"
+      },
+      {
+        "source_id": "extra_cisco",
+        "name": "Cisco PSIRT",
+        "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-esa-afw-zqYJkjxp",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-esa-afw-zqYJkjxp"
+        ],
+        "notes": "選定候補の一次資料として本文の日付・主張・対象条件を確認。詳細な留保は該当記事のsourcesとuncertaintiesに記録。"
+      },
+      {
+        "source_id": "extra_gitlab",
+        "name": "GitLab",
+        "url": "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-2-released/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-2-released/"
+        ],
+        "notes": "選定候補の一次資料として本文の日付・主張・対象条件を確認。詳細な留保は該当記事のsourcesとuncertaintiesに記録。"
+      },
+      {
+        "source_id": "extra_kddi",
+        "name": "KDDI総合研究所",
+        "url": "https://www.kddi-research.jp/topics/2026/101601.html",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.kddi-research.jp/topics/2026/101601.html"
+        ],
+        "notes": "選定候補の一次資料として本文の日付・主張・対象条件を確認。詳細な留保は該当記事のsourcesとuncertaintiesに記録。"
+      },
+      {
+        "source_id": "extra_microsoft",
+        "name": "Microsoft MSRC",
+        "url": "https://www.microsoft.com/en-us/msrc/blog/2026/10/202610-security-update",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-10-23T01:00:42.791Z",
+        "evidence_urls": [
+          "https://www.microsoft.com/en-us/msrc/blog/2026/10/202610-security-update"
+        ],
+        "notes": "選定候補の一次資料として本文の日付・主張・対象条件を確認。詳細な留保は該当記事のsourcesとuncertaintiesに記録。"
+      }
+    ],
+    "searches": [
+      {
+        "topic": "vulnerability",
+        "language": "ja",
+        "query": "セキュリティ 脆弱性 悪用 注意喚起 2026年10月12日 10月18日",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.nict.go.jp/press/2026/10/13-1.html",
+          "https://www.connectwise.com/company/trust/advisories"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "vulnerability",
+        "language": "en",
+        "query": "security vulnerability actively exploited advisory October 12 18 2026",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.nict.go.jp/press/2026/10/13-1.html",
+          "https://www.connectwise.com/company/trust/advisories"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "incident",
+        "language": "ja",
+        "query": "サイバー攻撃 情報漏えい 調査報告 2026年10月12日 10月18日",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.nict.go.jp/press/2026/10/13-1.html",
+          "https://www.connectwise.com/company/trust/advisories"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "incident",
+        "language": "en",
+        "query": "cyberattack data breach incident investigation October 12 18 2026",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.nict.go.jp/press/2026/10/13-1.html",
+          "https://www.connectwise.com/company/trust/advisories"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "defense",
+        "language": "ja",
+        "query": "セキュリティ 防御 認証 クラウド 新手法 2026年10月12日 10月18日",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.kddi-research.jp/topics/2026/101601.html",
+          "https://aws.amazon.com/blogs/security/guardduty-extended-threat-detection-has-added-five-new-indicators-to-surface-attack-sequences/"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "defense",
+        "language": "en",
+        "query": "security defense identity cloud detection October 12 18 2026",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.kddi-research.jp/topics/2026/101601.html",
+          "https://aws.amazon.com/blogs/security/guardduty-extended-threat-detection-has-added-five-new-indicators-to-surface-attack-sequences/"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "research_tools",
+        "language": "ja",
+        "query": "セキュリティ 研究 発表 ツール 2026年10月12日 10月18日",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.kddi-research.jp/topics/2026/101601.html",
+          "https://aws.amazon.com/blogs/security/guardduty-extended-threat-detection-has-added-five-new-indicators-to-surface-attack-sequences/"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "research_tools",
+        "language": "en",
+        "query": "security research paper open source tool released October 12 18 2026",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.kddi-research.jp/topics/2026/101601.html",
+          "https://aws.amazon.com/blogs/security/guardduty-extended-threat-detection-has-added-five-new-indicators-to-surface-attack-sequences/"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "policy",
+        "language": "ja",
+        "query": "サイバーセキュリティ 政策 標準 ガイドライン 2026年10月12日 10月18日",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/crypto-gram/archives/2026/1015.html"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "policy",
+        "language": "en",
+        "query": "cybersecurity policy standard guidance October 12 18 2026",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/crypto-gram/archives/2026/1015.html"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "expert_views",
+        "language": "ja",
+        "query": "セキュリティ 研究者 見解 講演 2026年10月12日 10月18日",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/crypto-gram/archives/2026/1015.html"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "expert_views",
+        "language": "en",
+        "query": "cybersecurity researcher analysis talk opinion October 12 18 2026",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/crypto-gram/archives/2026/1015.html"
+        ],
+        "notes": "候補発見と対象期間の確認を目的に日英で検索。同じ呼び出し内の複数検索は結果集合を合わせて読み、記載URLはその集合から確認したもの。政策・標準は本文で期間内の新規性を確認できた候補を選定できず。searched_atは検索結果の確認を記録した時刻。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "site:jpcert.or.jp \"2026-10\" \"14\"",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/at/2026/at260031.html",
+          "https://www.jpcert.or.jp/at/2026/at260032.html"
+        ],
+        "notes": "公的注意喚起の確認とベンダー原典への到達。 searched_atは結果確認の記録時刻。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:cisa.gov \"October\" \"2026\" \"16\"",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+        ],
+        "notes": "KEV追加や政府ガイダンス候補を検索。本文403により全件確認を完了できない。 searched_atは結果確認の記録時刻。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:sans.org/newsletters/newsbites \"2026\" \"October 16\"",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.sans.org/newsletters/newsbites/xxviii-77"
+        ],
+        "notes": "対象週の専門ニュースレターを確認し原典へ移動。 searched_atは結果確認の記録時刻。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:tldrsec.com \"2026\" \"Oct 15\"",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://tldrsec.com/archive",
+          "https://tldrsec.com/p/tldr-sec-350"
+        ],
+        "notes": "トップの429を受け、アーカイブと対象号へ移動。 searched_atは結果確認の記録時刻。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "site:itmedia.co.jp/enterprise \"2026年10月\" \"16日\" セキュリティ",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.itmedia.co.jp/enterprise/subtop/archive/"
+        ],
+        "notes": "日本語メディアの対象期間候補を補完。 searched_atは結果確認の記録時刻。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "site:ipa.go.jp/security \"2026年10月\" \"16日\" 不正アクセス",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://www.ipa.go.jp/pressrelease/2026/press20261016.html"
+        ],
+        "notes": "相談窓口の発表を発見し原典本文を確認。 searched_atは結果確認の記録時刻。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:gitlab.com OR site:about.gitlab.com \"19.4.2\" \"2026\"",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://about.gitlab.com/blog/categories/product/",
+          "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-2-released/"
+        ],
+        "notes": "GitLab修正の公式リリースと訂正注記を確認。 searched_atは結果確認の記録時刻。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:thehackernews.com/2026/10/ \"Ivanti\" \"104935\"",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [
+          "https://thehackernews.com/2026/10/attacker-chains-three-ivanti-connect.html?m=1"
+        ],
+        "notes": "対象週の報道を確認しVolexity原典と照合。 searched_atは結果確認の記録時刻。"
+      },
+      {
+        "topic": "x",
+        "language": "en",
+        "query": "site:x.com \"cryptanalysis\" \"October\" \"2026\" \"Green\"",
+        "searched_at": "2026-10-23T01:00:42.791Z",
+        "reviewed_urls": [],
+        "notes": "結果なし。本人原典の確証なしにハンドルや反応数を補完しない。Schneierがリンクした投稿も取得エラーで、投稿内容の独立した裏付けには使用しない。 searched_atは結果確認の記録時刻。"
+      }
+    ],
+    "limitations": [
+      "CISA KEVカタログ本文の取得が403 Forbiddenとなり、対象期間の全追加・更新を確認できなかった。サイト指定検索の抜粋だけで全件確認と扱わずpartialとした。",
+      "tl;dr secトップは429だったがアーカイブと対象号へ到達した。全リンク先・全ツールの網羅的評価はしていない。各coreサイトは記載した一覧・号・候補記事の範囲で確認した。",
+      "政策・標準を含む6群すべてを日英で検索したが、期間内の原典と新規性を十分確認できる政策・標準の独立記事は採用できなかった。X検索の結果と、Schneierが示す投稿原文の取得も不十分で、X全体の網羅・反応数・本人性は保証しない。",
+      "Ivantiのベンダー詳細アドバイザリは取得エラー。調査当事者Volexityの本文と報道を照合したが、全ブランチの版表は未確認。",
+      "GitLab公式ページは19.3.5への訂正を含むが訂正日時は不明。初期一覧の19.3.4とは区別し、現在読める修正情報として留保した。",
+      "ConnectWiseは期間後にも同じページを更新している。対象期間の終了はUTCで10月18日15:00のため、採用した更新は同日01:00 UTCまでとし、それ以降の知見を期間内の続報としていない。",
+      "前回週報は取得しておらず「先週未掲載」は保証しない。検索結果のクロール日を公開日にせず、時刻やタイムゾーンが不明な公開日はnullとした。",
+      "検索・取得の厳密なリクエスト時刻は保存していないため、searched_at/accessed_at/checked_atには今回の結果確認の記録時刻を使用した。",
+      "ツールや製品を自環境で実行・検証していない。編集上の示唆は、出典の事実と区別して記載した。"
+    ]
+  },
+  "validation": {
+    "editorial_review": "completed",
+    "notes": [
+      "必須4仕様を同一の実コミットSHAで全文取得し、schema 2.0.0・policy 1.0.4・sources 1.0.0の一致を目視で確認した。",
+      "JSONの必須項目、記事IDの一意性、重要3件の参照、記事内source_id参照、期間とファイル名、HTTPS出典、事実と意見の区分を目視で照合した。プログラムによるテストや検証は作成・実行していない。",
+      "原典の公開日・本文に基づき選定し、重複するNICTとJPCERT/CCのAPI攻撃分析を統合した。架空の完成例の記事・日時・SHA・URLを実データに流用していない。",
+      "AIによる編集上の照合であり、人間の監修・全Webの網羅・自環境での安全性確認を意味しない。"
+    ]
+  }
+}
