@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0",
-  "policy_version": "1.0.3",
+  "policy_version": "1.0.4",
   "sources_version": "1.0.0",
   "is_example": true,
   "report_id": "security-weekly-2026-10-19",
@@ -188,3 +188,4 @@
     ]
   }
 }
+

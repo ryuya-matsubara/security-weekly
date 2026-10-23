@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102c47">
+  <meta name="description" content="今週のセキュリティ情報を、概要・背景・出典とともに読む週報。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>セキュリティ週報</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script type="module" src="./assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ移動</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#" aria-label="セキュリティ週報 最新号へ">
+        <span class="brand-mark" aria-hidden="true">S<span>W</span></span>
+        <span>セキュリティ週報<small>SECURITY WEEKLY</small></span>
+      </a>
+      <a class="repository-link" href="https://github.com/ryuya-matsubara/security-weekly" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main id="main" class="shell">
+    <div class="toolbar">
+      <div class="issue-picker"><label for="issue-select">週報を選ぶ</label><select id="issue-select" disabled><option>読み込み中…</option></select></div>
+      <button id="refresh" class="button secondary" type="button">更新 <span aria-hidden="true">↻</span></button>
+    </div>
+    <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+    <section id="load-state" class="state-panel" aria-live="polite">
+      <span class="state-symbol" aria-hidden="true">◷</span>
+      <h1 id="state-title">週報を読み込んでいます</h1>
+      <p id="state-message">今週のセキュリティ情報を準備しています。</p>
+      <button id="retry" class="button" type="button" hidden>もう一度読み込む</button>
+    </section>
+    <div id="list-view" hidden>
+      <section class="issue-intro" aria-labelledby="issue-title">
+        <div class="eyebrow"><span id="issue-label">WEEKLY BRIEFING</span><span class="eyebrow-line"></span></div>
+        <h1 id="issue-title" tabindex="-1">今週のセキュリティ</h1>
+        <p id="issue-period" class="issue-period"></p>
+        <div id="issue-meta" class="issue-meta"></div>
+        <div id="partial-notice" class="notice" hidden></div>
+        <p id="issue-summary" class="issue-summary"></p>
+      </section>
+      <section id="highlights" class="highlights" aria-labelledby="highlights-title">
+        <div class="section-heading"><h2 id="highlights-title"><span class="section-index">01</span> 今週の重要トピック</h2><span class="section-note">まず押さえたいニュース</span></div>
+        <div id="highlight-cards" class="highlight-grid"></div>
+      </section>
+      <section class="all-articles" aria-labelledby="articles-title">
+        <div class="section-heading"><h2 id="articles-title"><span class="section-index">02</span> すべての記事</h2><span id="result-count" class="section-note" role="status"></span></div>
+        <div class="filter-panel">
+          <label class="search-label" for="search">キーワードで探す</label>
+          <input id="search" type="search" placeholder="タイトル、発信者、CVEなど" autocomplete="off" maxlength="200">
+          <div class="filter-row"><label for="category">ジャンル</label><select id="category"><option value="">すべてのジャンル</option></select></div>
+          <details id="extra-filters"><summary>さらに絞り込む</summary><div class="extra-filter-grid">
+            <div><label for="reason">掲載理由</label><select id="reason"><option value="">すべての掲載理由</option></select></div>
+            <div><label for="tag">タグ</label><select id="tag"><option value="">すべてのタグ</option></select></div>
+          </div></details>
+          <button id="clear-filters" class="text-button" type="button" hidden>絞り込みを解除</button>
+        </div>
+        <div id="article-cards" class="article-grid"></div>
+        <p id="no-results" class="empty-results" hidden></p>
+      </section>
+      <section class="report-notes" aria-label="週報の補足情報">
+        <details><summary>調査範囲と未確認事項</summary><div id="coverage" class="details-body"></div></details>
+        <details><summary>週報情報</summary><div id="report-info" class="details-body"></div></details>
+        <button id="download" class="button secondary" type="button">週報JSONをダウンロード <span aria-hidden="true">↓</span></button>
+      </section>
+    </div>
+    <section id="detail-view" hidden aria-labelledby="detail-title">
+      <button id="back" class="text-button back-button" type="button">← 記事一覧に戻る</button>
+      <article id="article-detail"></article>
+    </section>
+    <noscript><p class="notice">週報を表示するにはJavaScriptを有効にしてください。JSONはGitHubのoutputフォルダから取得できます。</p></noscript>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><span>SECURITY WEEKLY</span><p>情報の背景を知り、原典を確かめる。</p><a href="https://github.com/ryuya-matsubara/security-weekly/tree/main/output" target="_blank" rel="noopener noreferrer">週報データ ↗</a></div></footer>
+</body>
+</html>

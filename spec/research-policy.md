@@ -1,6 +1,6 @@
 # セキュリティ週報 調査・編集方針
 
-policy_version: 1.0.3
+policy_version: 1.0.4
 最終更新: 2026-10-23
 正本: ryuya-matsubara/security-weekly / main
 出力仕様: spec/report.schema.json
@@ -83,7 +83,8 @@ reason.type は importance / attention / expertise / novelty / relevance。
 - 保存後は保存先コミットから対象ファイルを読み戻し、内容を照合してから保存成功と報告する。週報内のspec.commit_shaは、出力の保存先コミットではなく、調査開始時に取得した仕様のコミットを記録する。
 - 最終結果に対象期間・記事数・重要3件・partialなら不足・内容と出典の確認状況・保存先のGitHubファイルリンクと保存先コミットSHAを提示する。
 - GitHubへのJSON保存に失敗したら明示する。JSONのコードブロックだけをファイル納品と称しない。
-- Gmailからの送信、LINE配信、Web公開は行わない。通知はChatGPT標準機能を利用する。
+- output/に保存した週報は、公開リポジトリとGitHub Pagesの閲覧画面から読める。閲覧画面はファイル名の日付で最新号を選ぶため、一覧用JSONやlatestファイルを作成・更新する必要はない。
+- 定期タスクはリポジトリの公開範囲やPages設定を変更しない。Gmailからの送信・LINE配信は行わず、通知はChatGPT標準機能を利用する。
 
 ## 表示・意味上の規則
 - category: vulnerability=脆弱性、incident=インシデント、defense_operations=防御・運用、research_tools=研究・ツール、policy_standards=政策・標準、expert_opinion=専門家の見解。
@@ -96,3 +97,4 @@ reason.type は importance / attention / expertise / novelty / relevance。
 - schema_versionは対応するJSON仕様の版、policy_version/sources_versionは読んだ各ファイルの版。JSON仕様の破壊的変更時はメジャー版を上げる。
 - is_exampleはライブ週報では必ずfalse。top_article_idsはarticles内のIDのみ。
 - validation.editorial_review=completedはAIがこの仕様に沿って出典・参照・内容を見直した意味であり、人間の監修を示さない。
+
