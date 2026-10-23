@@ -61,7 +61,7 @@
         "被害の全体規模や追加の技術的条件は今回の確認範囲では確定していない。"
       ],
       "author": {
-        "name": "https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure",
+        "name": "CISA",
         "affiliation": null,
         "expertise": null,
         "evidence_source_ids": [
@@ -73,10 +73,10 @@
       "published_at": null,
       "updated_at": null,
       "event_date": null,
-      "period_basis": "CVE-2026-104935付の公式公開情報。公開時刻は未確認。",
+      "period_basis": "2026-10-13付の公式公開情報。公開時刻は未確認。",
       "update_note": null,
       "cve_ids": [
-        "CISA"
+        "CVE-2026-104935"
       ],
       "reasons": [
         {
@@ -92,15 +92,15 @@
         {
           "id": "s1",
           "title": "Ivanti Connect Secureの認証回避ゼロデイ、実際の悪用をCISAが警告",
-          "url": "CISAが実際の悪用と情報窃取を確認し、即時更新だけでなく侵害調査を勧告したため、境界機器への侵入と二次被害の危険が高い。",
-          "publisher": "https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure",
+          "publisher": "CISA",
           "author": null,
           "role": "primary",
           "published_at": null,
           "updated_at": null,
           "accessed_at": "2026-10-23T22:26:00+09:00",
           "read_status": "page_read",
-          "notes": "CVE-2026-104935の日付をページで確認。"
+          "notes": "2026-10-13の日付をページで確認。"
         }
       ]
     },
@@ -123,7 +123,7 @@
         "被害の全体規模や追加の技術的条件は今回の確認範囲では確定していない。"
       ],
       "author": {
-        "name": "https://www.cyber.gc.ca/en/alerts-advisories/microsoft-security-advisory-october-2026-monthly-rollup-av26-1038",
+        "name": "Canadian Centre for Cyber Security",
         "affiliation": null,
         "expertise": null,
         "evidence_source_ids": [
@@ -135,10 +135,10 @@
       "published_at": null,
       "updated_at": null,
       "event_date": null,
-      "period_basis": "CVE-2026-96951付の公式公開情報。公開時刻は未確認。",
+      "period_basis": "2026-10-13付の公式公開情報。公開時刻は未確認。",
       "update_note": null,
       "cve_ids": [
-        "Canadian Centre for Cyber Security"
+        "CVE-2026-96951"
       ],
       "reasons": [
         {
@@ -154,15 +154,15 @@
         {
           "id": "s1",
           "title": "Microsoftの10月更新、Windows Shellの悪用確認済み脆弱性に対応",
-          "url": "悪用確認と政府機関による緊急の注意喚起が重なっており、Windowsの更新遅延が実害につながる可能性があるため重要度が高い。",
-          "publisher": "https://www.cyber.gc.ca/en/alerts-advisories/microsoft-security-advisory-october-2026-monthly-rollup-av26-1038",
+          "url": "https://www.cyber.gc.ca/en/alerts-advisories/microsoft-security-advisory-october-2026-monthly-rollup-av26-1038",
+          "publisher": "Canadian Centre for Cyber Security",
           "author": null,
           "role": "primary",
           "published_at": null,
           "updated_at": null,
           "accessed_at": "2026-10-23T22:26:00+09:00",
           "read_status": "page_read",
-          "notes": "CVE-2026-96951の日付をページで確認。"
+          "notes": "2026-10-13の日付をページで確認。"
         }
       ]
     },
@@ -185,7 +185,7 @@
         "被害の全体規模や追加の技術的条件は今回の確認範囲では確定していない。"
       ],
       "author": {
-        "name": "https://www.nict.go.jp/press/2026/10/13-1.html",
+        "name": "NICT",
         "affiliation": null,
         "expertise": null,
         "evidence_source_ids": [
@@ -197,11 +197,9 @@
       "published_at": null,
       "updated_at": null,
       "event_date": null,
-      "period_basis": "null付の公式公開情報。公開時刻は未確認。",
+      "period_basis": "2026-10-13付の公式公開情報。公開時刻は未確認。",
       "update_note": null,
-      "cve_ids": [
-        "NICT"
-      ],
+      "cve_ids": [],
       "reasons": [
         {
           "type": "importance",
@@ -216,15 +214,15 @@
         {
           "id": "s1",
           "title": "NICT、Androidアプリ解析を足掛かりにしたバックエンド攻撃を注意喚起",
-          "url": "公的研究機関が国内の情報漏えいとの関連を報告し、アプリ事業者に具体的な対策を提示したため、モバイルアプリとAPIを横断する防御判断に影響する。",
-          "publisher": "https://www.nict.go.jp/press/2026/10/13-1.html",
+          "url": "https://www.nict.go.jp/press/2026/10/13-1.html",
+          "publisher": "NICT",
           "author": null,
           "role": "primary",
           "published_at": null,
           "updated_at": null,
           "accessed_at": "2026-10-23T22:26:00+09:00",
           "read_status": "page_read",
-          "notes": "nullの日付をページで確認。"
+          "notes": "2026-10-13の日付をページで確認。"
         }
       ]
     },
@@ -247,7 +245,7 @@
         "被害の全体規模や追加の技術的条件は今回の確認範囲では確定していない。"
       ],
       "author": {
-        "name": "https://www.cyber.go.jp/news/20261014.html",
+        "name": "国家サイバー統括室",
         "affiliation": null,
         "expertise": null,
         "evidence_source_ids": [
@@ -259,11 +257,9 @@
       "published_at": null,
       "updated_at": null,
       "event_date": null,
-      "period_basis": "null付の公式公開情報。公開時刻は未確認。",
+      "period_basis": "2026-10-14付の公式公開情報。公開時刻は未確認。",
       "update_note": "10月14日に政府横断の案内ページを公開。",
-      "cve_ids": [
-        "国家サイバー統括室"
-      ],
+      "cve_ids": [],
       "reasons": [
         {
           "type": "importance",
@@ -278,15 +274,15 @@
         {
           "id": "s1",
           "title": "国家サイバー統括室、相次ぐ情報漏えいを受けた省庁横断の注意喚起を整理",
-          "url": "政府の複数機関が漏えい被害の防止に向けて横断的に注意喚起を整理し、広範な事業者の対応判断に資するため重要度が高い。",
-          "publisher": "https://www.cyber.go.jp/news/20261014.html",
+          "url": "https://www.cyber.go.jp/news/20261014.html",
+          "publisher": "国家サイバー統括室",
           "author": null,
           "role": "primary",
           "published_at": null,
           "updated_at": null,
           "accessed_at": "2026-10-23T22:26:00+09:00",
           "read_status": "page_read",
-          "notes": "nullの日付をページで確認。"
+          "notes": "2026-10-14の日付をページで確認。"
         }
       ]
     }
