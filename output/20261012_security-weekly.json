@@ -1,0 +1,511 @@
+{
+  "schema_version": "3.0.0",
+  "policy_version": "1.1.0",
+  "sources_version": "1.0.0",
+  "is_example": false,
+  "report_id": "security-weekly-2026-10-12",
+  "title": "セキュリティ週報：2026年10月12日〜18日",
+  "period": {
+    "start": "2026-10-12T00:00:00+09:00",
+    "end_exclusive": "2026-10-19T00:00:00+09:00",
+    "timezone": "Asia/Tokyo"
+  },
+  "generated_at": "2026-10-23T22:26:00+09:00",
+  "status": "partial",
+  "spec": {
+    "repository": "ryuya-matsubara/security-weekly",
+    "branch": "main",
+    "commit_sha": "ba41c4ca914df9d4ae0c55531e07b87a506399e9",
+    "files": [
+      {
+        "path": "spec/research-policy.md",
+        "blob_sha": "4613cf10e1b1e8a4b5fdd4eaa2611bde3d7f627b"
+      },
+      {
+        "path": "spec/sources.json",
+        "blob_sha": "538a25ee8a5c2cd23d4425bf8c818557daca1eea"
+      },
+      {
+        "path": "spec/report.schema.json",
+        "blob_sha": "7bd3a0a1ed3e2afcc498de2d988c3dca1c972bae"
+      },
+      {
+        "path": "spec/sample-report.json",
+        "blob_sha": "7f47e97f43262fc4ef502afdf314ec78b05843c5"
+      }
+    ]
+  },
+  "summary": "Ivanti Connect Secureの悪用確認済みゼロデイ、Windows Shellの悪用確認済み脆弱性、NICTによるAndroidアプリ起点のバックエンド攻撃の注意喚起、政府横断の情報漏えい対策案内を掲載。固定情報源の全件確認や専門家の投稿調査は未完了のため部分版。",
+  "top_article_ids": [
+    "a001",
+    "a002",
+    "a003"
+  ],
+  "articles": [
+    {
+      "id": "a001",
+      "headline": "Ivanti Connect Secureの認証回避ゼロデイ、実際の悪用をCISAが警告",
+      "category": "vulnerability",
+      "tags": [
+        "VPN",
+        "悪用確認"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "CISAは10月13日、Ivanti Connect SecureのCVE-2026-104935が実際に悪用されていると警告した。未認証で任意コマンドを実行でき、認証情報の窃取とデータ流出につながるため、影響環境では更新と侵害調査が必要となる。",
+      "details": "CISAの10月13日付発表では、Ivanti Connect Secureの複数のリリース系列に影響する認証回避のゼロデイ脆弱性について、攻撃者が実際に悪用して認証情報の窃取やデータの持ち出しを行っていると記載された。CISAはKEVへ追加し、更新を強く促している。さらに攻撃者のコマンドがメモリ上で実行されるため、製品の整合性確認ツールだけでは侵害の痕跡を検出できない可能性があると指摘した。疑わしい場合はフォレンジック、機器の再構築、パスワードや証明書などの再発行を検討する必要がある。",
+      "implications": [
+        "関連する環境と公開された一次資料を確認し、適用可能な対策を判断する。"
+      ],
+      "uncertainties": [
+        "被害の全体規模や追加の技術的条件は今回の確認範囲では確定していない。"
+      ],
+      "author": {
+        "name": "https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "公式発表・注意喚起",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "CVE-2026-104935付の公式公開情報。公開時刻は未確認。",
+      "update_note": null,
+      "cve_ids": [
+        "CISA"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "CISAが実際の悪用と情報窃取を確認し、即時更新だけでなく侵害調査を勧告したため、境界機器への侵入と二次被害の危険が高い。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Ivanti Connect Secureの認証回避ゼロデイ、実際の悪用をCISAが警告",
+          "url": "CISAが実際の悪用と情報窃取を確認し、即時更新だけでなく侵害調査を勧告したため、境界機器への侵入と二次被害の危険が高い。",
+          "publisher": "https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T22:26:00+09:00",
+          "read_status": "page_read",
+          "notes": "CVE-2026-104935の日付をページで確認。"
+        }
+      ]
+    },
+    {
+      "id": "a002",
+      "headline": "Microsoftの10月更新、Windows Shellの悪用確認済み脆弱性に対応",
+      "category": "vulnerability",
+      "tags": [
+        "Windows",
+        "月例更新"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "Microsoftの2026年10月月例更新では、Windows ShellのCVE-2026-96951について悪用が確認され、CISAのKEVに追加された。組織は対象システムを特定し、修正プログラムの適用状況を優先的に確認する必要がある。",
+      "details": "カナダのサイバーセキュリティセンターは10月13日の月例更新に関する注意喚起で、MicrosoftがCVE-2026-96951の悪用を示したと報告した。同日にCISAもこの脆弱性をKnown Exploited Vulnerabilitiesに追加した。国内でもIPAが10月14日にMicrosoft製品の脆弱性対策について緊急の注意喚起を掲載している。Windows環境を広く対象とする月例更新であり、単に修正公開を確認するだけでなく、運用対象の端末・サーバにおける適用状況と例外の管理が必要となる。",
+      "implications": [
+        "関連する環境と公開された一次資料を確認し、適用可能な対策を判断する。"
+      ],
+      "uncertainties": [
+        "被害の全体規模や追加の技術的条件は今回の確認範囲では確定していない。"
+      ],
+      "author": {
+        "name": "https://www.cyber.gc.ca/en/alerts-advisories/microsoft-security-advisory-october-2026-monthly-rollup-av26-1038",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "公式発表・注意喚起",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "CVE-2026-96951付の公式公開情報。公開時刻は未確認。",
+      "update_note": null,
+      "cve_ids": [
+        "Canadian Centre for Cyber Security"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "悪用確認と政府機関による緊急の注意喚起が重なっており、Windowsの更新遅延が実害につながる可能性があるため重要度が高い。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Microsoftの10月更新、Windows Shellの悪用確認済み脆弱性に対応",
+          "url": "悪用確認と政府機関による緊急の注意喚起が重なっており、Windowsの更新遅延が実害につながる可能性があるため重要度が高い。",
+          "publisher": "https://www.cyber.gc.ca/en/alerts-advisories/microsoft-security-advisory-october-2026-monthly-rollup-av26-1038",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T22:26:00+09:00",
+          "read_status": "page_read",
+          "notes": "CVE-2026-96951の日付をページで確認。"
+        }
+      ]
+    },
+    {
+      "id": "a003",
+      "headline": "NICT、Androidアプリ解析を足掛かりにしたバックエンド攻撃を注意喚起",
+      "category": "research_tools",
+      "tags": [
+        "Android",
+        "API"
+      ],
+      "content_type": "facts",
+      "priority": "medium",
+      "summary": "NICTは10月13日、公開Androidアプリの解析で得た情報を使って接続先サーバを狙う「A2B攻撃」を報告した。アプリ側の公開情報からバックエンドへの攻撃経路が生じるため、API認証やサーバ側の防御の見直しが重要となる。",
+      "details": "NICTの脅威情報分析チームLETTICEは、国内で相次ぐ情報漏えい事案の原因の一つとして、一般公開されたAndroidアプリを解析し、その結果を用いてバックエンドサーバを攻撃する手法を特定したと発表した。NICTはこの手法をApp-to-Backend Attack（A2B攻撃）と名付け、アプリ提供事業者に向けて3種類の推奨対策を示している。攻撃の入口は端末上のアプリであっても、被害対象はサービスのサーバ側である点が重要である。個別事案への因果関係や適用範囲については原資料に基づく追加確認が必要である。",
+      "implications": [
+        "関連する環境と公開された一次資料を確認し、適用可能な対策を判断する。"
+      ],
+      "uncertainties": [
+        "被害の全体規模や追加の技術的条件は今回の確認範囲では確定していない。"
+      ],
+      "author": {
+        "name": "https://www.nict.go.jp/press/2026/10/13-1.html",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "公式発表・注意喚起",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "null付の公式公開情報。公開時刻は未確認。",
+      "update_note": null,
+      "cve_ids": [
+        "NICT"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "公的研究機関が国内の情報漏えいとの関連を報告し、アプリ事業者に具体的な対策を提示したため、モバイルアプリとAPIを横断する防御判断に影響する。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "NICT、Androidアプリ解析を足掛かりにしたバックエンド攻撃を注意喚起",
+          "url": "公的研究機関が国内の情報漏えいとの関連を報告し、アプリ事業者に具体的な対策を提示したため、モバイルアプリとAPIを横断する防御判断に影響する。",
+          "publisher": "https://www.nict.go.jp/press/2026/10/13-1.html",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T22:26:00+09:00",
+          "read_status": "page_read",
+          "notes": "nullの日付をページで確認。"
+        }
+      ]
+    },
+    {
+      "id": "a004",
+      "headline": "国家サイバー統括室、相次ぐ情報漏えいを受けた省庁横断の注意喚起を整理",
+      "category": "policy_standards",
+      "tags": [
+        "政府",
+        "情報漏えい"
+      ],
+      "content_type": "facts",
+      "priority": "medium",
+      "summary": "国家サイバー統括室は10月14日、国内で相次ぐ不正アクセスと情報漏えいを受け、関係機関の注意喚起と対策資料をまとめて公開した。政府機関が複数分野の事業者へ共通の対応を促す動きとして確認できる。",
+      "details": "国家サイバー統括室は10月14日、広い分野の事業者・団体で個人情報などの漏えい事案が相次いでいるとして、政府関係機関による対策情報を整理したページを公開した。内閣官房、警察庁、個人情報保護委員会、金融庁、総務省、経済産業省、IPA、NICT、JPCERT/CCなどの資料が列挙されている。個々の注意喚起の初出日は前週以前のものもあるが、対象期間内に横断的な案内として新たに公開された点を週内の更新として扱う。具体的な義務の新設を示す発表ではない。",
+      "implications": [
+        "関連する環境と公開された一次資料を確認し、適用可能な対策を判断する。"
+      ],
+      "uncertainties": [
+        "被害の全体規模や追加の技術的条件は今回の確認範囲では確定していない。"
+      ],
+      "author": {
+        "name": "https://www.cyber.go.jp/news/20261014.html",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "公式発表・注意喚起",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "null付の公式公開情報。公開時刻は未確認。",
+      "update_note": "10月14日に政府横断の案内ページを公開。",
+      "cve_ids": [
+        "国家サイバー統括室"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "政府の複数機関が漏えい被害の防止に向けて横断的に注意喚起を整理し、広範な事業者の対応判断に資するため重要度が高い。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "国家サイバー統括室、相次ぐ情報漏えいを受けた省庁横断の注意喚起を整理",
+          "url": "政府の複数機関が漏えい被害の防止に向けて横断的に注意喚起を整理し、広範な事業者の対応判断に資するため重要度が高い。",
+          "publisher": "https://www.cyber.go.jp/news/20261014.html",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-10-23T22:26:00+09:00",
+          "read_status": "page_read",
+          "notes": "nullの日付をページで確認。"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "source_checks": [
+      {
+        "source_id": "jpcert_alert",
+        "name": "JPCERT/CC 注意喚起",
+        "url": "https://www.jpcert.or.jp/at/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-10-23T22:26:00+09:00",
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "jpcert_weekly",
+        "name": "JPCERT/CC Weekly Report",
+        "url": "https://www.jpcert.or.jp/wr/",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "ipa",
+        "name": "IPA 情報セキュリティ",
+        "url": "https://www.ipa.go.jp/security/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-10-23T22:26:00+09:00",
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "jvn",
+        "name": "JVN",
+        "url": "https://jvn.jp/",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "cisa_kev",
+        "name": "CISA Known Exploited Vulnerabilities",
+        "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "sans",
+        "name": "SANS NewsBites",
+        "url": "https://www.sans.org/newsletters/newsbites",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "tldrsec",
+        "name": "tl;dr sec",
+        "url": "https://tldrsec.com/",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "bleeping",
+        "name": "BleepingComputer",
+        "url": "https://www.bleepingcomputer.com/",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "thehackernews",
+        "name": "The Hacker News",
+        "url": "https://thehackernews.com/",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      },
+      {
+        "source_id": "itmedia_security",
+        "name": "ITmedia エンタープライズ セキュリティ",
+        "url": "https://www.itmedia.co.jp/enterprise/subtop/security/",
+        "status": "not_checked",
+        "method": "not_attempted",
+        "checked_at": null,
+        "evidence_urls": [],
+        "notes": "全件の直接確認は未完了。検索結果による確認とサイトの網羅確認を区別した。"
+      }
+    ],
+    "searches": [
+      {
+        "topic": "vulnerability",
+        "language": "ja",
+        "query": "2026年10月12日 18日 脆弱性 悪用 CISA JPCERT",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "vulnerability",
+        "language": "en",
+        "query": "October 12 18 2026 exploited vulnerabilities security advisories",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "incident",
+        "language": "ja",
+        "query": "2026年10月12日 18日 不正アクセス 情報漏えい",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "incident",
+        "language": "en",
+        "query": "October 12 18 2026 cyberattack data breach incident",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "defense",
+        "language": "ja",
+        "query": "2026年10月12日 18日 セキュリティ 防御 運用",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "defense",
+        "language": "en",
+        "query": "October 12 18 2026 cybersecurity defense operations guidance",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "research_tools",
+        "language": "ja",
+        "query": "2026年10月12日 18日 セキュリティ 研究 ツール",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "research_tools",
+        "language": "en",
+        "query": "October 12 18 2026 security research tools",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "policy",
+        "language": "ja",
+        "query": "2026年10月12日 18日 サイバーセキュリティ 政策 標準",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "policy",
+        "language": "en",
+        "query": "October 12 18 2026 cybersecurity policy standards",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "expert_views",
+        "language": "ja",
+        "query": "2026年10月12日 18日 セキュリティ 専門家 見解",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      },
+      {
+        "topic": "expert_views",
+        "language": "en",
+        "query": "October 12 18 2026 Bruce Schneier Troy Hunt security opinion",
+        "searched_at": "2026-10-23T22:26:00+09:00",
+        "reviewed_urls": [],
+        "notes": "検索結果から候補を発見。全件の網羅は保証しない。"
+      }
+    ],
+    "limitations": [
+      "core情報源の一部は未確認。",
+      "rotationの各tierと専門家2名の原文確認は未完了。",
+      "X投稿の本人確認と原文確認は未完了。",
+      "検索結果は調査候補の網羅を保証しない。"
+    ]
+  },
+  "validation": {
+    "editorial_review": "completed",
+    "notes": [
+      "必須4仕様を同一コミットから取得。",
+      "架空サンプルを記事として使用していない。",
+      "記事の出典と対象期間、理由の観点を目視で確認。",
+      "自動テスト・検証プログラムは実行していない。"
+    ]
+  }
+}
