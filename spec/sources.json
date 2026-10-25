@@ -1,6 +1,6 @@
 {
-  "sources_version": "1.0.0",
-  "updated_on": "2026-10-23",
+  "sources_version": "1.1.0",
+  "updated_on": "2026-10-25",
   "languages": [
     "ja",
     "en"
@@ -43,7 +43,17 @@
       "url": "https://jvn.jp/",
       "tier": "official",
       "priority": "core",
-      "purpose": "国内で調整された脆弱性情報",
+      "purpose": "国内で調整された脆弱性情報。対象期間の新規公開・重要更新についてCVSS基本値9.0以上の候補を毎回確認する。",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "nvd",
+      "name": "NIST National Vulnerability Database",
+      "url": "https://nvd.nist.gov/vuln/search",
+      "tier": "official",
+      "priority": "core",
+      "purpose": "対象期間の新規公開・重要更新のうちCVSS基本値9.0以上の候補を毎回確認。各版・評価元のスコアとCNA・ベンダーの原典を照合し、未確認範囲も記録する。",
       "access": "public_web_or_search",
       "rss_url": null
     },
@@ -232,8 +242,8 @@
       "name": "GitHub Advisory Database",
       "url": "https://github.com/advisories",
       "tier": "community",
-      "priority": "rotation",
-      "purpose": "OSS脆弱性の一次資料への入口",
+      "priority": "core",
+      "purpose": "OSS脆弱性の一次資料への入口。対象期間の新規公開・重要更新についてCVSS基本値9.0以上の候補を毎回確認する。",
       "access": "public_web_or_search",
       "rss_url": null
     },
@@ -314,7 +324,9 @@
   ],
   "extra_discovery": [
     "site:x.com {person_or_topic} {start} {end}",
-    "{product} security advisory {start} {end}"
+    "{product} security advisory {start} {end}",
+    "CVSS 9.0 9.1 9.8 10.0 脆弱性 {start} {end}",
+    "critical vulnerability CVSS 9 10 advisory {start} {end}"
   ],
-  "query_notes": "日付や検索式はサービスに合わせて調整。検索の期間フィルターだけに依存せず、本文の日付を確認する。"
+  "query_notes": "日付や検索式はサービスに合わせて調整。検索の期間フィルターだけに依存せず、本文の日付を確認する。 CVSS 9.0以上の確認では検索語だけに依存せず、調査方針A-2に従い、各情報源の一覧・検索機能と原典を確認する。"
 }
