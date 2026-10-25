@@ -1,5 +1,5 @@
 {
-  "sources_version": "1.1.0",
+  "sources_version": "1.2.0",
   "updated_on": "2026-10-25",
   "languages": [
     "ja",
@@ -170,10 +170,10 @@
     {
       "id": "google_security",
       "name": "Google Security Blog",
-      "url": "https://security.googleblog.com/",
+      "url": "https://blog.google/security/",
       "tier": "vendor",
-      "priority": "rotation",
-      "purpose": "製品・研究の公式発信",
+      "priority": "core",
+      "purpose": "Googleのセキュリティ発表・防御ガイド・AIセキュリティを毎回確認。関連するGoogle DeepMind、Google Cloud、Google Threat Intelligence等の公式発信も補足検索で調べる。",
       "access": "public_web_or_search",
       "rss_url": null
     },
@@ -256,6 +256,36 @@
       "purpose": "検索で見つかったツールの公式リポジトリを個別確認",
       "access": "public_web_or_search",
       "rss_url": null
+    },
+    {
+      "id": "openai_security",
+      "name": "OpenAI News（Security・Research・Safety）",
+      "url": "https://openai.com/news/",
+      "tier": "vendor",
+      "priority": "core",
+      "purpose": "AI製品・エージェントのセキュリティ、脅威分析、脆弱性発見・修正、防御手法・技術文書の新規公開・重要更新を毎回確認。関連する公式研究・開発者文書もたどる。",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "anthropic_news",
+      "name": "Anthropic News",
+      "url": "https://www.anthropic.com/news",
+      "tier": "vendor",
+      "priority": "core",
+      "purpose": "AI悪用・脅威分析、サイバー防御、製品・エージェントのセキュリティと対処方針の発表を毎回確認。",
+      "access": "public_web_or_search",
+      "rss_url": null
+    },
+    {
+      "id": "anthropic_research",
+      "name": "Anthropic Research",
+      "url": "https://www.anthropic.com/research",
+      "tier": "vendor",
+      "priority": "core",
+      "purpose": "プロンプトインジェクション等のAIセキュリティ、脆弱性発見・修正、防御・評価研究の新規公開・重要更新を毎回確認。",
+      "access": "public_web_or_search",
+      "rss_url": null
     }
   ],
   "experts": [
@@ -303,8 +333,8 @@
     },
     {
       "topic": "defense",
-      "ja": "セキュリティ 防御 認証 クラウド 新手法 {start} {end}",
-      "en": "security defense identity cloud detection new technique {start} {end}"
+      "ja": "セキュリティ 脆弱性 対策 修正 緩和策 検知 インシデント対応 復旧 ガイド {start} {end}",
+      "en": "security vulnerability remediation mitigation patch detection incident response recovery guidance {start} {end}"
     },
     {
       "topic": "research_tools",
@@ -326,7 +356,14 @@
     "site:x.com {person_or_topic} {start} {end}",
     "{product} security advisory {start} {end}",
     "CVSS 9.0 9.1 9.8 10.0 脆弱性 {start} {end}",
-    "critical vulnerability CVSS 9 10 advisory {start} {end}"
+    "critical vulnerability CVSS 9 10 advisory {start} {end}",
+    "site:openai.com security cybersecurity prompt injection defense mitigation {start} {end}",
+    "site:anthropic.com security cybersecurity threat intelligence mitigation {start} {end}",
+    "Google DeepMind Google Cloud security AI defense guidance {start} {end}",
+    "AI セキュリティ 企業 発表 脆弱性 対策 防御 {start} {end}",
+    "AI company cybersecurity research defense mitigation guidance {start} {end}",
+    "{product_or_cve} 対策 修正版 緩和策 検知 {start} {end}",
+    "{product_or_cve} security advisory remediation mitigation detection {start} {end}"
   ],
-  "query_notes": "日付や検索式はサービスに合わせて調整。検索の期間フィルターだけに依存せず、本文の日付を確認する。 CVSS 9.0以上の確認では検索語だけに依存せず、調査方針A-2に従い、各情報源の一覧・検索機能と原典を確認する。"
+  "query_notes": "日付や検索式はサービスに合わせて調整。検索の期間フィルターだけに依存せず、本文の日付を確認する。 CVSS 9.0以上の確認では検索語だけに依存せず、調査方針A-2に従い、各情報源の一覧・検索機能と原典を確認する。 AI企業の補足検索では調査方針B-2に従いOpenAI・Anthropic・Google各社の公式ドメインを確認する。複数語を一律にAND条件にせず、目的に応じてクエリを分け、対処・防御の解説も探す。"
 }
