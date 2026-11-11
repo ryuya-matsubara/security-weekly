@@ -1,0 +1,1337 @@
+{
+  "schema_version": "3.0.0",
+  "policy_version": "1.3.0",
+  "sources_version": "1.2.0",
+  "is_example": false,
+  "report_id": "security-weekly-2026-11-02",
+  "title": "セキュリティ週報 2026年11月2日〜8日",
+  "period": {
+    "start": "2026-11-02T00:00:00+09:00",
+    "end_exclusive": "2026-11-09T00:00:00+09:00",
+    "timezone": "Asia/Tokyo"
+  },
+  "generated_at": "2026-11-11T22:02:23.109Z",
+  "status": "partial",
+  "spec": {
+    "repository": "ryuya-matsubara/security-weekly",
+    "branch": "main",
+    "commit_sha": "0f4a1b5ff5535fb1a7762b042955949b15daf832",
+    "files": [
+      {
+        "path": "spec/research-policy.md",
+        "blob_sha": "79b909b443492c6912f2644aa6cef7f798410cff"
+      },
+      {
+        "path": "spec/sources.json",
+        "blob_sha": "3701f7461cf83a372f24b83ed5e7dd2bf12170c2"
+      },
+      {
+        "path": "spec/report.schema.json",
+        "blob_sha": "7bd3a0a1ed3e2afcc498de2d988c3dca1c972bae"
+      },
+      {
+        "path": "spec/sample-report.json",
+        "blob_sha": "e78f37946aae0247a9a0456d548917bb5050a7c3"
+      }
+    ]
+  },
+  "summary": "Siemens産業用機器の悪用観測と対象拡大、ApplyNowの漏えい調査最終報、OpenAIによるLinux権限昇格の研究報告を優先した。AndroidとWordPressの更新、AI出力の完全性検証、クラウドのデータ境界も含む7件を掲載。期間別高スコア一覧とKEV全体の確認には取得制限があった。",
+  "top_article_ids": [
+    "a001",
+    "a002",
+    "a003"
+  ],
+  "articles": [
+    {
+      "id": "a001",
+      "headline": "Siemens産業用IoT機器の認証不備、悪用観測を受け対象製品を追加",
+      "category": "vulnerability",
+      "tags": [
+        "Siemens",
+        "Node-RED",
+        "OT"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "Siemensは産業用IoT機器のNode-REDに関する認証不備について、囮環境を狙った悪用の報告を受け、追加の影響製品を公表した。修正は既に提供されており、対象機器と公開範囲の確認を優先したい。",
+      "details": "Siemensは11月4日、VulnCheckの囮環境で観測された悪用を受け、従来案内していたSIMATIC IoT2050 Advanced以外に3製品が影響を受けると公表した。CVE-2026-58115はIndustrial OS上でNode-REDを利用する構成の認証不備で、SiemensのCVSS v3.1およびv4.0基本値はいずれも10.0。修正は8月11日に公開済みで、該当するIndustrial OS構成にはV4.3.4-1以降を案内している。観測は囮への実際の攻撃通信であり、顧客機器の侵害を確認したものではない。",
+      "implications": [
+        "機器の型番とOSを勧告で照合し、製品別に更新する。管理面をインターネットから隔離し、既に公開していた環境は運用履歴も調査する。"
+      ],
+      "uncertainties": [
+        "顧客機器の侵害件数、攻撃者の身元は確認できない。取得した勧告の最終更新は11月10日で、期間内の影響範囲の変更は11月4日付発表に基づく。"
+      ],
+      "author": {
+        "name": "Siemens ProductCERT",
+        "affiliation": "Siemens ProductCERT",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Siemens ProductCERT、Siemens ProductCERT、VulnCheck",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "11月4日のSiemens発表が対象期間内。初回修正は8月11日。",
+      "update_note": "囮への悪用観測を受けたベンダー確認と、3製品の対象追加。",
+      "cve_ids": [
+        "CVE-2026-58115"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "Siemens評価はCVSS v3.1／v4.0基本値10.0。認証のない管理機能を狙う通信が観測され、以前の対象表だけでは見落とす産業用機器も増えたため、修正と公開状況の確認を急ぐ根拠がある。",
+          "source_ids": [
+            "s1",
+            "s2",
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Missing Authentication Vulnerability in Node-RED on SIMATIC IoT2050 with Industrial OS",
+          "url": "https://productcert.siemens.com/news/2026/11/04/missing-authentication-vulnerability-in-node-red-on-simatic-iot2050-with-industrial-os/",
+          "publisher": "Siemens ProductCERT",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:57:26.267Z",
+          "read_status": "page_read",
+          "notes": "11月4日公開"
+        },
+        {
+          "id": "s2",
+          "title": "SSA-834709",
+          "url": "https://productcert.siemens.com/productcert/html/ssa-834709.html",
+          "publisher": "Siemens ProductCERT",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:57:57.663Z",
+          "read_status": "page_read",
+          "notes": "8月11日初回修正、取得版は11月10日更新"
+        },
+        {
+          "id": "s3",
+          "title": "Exploitation Targeting Node-RED, a Tool Embedded in ICS Products",
+          "url": "https://www.vulncheck.com/blog/exploitation-targeting-node-red",
+          "publisher": "VulnCheck",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:58:34.632Z",
+          "read_status": "page_read",
+          "notes": "10月30日〜11月1日の観測の記述"
+        }
+      ]
+    },
+    {
+      "id": "a002",
+      "headline": "ApplyNowの漏えい最終報、約39万7千人が対象",
+      "category": "incident",
+      "tags": [
+        "国内",
+        "個人情報",
+        "パッチ管理"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "採用・雇用契約サービスのApplyNowは、外部専門機関による不正アクセス調査の結果を公表した。影響は396,920人に及び、既知脆弱性への対応の遅れが、分析用ツールにつながる業務データに波及した。",
+      "details": "11月4日の最終報によると、第三者は8月9日に社内データ分析ツールの公表済みの脆弱性を悪用し、管理権限を取得した。8月に一部を閲覧し、9月7日に接続先の3サービスのデータを一括取得したと同社は説明した。応募者・契約者・企業ユーザーは396,920人で、ApplyNow Signの契約者30,067人は内数。一部では個人番号や口座情報なども対象になった。企業ユーザーのパスワードはハッシュ化されていた。公表時点で同社は二次被害を確認していない。",
+      "implications": [
+        "業務データに接続する分析ツールも脆弱性管理の対象にし、ツールの接続先と権限を確認する。通知を受けた場合は、公式の案内から問い合わせ先を確認する。"
+      ],
+      "uncertainties": [
+        "悪用された製品・CVE、個々人の影響項目、二次利用の全容はこの発表からは確定できない。"
+      ],
+      "author": {
+        "name": "ApplyNow",
+        "affiliation": "ApplyNow",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "ApplyNow",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "11月4日の公式最終報を採用。侵入・データ取得は対象期間前。",
+      "update_note": "外部調査が確認した侵入・データ取得の時系列と原因、再発防止策が公表された。",
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "約39万7千人分に及び、一部には個人番号や口座情報も含まれる。既知脆弱性を起点に接続先の複数サービスへ波及しており、更新と権限管理の両方に影響する。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "不正アクセスによる個人情報漏えいに関する調査結果",
+          "url": "https://applynow.co.jp/news/20261104",
+          "publisher": "ApplyNow",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:57:38.791Z",
+          "read_status": "page_read",
+          "notes": "11月4日付最終報"
+        }
+      ]
+    },
+    {
+      "id": "a003",
+      "headline": "OpenAIがLinuxカーネルのローカル権限昇格948件の検証を報告",
+      "category": "research_tools",
+      "tags": [
+        "Linux",
+        "AIによる脆弱性研究",
+        "修正調整"
+      ],
+      "content_type": "mixed",
+      "priority": "high",
+      "summary": "OpenAIは、制御された研究環境でLinuxのローカル権限昇格を948件検証し、修正案を作ったと発表した。報告は研究の実績で、全件の修正が既に出荷されたことや、外部からの侵害を示すものではない。",
+      "details": "OpenAIが11月4日に公開した記事によると、10月中旬の実験ではLinuxカーネルを対象に、ローカル権限昇格948件を検証して個別の修正案を作成した。APIクレジット費用は約121万ドルだった。同社は、早期の試行で別の脆弱性を使って成功と判定された例が見つかり、その後は割り当てた脆弱性による結果かを独立に確認する工程を加えたと説明した。保守者への報告は段階的であり、個別の配布版への取り込み状況は発表の件数からは判断できない。翌日のGPT-6 Cyberの発表は関連する開発状況として参照した。",
+      "implications": [
+        "利用するLinux配布元の修正情報を確認する。AIの報告や修正案は、再現結果と原因の対応、修正差分、保守者の判断を照合する。"
+      ],
+      "uncertainties": [
+        "件数・費用は提供元の研究報告。独立再現、全件のCVE割当・配布・修正状況は未確認。"
+      ],
+      "author": {
+        "name": "OpenAI",
+        "affiliation": "OpenAI",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "OpenAI、OpenAI、tl;dr sec",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "11月4日の研究発表を採用。実験実施は10月中旬。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "報告された検証規模は、保守者への連絡・修正レビュー・配布の処理能力が防御上の課題になることを示す。初期の誤判定例は、結果だけでなく原因の照合が必要な具体例でもある。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        },
+        {
+          "type": "attention",
+          "explanation": "11月5日の専門ニュースレターtl;dr secが件数と研究手法を特集し、セキュリティ実務者向けに取り上げた。",
+          "source_ids": [
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "A thousand fewer paths to root",
+          "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+          "publisher": "OpenAI",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:57:26.267Z",
+          "read_status": "page_read",
+          "notes": "11月4日公開"
+        },
+        {
+          "id": "s2",
+          "title": "GPT‑6 Cyber: Advancing the frontier of aligned cybersecurity agents",
+          "url": "https://openai.com/index/introducing-gpt-6-cyber/",
+          "publisher": "OpenAI",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:57:26.267Z",
+          "read_status": "page_read",
+          "notes": "11月5日公開"
+        },
+        {
+          "id": "s3",
+          "title": "[tl;dr sec] #353",
+          "url": "https://tldrsec.com/p/tldr-sec-353",
+          "publisher": "tl;dr sec",
+          "author": null,
+          "role": "analysis",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:57:02.451Z",
+          "read_status": "page_read",
+          "notes": "11月5日号"
+        }
+      ]
+    },
+    {
+      "id": "a004",
+      "headline": "Androidの11月更新、操作不要の重大なコード実行を修正",
+      "category": "vulnerability",
+      "tags": [
+        "Android",
+        "Framework",
+        "端末更新"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "GoogleのAndroid向け11月のセキュリティ情報には、ユーザー操作を必要としない重大な遠隔コード実行の修正が含まれる。端末メーカーごとに配布が異なるため、OSの名称だけでなく実際のセキュリティパッチレベルを確認する。",
+      "details": "11月2日公開、6日更新のAndroid Security Bulletinは、FrameworkのCVE-2026-58868をCriticalの遠隔コード実行とし、修正対象のAOSP系列に14、15、16、16-qpr2、17を挙げる。Googleはこの速報の最も深刻な問題について追加権限とユーザー操作が不要と説明した。重大度は開発時に保護を無効化した場合や保護が回避された場合の影響を考慮している。速報全体の問題には2026-11-05以降のパッチレベルが対応する。 CVE Programの公開レコードにおけるCISA-ADP評価はCVSS v3.1基本値9.8。",
+      "implications": [
+        "端末のパッチレベルとメーカーの提供状況を確認する。企業の管理端末では配布の遅れも把握する。"
+      ],
+      "uncertainties": [
+        "悪用の有無は確認できない。数値はCISA-ADPの評価で、Android公式速報のCritical表記とは別。"
+      ],
+      "author": {
+        "name": "Android Open Source Project",
+        "affiliation": "Android Open Source Project",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Android Open Source Project、CVE Program",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "公式速報は11月2日公開、11月6日更新。パッチレベルの日付とは区別。",
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-58868"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "操作なしで遠隔コード実行に至り得る問題が複数のAOSP系列に関わる。端末メーカーごとに適用状況が異なるため、パッチレベルを直接確認する重要性が高い。 CISA-ADPのCVSS v3.1基本値9.8も確認した。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Android Security Bulletin—November 2026",
+          "url": "https://source.android.com/docs/security/bulletin/2026/2026-11-01/",
+          "publisher": "Android Open Source Project",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:57:11.588Z",
+          "read_status": "page_read",
+          "notes": "11月2日公開、11月6日更新"
+        },
+        {
+          "id": "s2",
+          "title": "CVE-2026-58868の公開レコード",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/58xxx/CVE-2026-58868.json",
+          "publisher": "CVE Program",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T22:00:37.693Z",
+          "read_status": "page_read",
+          "notes": "CISA-ADPの評価欄を確認"
+        }
+      ]
+    },
+    {
+      "id": "a005",
+      "headline": "Anthropic、AI応答が指定モデル由来かを検証する暗号技術の試作を公開",
+      "category": "research_tools",
+      "tags": [
+        "暗号",
+        "AI推論",
+        "完全性"
+      ],
+      "content_type": "mixed",
+      "priority": "medium",
+      "summary": "Anthropicは、応答が指定したモデルと入力に対応するかを暗号学的に確かめるFlashProveを公開した。第三者の中継サービスを利用するときなどにモデルのすり替えを見分ける用途を想定するが、実運用には計算費用などの課題が残る。",
+      "details": "11月2日付の研究では、モデルの重みを検証者に開示せず、事前に約束したモデルと指定入力から出力が生成されたことを証明する方式を扱う。同社の試作では量子化した4000億パラメータのLlama 4 Maverickに対し、H100 1基で毎秒100トークン超の証明生成を報告。1024トークン当たりの証明は約19MBで、通常の推論よりGPU時間が約70〜95倍かかるという。証明が検証するのは出力と所定の計算の対応で、回答の正しさや安全性とは別である。公開リポジトリは保守されていない研究試作と明記する。",
+      "implications": [
+        "中継経路の完全性を検証する技術候補として扱い、モデルを指定する根拠、証明の通信量、検証できる範囲を確認する。"
+      ],
+      "uncertainties": [
+        "実運用での独立再現や費用は未確認。証明が対象にする計算の仕様が意図どおりかは別途監査が必要。"
+      ],
+      "author": {
+        "name": "Anthropic",
+        "affiliation": "Anthropic",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Anthropic、Anthropic",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "Anthropic Researchの公開表示は11月2日。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "配信経路でのモデルのすり替えに対し、提供者の申告に依存しない検証を試作で示した。大きな計算負荷も同時に開示され、採用判断に使える条件が具体的。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Progress on provable inference for large language models",
+          "url": "https://www.anthropic.com/research/provable-inference",
+          "publisher": "Anthropic",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:58:34.632Z",
+          "read_status": "page_read",
+          "notes": "11月2日公開"
+        },
+        {
+          "id": "s2",
+          "title": "anthropics/FlashProve",
+          "url": "https://github.com/anthropics/FlashProve",
+          "publisher": "Anthropic",
+          "author": null,
+          "role": "tool",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:58:34.632Z",
+          "read_status": "page_read",
+          "notes": "研究プロトタイプの公式リポジトリ"
+        }
+      ]
+    },
+    {
+      "id": "a006",
+      "headline": "Google Cloud、VPC Service Controlsの境界ルールをID単位に拡張",
+      "category": "defense_operations",
+      "tags": [
+        "Google Cloud",
+        "GKE",
+        "データ持ち出し対策"
+      ],
+      "content_type": "mixed",
+      "priority": "medium",
+      "summary": "Google Cloudはデータ持ち出し対策に使うVPC Service Controlsで、入出境ルールのIAMロール対応を一般提供とした。GKE向けのWorkload Identity Federationへの対応はプレビューで、導入判断では提供段階を区別する必要がある。",
+      "details": "11月4日のGoogle Cloud公式発表は、VPC Service Controlsの入口・出口ルールにおけるIAMロールへの対応を一般提供、GKEのWorkload Identity Federationへの対応をプレビューとした。Googleは組織のクラスタでIDに基づく細かな境界ルールを設けるための変更と説明する。同じ発表には他の保護機能も含まれるが、ここではデータ境界の運用に直接関わる変更を対象とする。既存の例外が自動で縮小されるわけではなく、どの主体からどのサービスに通信を認めるかは利用者が確認する必要がある。",
+      "implications": [
+        "境界をまたぐ処理の主体と例外を棚卸しし、ロール対応が意図しない広い例外を減らせるか評価する。プレビュー機能は本番導入条件を別に確認する。"
+      ],
+      "uncertainties": [
+        "対象リージョン・サービスの全条件や既存環境での効果は個別に未確認。"
+      ],
+      "author": {
+        "name": "Google Cloud",
+        "affiliation": "Google Cloud",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Google Cloud",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "Google Cloud公式発表は11月4日。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "データ境界の例外をIDでより細かく表せることは、権限管理とデータ流出防止の運用判断に直接影響する。一般提供とプレビューを区別できることも採用に必要。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Helping you build and defend at machine-speed in the agentic era",
+          "url": "https://cloud.google.com/blog/products/identity-security/helping-you-build-and-defend-at-machine-speed-in-the-agentic-era/",
+          "publisher": "Google Cloud",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T21:58:14.340Z",
+          "read_status": "page_read",
+          "notes": "11月4日公開"
+        }
+      ]
+    },
+    {
+      "id": "a007",
+      "headline": "WordPressの更新処理に関する欠陥、CISAが既知悪用一覧への追加を通知",
+      "category": "vulnerability",
+      "tags": [
+        "WordPress",
+        "更新",
+        "既知悪用"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "CISAはWordPress Coreの更新処理にあるCVE-2026-119977を、悪用の証拠に基づいて既知悪用一覧へ加えたと通知した。主系列の修正は先行して提供されており、旧系列も配布元の修正情報を確認したい。",
+      "details": "WordfenceのCVEレコードによると、WordPress Core 4.7〜7.1.3の一部の更新処理に競合状態があり、更新中に認証なしのコード実行に至り得る。CNAのWordfenceはCVSS v3.1基本値8.1と評価した。WordPressの主系列では10月28日に7.1.4が出ている。対象期間内の新規情報は、CISAが11月3日付の通知で実悪用の証拠に基づく既知悪用一覧への追加を公表したこと。通常のアクセスすべてで同じ条件が成立するわけではない。",
+      "implications": [
+        "対象サイトのバージョンと更新履歴を確認し、利用系列の修正版を適用する。公開環境では更新時の異常や意図しないファイル変更も調べる。"
+      ],
+      "uncertainties": [
+        "実被害の件数や、各サイトの侵害の有無は確認できない。"
+      ],
+      "author": {
+        "name": "CISA",
+        "affiliation": "CISA",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "CISA、CVE Program / Wordfence、WordPress.org",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "主系列修正は10月28日、既知悪用一覧への追加通知は11月3日米国時間。",
+      "update_note": "修正後にCISAが実悪用に基づく追加を公表。",
+      "cve_ids": [
+        "CVE-2026-119977"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "WordfenceのCVSS v3.1基本値は8.1だが、CISAが実悪用に基づく追加を公式通知している。公開サイトでは未更新のまま運用する影響が大きい。",
+          "source_ids": [
+            "s1",
+            "s2",
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
+          "url": "https://content.govdelivery.com/accounts/USDHSCISA/bulletins/4318a48",
+          "publisher": "CISA",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T22:00:23.950Z",
+          "read_status": "page_read",
+          "notes": "11月3日米国時間通知"
+        },
+        {
+          "id": "s2",
+          "title": "CVE-2026-119977の公開レコード",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/119xxx/CVE-2026-119977.json",
+          "publisher": "CVE Program / Wordfence",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T22:00:37.693Z",
+          "read_status": "page_read",
+          "notes": "CNAの評価と影響範囲"
+        },
+        {
+          "id": "s3",
+          "title": "WordPress 7.1.4",
+          "url": "https://wordpress.org/news/2026/10/wordpress-7-1-4/",
+          "publisher": "WordPress.org",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-11T22:00:31.682Z",
+          "read_status": "page_read",
+          "notes": "10月28日公開"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "source_checks": [
+      {
+        "source_id": "jpcert_alert",
+        "name": "JPCERT/CC 注意喚起",
+        "url": "https://www.jpcert.or.jp/at/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:56:34.527Z",
+        "evidence_urls": [
+          "https://www.jpcert.or.jp/m/at/2026.html"
+        ],
+        "notes": "年次注意喚起一覧を確認。11月11日付のMicrosoft月例は期間外。"
+      },
+      {
+        "source_id": "jpcert_weekly",
+        "name": "JPCERT/CC Weekly Report",
+        "url": "https://www.jpcert.or.jp/wr/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:57:02.451Z",
+        "evidence_urls": [
+          "https://www.jpcert.or.jp/m/wr/2026/wr261105.html"
+        ],
+        "notes": "11月5日号を確認し、紹介される出来事の発生日と発行日を区別。"
+      },
+      {
+        "source_id": "ipa",
+        "name": "IPA 情報セキュリティ",
+        "url": "https://www.ipa.go.jp/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:06.537Z",
+        "evidence_urls": [
+          "https://www.ipa.go.jp/security/security-alert/2026/"
+        ],
+        "notes": "入口と2026年度の重要情報一覧でPHPの11月2日更新等を確認。今号では個別採用せず。"
+      },
+      {
+        "source_id": "jvn",
+        "name": "JVN",
+        "url": "https://jvn.jp/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:56:34.527Z",
+        "evidence_urls": [
+          "https://jvndb.jvn.jp/search/index.php"
+        ],
+        "notes": "新着一覧を取得。iPediaの指定検索入口は404で期間別高スコア抽出を完了できず。"
+      },
+      {
+        "source_id": "nvd",
+        "name": "NIST National Vulnerability Database",
+        "url": "https://nvd.nist.gov/vuln/search",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:57:57.663Z",
+        "evidence_urls": [
+          "https://nvd.nist.gov/vuln/search/results?form_type=Advanced&results_type=overview&pub_start_date=11%2F02%2F2026&pub_end_date=11%2F08%2F2026&cvss_version=3&cvss_v3_severity=CRITICAL",
+          "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-01T15%3A00%3A00.000&pubEndDate=2026-11-08T14%3A59%3A59.999&cvssV4Severity=CRITICAL",
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/58xxx/CVE-2026-58868.json"
+        ],
+        "notes": "入口とAndroid個別詳細の本文が抽出されず、期間別v3検索、v4 APIも取得不能。全版・全ページ・重要更新の確認は未完。CVE Programの原文でAndroid個別評価を補完。"
+      },
+      {
+        "source_id": "cisa_kev",
+        "name": "CISA Known Exploited Vulnerabilities",
+        "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-11-11T22:00:23.950Z",
+        "evidence_urls": [
+          "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+          "https://content.govdelivery.com/accounts/USDHSCISA/bulletins/4318a48"
+        ],
+        "notes": "一覧とJSONフィードは403。CISAの配信サービスにある11月3日付WordPress追加通知を個別確認したが、全追加の照合はできなかった。"
+      },
+      {
+        "source_id": "sans",
+        "name": "SANS NewsBites",
+        "url": "https://www.sans.org/newsletters/newsbites",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:57:02.451Z",
+        "evidence_urls": [
+          "https://www.sans.org/newsletters/newsbites/xxviii-83",
+          "https://www.sans.org/newsletters/newsbites/xxviii-82"
+        ],
+        "notes": "11月6日号および11月3日号の検索結果で候補を確認。"
+      },
+      {
+        "source_id": "tldrsec",
+        "name": "tl;dr sec",
+        "url": "https://tldrsec.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:14.340Z",
+        "evidence_urls": [
+          "https://tldrsec.com/p/tldr-sec-353",
+          "https://blog.marcolancini.it/2026/blog-security-logging-cloud-environments-kubernetes/"
+        ],
+        "notes": "#353を読み、Linux調査・Kubernetes監査ログの候補を確認。"
+      },
+      {
+        "source_id": "bleeping",
+        "name": "BleepingComputer",
+        "url": "https://www.bleepingcomputer.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:27.660Z",
+        "evidence_urls": [
+          "https://www.bleepingcomputer.com/news/security/new-android-sms-of-death-exploit-can-remotely-crash-unpatched-phones/"
+        ],
+        "notes": "トップとAndroidの個別候補を確認。採用したCVEの事実はAndroidとCVE Programの原典を使用。"
+      },
+      {
+        "source_id": "thehackernews",
+        "name": "The Hacker News",
+        "url": "https://thehackernews.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:34.632Z",
+        "evidence_urls": [
+          "https://thehackernews.com/2026/11/attackers-exploit-critical-siemens.html",
+          "https://www.vulncheck.com/blog/exploitation-targeting-node-red"
+        ],
+        "notes": "11月3日のSiemens関連報道からVulnCheckの一次資料を確認。"
+      },
+      {
+        "source_id": "itmedia_security",
+        "name": "ITmedia エンタープライズ セキュリティ",
+        "url": "https://www.itmedia.co.jp/enterprise/subtop/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:27.660Z",
+        "evidence_urls": [
+          "https://www.itmedia.co.jp/news/article/2611/06/2000002931/"
+        ],
+        "notes": "指定入口と、ITmedia NEWSの11月6日GPT-6 Cyber関連記事を確認。指定欄の全件確認ではない。"
+      },
+      {
+        "source_id": "aws_security",
+        "name": "AWS Security Blog",
+        "url": "https://aws.amazon.com/blogs/security/",
+        "status": "checked_no_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:56:34.527Z",
+        "evidence_urls": [
+          "https://aws.amazon.com/blogs/security/"
+        ],
+        "notes": "公式ブログ入口は取得。期間内の追加候補は確認した範囲で採用に至らず、一覧全件は未確認。"
+      },
+      {
+        "source_id": "google_security",
+        "name": "Google Security Blog",
+        "url": "https://blog.google/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:14.340Z",
+        "evidence_urls": [
+          "https://source.android.com/docs/security/bulletin/2026/2026-11-01/",
+          "https://cloud.google.com/blog/products/identity-security/helping-you-build-and-defend-at-machine-speed-in-the-agentic-era/"
+        ],
+        "notes": "セキュリティ入口と公式ドメイン検索、Android速報・Google Cloud発表を確認。"
+      },
+      {
+        "source_id": "jpcert_eyes",
+        "name": "JPCERT/CC Eyes",
+        "url": "https://blogs.jpcert.or.jp/",
+        "status": "checked_no_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:57:26.267Z",
+        "evidence_urls": [
+          "https://blogs.jpcert.or.jp/ja/"
+        ],
+        "notes": "日本語一覧の取得範囲では採用候補なし。"
+      },
+      {
+        "source_id": "schneier",
+        "name": "Schneier on Security",
+        "url": "https://www.schneier.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:06.537Z",
+        "evidence_urls": [
+          "https://www.schneier.com/"
+        ],
+        "notes": "本人ブログの11月2日・3日のAIとセキュリティに関する見解を確認。"
+      },
+      {
+        "source_id": "troyhunt",
+        "name": "Troy Hunt",
+        "url": "https://www.troyhunt.com/",
+        "status": "checked_no_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:06.537Z",
+        "evidence_urls": [
+          "https://www.troyhunt.com/"
+        ],
+        "notes": "本人ブログの取得範囲に11月1日、10日、11日の投稿は確認したが、対象期間内の掲載候補を確認できなかった。"
+      },
+      {
+        "source_id": "github_advisories",
+        "name": "GitHub Advisory Database",
+        "url": "https://github.com/advisories",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:56:34.527Z",
+        "evidence_urls": [
+          "https://github.com/advisories?q=published%3A2026-11-02..2026-11-08+severity%3Acritical",
+          "https://github.com/advisories?q=updated%3A2026-11-02..2026-11-08+severity%3Acritical"
+        ],
+        "notes": "入口は取得できたが、公開日・更新日指定のcritical一覧はDisabledError。全版・後続ページ未確認。"
+      },
+      {
+        "source_id": "github_tools",
+        "name": "GitHub",
+        "url": "https://github.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:34.632Z",
+        "evidence_urls": [
+          "https://github.com/anthropics/FlashProve"
+        ],
+        "notes": "AnthropicのFlashProve公式リポジトリを確認。研究試作を実行していない。"
+      },
+      {
+        "source_id": "openai_security",
+        "name": "OpenAI News（Security・Research・Safety）",
+        "url": "https://openai.com/news/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:57:26.267Z",
+        "evidence_urls": [
+          "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+          "https://openai.com/index/introducing-gpt-6-cyber/",
+          "https://openai.com/index/preparing-our-next-security-sprint-to-harden-openai/"
+        ],
+        "notes": "公式セキュリティ欄と補足検索からLinux研究・GPT-6 Cyber・セキュリティスプリントを確認。"
+      },
+      {
+        "source_id": "anthropic_news",
+        "name": "Anthropic News",
+        "url": "https://www.anthropic.com/news",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:57:02.451Z",
+        "evidence_urls": [
+          "https://www.anthropic.com/research/provable-inference"
+        ],
+        "notes": "ニュース一覧と公式ドメイン検索を確認。研究欄から11月2日のFlashProveへ。11月9日以降のモデル発表は除外。"
+      },
+      {
+        "source_id": "anthropic_research",
+        "name": "Anthropic Research",
+        "url": "https://www.anthropic.com/research",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-11T21:58:34.632Z",
+        "evidence_urls": [
+          "https://www.anthropic.com/research/provable-inference",
+          "https://github.com/anthropics/FlashProve"
+        ],
+        "notes": "11月2日の研究本文と試作リポジトリを確認。"
+      },
+      {
+        "source_id": "extra_x_public",
+        "name": "X公開投稿検索",
+        "url": "https://x.com/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-11-11T21:57:38.791Z",
+        "evidence_urls": [],
+        "notes": "公開Web検索で期間内の本人確認・原文・反応指標まで確認できた投稿を採用していない。投稿なしとは判断しない。"
+      }
+    ],
+    "searches": [
+      {
+        "language": "ja",
+        "topic": "vulnerability",
+        "query": "セキュリティ 脆弱性 悪用 注意喚起 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/m/at/2026.html",
+          "https://applynow.co.jp/news/20261104"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "en",
+        "topic": "vulnerability",
+        "query": "security vulnerability actively exploited advisory 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/m/at/2026.html",
+          "https://applynow.co.jp/news/20261104"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "ja",
+        "topic": "incident",
+        "query": "サイバー攻撃 情報漏えい 調査報告 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/m/at/2026.html",
+          "https://applynow.co.jp/news/20261104"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "en",
+        "topic": "incident",
+        "query": "cyberattack data breach incident investigation 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/m/at/2026.html",
+          "https://applynow.co.jp/news/20261104"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "ja",
+        "topic": "defense",
+        "query": "セキュリティ 脆弱性 対策 修正 緩和策 検知 インシデント対応 復旧 ガイド 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.ipa.go.jp/security/security-alert/2026/",
+          "https://www.anthropic.com/research/provable-inference"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "en",
+        "topic": "defense",
+        "query": "security vulnerability remediation mitigation patch detection incident response recovery guidance 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.ipa.go.jp/security/security-alert/2026/",
+          "https://www.anthropic.com/research/provable-inference"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "ja",
+        "topic": "research_tools",
+        "query": "セキュリティ 研究 発表 ツール 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.ipa.go.jp/security/security-alert/2026/",
+          "https://www.anthropic.com/research/provable-inference"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "en",
+        "topic": "research_tools",
+        "query": "security research paper open source tool released 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.ipa.go.jp/security/security-alert/2026/",
+          "https://www.anthropic.com/research/provable-inference"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "ja",
+        "topic": "policy",
+        "query": "サイバーセキュリティ 政策 標準 ガイドライン 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/",
+          "https://csrc.nist.gov/news/2026"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "en",
+        "topic": "policy",
+        "query": "cybersecurity policy standard guidance 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/",
+          "https://csrc.nist.gov/news/2026"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "ja",
+        "topic": "expert_views",
+        "query": "セキュリティ 研究者 見解 講演 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/",
+          "https://csrc.nist.gov/news/2026"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "language": "en",
+        "topic": "expert_views",
+        "query": "cybersecurity researcher analysis talk opinion 2026-11-02 2026-11-08",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/",
+          "https://csrc.nist.gov/news/2026"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:openai.com cybersecurity November 2–8 2026",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+          "https://www.anthropic.com/research/provable-inference",
+          "https://cloud.google.com/blog/products/identity-security/helping-you-build-and-defend-at-machine-speed-in-the-agentic-era/"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:anthropic.com cybersecurity November 2–8 2026",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+          "https://www.anthropic.com/research/provable-inference",
+          "https://cloud.google.com/blog/products/identity-security/helping-you-build-and-defend-at-machine-speed-in-the-agentic-era/"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:blog.google OR site:cloud.google.com cybersecurity November 2–8 2026",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+          "https://www.anthropic.com/research/provable-inference",
+          "https://cloud.google.com/blog/products/identity-security/helping-you-build-and-defend-at-machine-speed-in-the-agentic-era/"
+        ],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "topic": "x",
+        "language": "en",
+        "query": "site:x.com cybersecurity November 2–8 2026",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [],
+        "notes": "日付を含む発見検索。一括結果および関連リンクの確認先を記録。対象期間は原典の日付で判断。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "November 2 3 4 5 6 2026 critical CVSS actively exploited security vulnerability advisory",
+        "searched_at": "2026-11-11T21:56:34.527Z",
+        "reviewed_urls": [
+          "https://productcert.siemens.com/news/2026/11/04/missing-authentication-vulnerability-in-node-red-on-simatic-iot2050-with-industrial-os/",
+          "https://source.android.com/docs/security/bulletin/2026/2026-11-01/"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "Cisco Secure Email CVE-2026-76461 Cisco November 4 2026 advisory",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://productcert.siemens.com/news/2026/11/04/missing-authentication-vulnerability-in-node-red-on-simatic-iot2050-with-industrial-os/",
+          "https://source.android.com/docs/security/bulletin/2026/2026-11-01/"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:progress.com WS_FTP 84295 90868 November 2026",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://productcert.siemens.com/news/2026/11/04/missing-authentication-vulnerability-in-node-red-on-simatic-iot2050-with-industrial-os/",
+          "https://source.android.com/docs/security/bulletin/2026/2026-11-01/"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:siemens.com CVE-2026-58115 November 2026 VulnCheck",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://productcert.siemens.com/news/2026/11/04/missing-authentication-vulnerability-in-node-red-on-simatic-iot2050-with-industrial-os/",
+          "https://source.android.com/docs/security/bulletin/2026/2026-11-01/"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "Android Security Bulletin November 2026 58868 source.android.com",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://productcert.siemens.com/news/2026/11/04/missing-authentication-vulnerability-in-node-red-on-simatic-iot2050-with-industrial-os/",
+          "https://source.android.com/docs/security/bulletin/2026/2026-11-01/"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:openai.com November 2026 November 4 board directors guide cybersecurity AI OpenAI",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://tldrsec.com/p/tldr-sec-353",
+          "https://www.sans.org/newsletters/newsbites/xxviii-83",
+          "https://www.sans.org/newsletters/newsbites/xxviii-82"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:tldrsec.com November 5 2026 353",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://tldrsec.com/p/tldr-sec-353",
+          "https://www.sans.org/newsletters/newsbites/xxviii-83",
+          "https://www.sans.org/newsletters/newsbites/xxviii-82"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:sans.org NewsBites November 6 2026 issue",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://tldrsec.com/p/tldr-sec-353",
+          "https://www.sans.org/newsletters/newsbites/xxviii-83",
+          "https://www.sans.org/newsletters/newsbites/xxviii-82"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:schneier.com November 2026 November 5 security",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://tldrsec.com/p/tldr-sec-353",
+          "https://www.sans.org/newsletters/newsbites/xxviii-83",
+          "https://www.sans.org/newsletters/newsbites/xxviii-82"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "November 2 3 4 5 6 2026 BleepingComputer The Hacker News Cisco WS_FTP cyber attack data breach",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://applynow.co.jp/news/20261104",
+          "https://www.jpcert.or.jp/m/wr/2026/wr261105.html"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "2026年11月4日 5日 6日 不正アクセス 情報漏えい ApplyNow 調査 公式",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://applynow.co.jp/news/20261104",
+          "https://www.jpcert.or.jp/m/wr/2026/wr261105.html"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "site:jpcert.or.jp Weekly Report 2026 11 04 2026年11月4日",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://applynow.co.jp/news/20261104",
+          "https://www.jpcert.or.jp/m/wr/2026/wr261105.html"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:cisa.gov November 2026 known exploited November 4 5 6 2026",
+        "searched_at": "2026-11-11T21:56:52.279Z",
+        "reviewed_urls": [
+          "https://applynow.co.jp/news/20261104",
+          "https://www.jpcert.or.jp/m/wr/2026/wr261105.html"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "CVE-2026-84295 Progress WS_FTP November 5 2026 support advisory 2024.0.7",
+        "searched_at": "2026-11-11T21:57:26.267Z",
+        "reviewed_urls": [
+          "https://www.vulncheck.com/blog/exploitation-targeting-node-red"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:metabase.com November 2026 actively exploited vulnerability CVSS 10 metabase November 5",
+        "searched_at": "2026-11-11T21:57:26.267Z",
+        "reviewed_urls": [
+          "https://www.vulncheck.com/blog/exploitation-targeting-node-red"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:bleepingcomputer.com November 5 6 2026 exploited hackers Siemens ApplyNow",
+        "searched_at": "2026-11-11T21:57:26.267Z",
+        "reviewed_urls": [
+          "https://www.vulncheck.com/blog/exploitation-targeting-node-red"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:thehackernews.com November 2026 Siemens SIMATIC VulnCheck November 2",
+        "searched_at": "2026-11-11T21:57:26.267Z",
+        "reviewed_urls": [
+          "https://www.vulncheck.com/blog/exploitation-targeting-node-red"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "x",
+        "language": "en",
+        "query": "site:x.com VulnCheck Siemens CVE-2026-58115 November 2026",
+        "searched_at": "2026-11-11T21:57:38.791Z",
+        "reviewed_urls": [],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:bleepingcomputer.com November 2026 November 5 Android Siemens Android bulletin 58868",
+        "searched_at": "2026-11-11T21:57:38.791Z",
+        "reviewed_urls": [
+          "https://applynow.co.jp/news/20261104",
+          "https://www.itmedia.co.jp/news/article/2611/06/2000002931/"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "site:itmedia.co.jp 2026年11月4日 ApplyNow 11月5日 OpenAI Linux セキュリティ",
+        "searched_at": "2026-11-11T21:57:38.791Z",
+        "reviewed_urls": [
+          "https://applynow.co.jp/news/20261104",
+          "https://www.itmedia.co.jp/news/article/2611/06/2000002931/"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:linuxfoundation.org Akrites November 2026 open source security",
+        "searched_at": "2026-11-11T21:57:57.663Z",
+        "reviewed_urls": [
+          "https://productcert.siemens.com/news/2026/11/04/missing-authentication-vulnerability-in-node-red-on-simatic-iot2050-with-industrial-os/",
+          "https://www.vulncheck.com/blog/exploitation-targeting-node-red"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:vulncheck.com CVE-2026-58115 Siemens November 2026",
+        "searched_at": "2026-11-11T21:57:57.663Z",
+        "reviewed_urls": [
+          "https://productcert.siemens.com/news/2026/11/04/missing-authentication-vulnerability-in-node-red-on-simatic-iot2050-with-industrial-os/",
+          "https://www.vulncheck.com/blog/exploitation-targeting-node-red"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "CVE-2026-58868 CVSS Android CNA base score",
+        "searched_at": "2026-11-11T22:00:15.298Z",
+        "reviewed_urls": [
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/58xxx/CVE-2026-58868.json",
+          "https://content.govdelivery.com/accounts/USDHSCISA/bulletins/4318a48"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "CISA KEV 2026-11-04 2026-11-05 2026-11-06 known exploited vulnerabilities catalog November 2026",
+        "searched_at": "2026-11-11T22:00:15.298Z",
+        "reviewed_urls": [
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/58xxx/CVE-2026-58868.json",
+          "https://content.govdelivery.com/accounts/USDHSCISA/bulletins/4318a48"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:wordpress.org 7.1.4 CVE-2026-119977 WordPress security November 2026",
+        "searched_at": "2026-11-11T22:00:23.950Z",
+        "reviewed_urls": [
+          "https://wordpress.org/news/2026/10/wordpress-7-1-4/"
+        ],
+        "notes": "候補発見・一次資料追跡の一括確認先。検索結果だけで掲載事実を確定していない。"
+      }
+    ],
+    "limitations": [
+      "NVDの入口、期間指定v3一覧とv4 API、JVN iPediaの検索入口、GitHubの公開・更新日別critical一覧が取得できず、CVSS 2.0・3.0・3.1・4.0の各版および全ページの網羅は未完。個別の評価はベンダー勧告・CVE Program原文で補完した。",
+      "CISA KEV本体とJSONフィードは403。CISAの配信通知からWordPress追加のみ個別確認し、期間中の全追加・更新は未確認。",
+      "Xの期間内投稿の本人・原文・反応指標を確定していない。各媒体・研究サイトも取得した範囲に限る。",
+      "日付だけ確認した記事の日時はnull。被害総数、個別端末での配布、AI研究の独立再現などは確認できる範囲を記事ごとに記載。"
+    ]
+  },
+  "validation": {
+    "editorial_review": "completed",
+    "notes": [
+      "同一コミットの必須4ファイルに沿って期間、CVE、根拠URL、記事ID・出典ID・掲載理由を編集上照合した。サンプルの架空データは不使用。",
+      "テスト・検証プログラムは作成・実行していない。"
+    ]
+  }
+}
