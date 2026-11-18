@@ -1,0 +1,1290 @@
+{
+  "schema_version": "3.0.0",
+  "policy_version": "1.3.0",
+  "sources_version": "1.2.0",
+  "is_example": false,
+  "report_id": "security-weekly-2026-11-09",
+  "title": "セキュリティ週報 2026年11月9日〜15日",
+  "period": {
+    "start": "2026-11-09T00:00:00+09:00",
+    "end_exclusive": "2026-11-16T00:00:00+09:00",
+    "timezone": "Asia/Tokyo"
+  },
+  "generated_at": "2026-11-18T22:03:17.893Z",
+  "status": "partial",
+  "spec": {
+    "repository": "ryuya-matsubara/security-weekly",
+    "branch": "main",
+    "commit_sha": "90af0889ce6e17f9d317349b318229669a53267f",
+    "files": [
+      {
+        "path": "spec/research-policy.md",
+        "blob_sha": "79b909b443492c6912f2644aa6cef7f798410cff"
+      },
+      {
+        "path": "spec/sources.json",
+        "blob_sha": "3701f7461cf83a372f24b83ed5e7dd2bf12170c2"
+      },
+      {
+        "path": "spec/report.schema.json",
+        "blob_sha": "7bd3a0a1ed3e2afcc498de2d988c3dca1c972bae"
+      },
+      {
+        "path": "spec/sample-report.json",
+        "blob_sha": "e78f37946aae0247a9a0456d548917bb5050a7c3"
+      }
+    ]
+  },
+  "summary": "ChromeとOutlookの悪用済み脆弱性への更新、gifteeの認証委託先侵害と機能停止を優先した。SAPの重大修正、インシデント調査の委託・報告、AI稼働停止、Cloud Runのイメージ点検、AIのサイバー能力評価を含む8件を採用。NVD・JVN iPedia・GitHubの期間別高スコア一覧とCISA KEVの確認は取得制限により部分完了。",
+  "top_article_ids": [
+    "a001",
+    "a002",
+    "a003"
+  ],
+  "articles": [
+    {
+      "id": "a001",
+      "headline": "ChromeのXML処理の脆弱性、悪用を確認して修正",
+      "category": "vulnerability",
+      "tags": [
+        "Chrome",
+        "ゼロデイ",
+        "ブラウザ更新"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "GoogleはChromeのXML処理にある解放後使用の脆弱性について、実際の悪用を確認し修正版を公開した。自動更新の対象でも、利用中のブラウザを再起動して更新が反映されたか確認する必要がある。",
+      "details": "11月9日のChrome安定版更新でCVE-2026-125350を修正した。Googleは実環境での悪用があると明記し、技術的詳細を更新普及まで制限している。修正版はWindows・Macが157.0.8103.50/.51、Linuxが157.0.8103.50。CVE Program公開レコードのCISA-ADPによるCVSS v3.1基本値は8.8で、Googleの製品側評価はHigh。悪用を確認した脆弱性と、他の同時修正項目を区別する。配布は段階的なため、端末で版と再起動の必要性を確認する。",
+      "implications": [
+        "ブラウザの更新を適用して再起動し、実際に稼働している版を確認する。管理対象端末では更新が止まっていないかも点検する。"
+      ],
+      "uncertainties": [
+        "悪用の手法、標的、件数は公開情報で確定できない。CISA-ADPの数値はGoogleのHigh表記とは別の評価。"
+      ],
+      "author": {
+        "name": "Google Chrome Releases",
+        "affiliation": "Google Chrome Releases",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Google Chrome Releases、CVE Program、BleepingComputer",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "Chrome公式の11月9日付発表と、11月10日の独立報道を確認。CVEレコードの公開は11月10日。",
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-125350"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "Googleが実悪用を確認し、未修正のブラウザでメモリ破壊に至り得るため、スコアだけでなく実際の攻撃と端末の広がりを重視した。CISA-ADPのCVSS v3.1基本値8.8も確認した。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        },
+        {
+          "type": "attention",
+          "explanation": "独立した専門媒体BleepingComputerが悪用と更新を個別に報道した。確認できた専門ニュース媒体の範囲で注目度を判断し、SNS反応や世界全体の人気を推測していない。",
+          "source_ids": [
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Stable Channel Update for Desktop",
+          "url": "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html",
+          "publisher": "Google Chrome Releases",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:58:55.727Z",
+          "read_status": "page_read",
+          "notes": "11月9日公開。時刻を確定できない資料は日時欄をnullとした。"
+        },
+        {
+          "id": "s2",
+          "title": "CVE-2026-125350公開レコード",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/125xxx/CVE-2026-125350.json",
+          "publisher": "CVE Program",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:09.699Z",
+          "read_status": "page_read",
+          "notes": "11月10日公開、11月11日更新。CISA-ADP評価欄。時刻を確定できない資料は日時欄をnullとした。"
+        },
+        {
+          "id": "s3",
+          "title": "Google patches eighth Chrome zero-day exploited in attacks this year",
+          "url": "https://www.bleepingcomputer.com/news/security/google-patches-eighth-chrome-zero-day-exploited-in-attacks-this-year/",
+          "publisher": "BleepingComputer",
+          "author": null,
+          "role": "reporting",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:09.699Z",
+          "read_status": "page_read",
+          "notes": "11月10日公開。時刻を確定できない資料は日時欄をnullとした。"
+        }
+      ]
+    },
+    {
+      "id": "a002",
+      "headline": "Microsoftの11月更新、悪用済みのOutlookのなりすましを修正",
+      "category": "vulnerability",
+      "tags": [
+        "Microsoft",
+        "Outlook",
+        "月例更新"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "Microsoftは11月の月例更新で、公開前から悪用されていたOutlookのなりすましの脆弱性を修正した。Officeの製品系列や配布チャネルごとに修正が異なるため、自組織に対応する更新の適用を確認したい。",
+      "details": "Microsoftの月例案内は、CVE-2026-124194が更新公開前に悪用されていたと明記し、早急な適用を求めている。CNAのMicrosoftによる公開CVEレコードは、危険な操作への警告が不足するOutlookのユーザーインターフェースに起因し、ネットワーク経由のなりすましが可能になると説明する。CVSS v3.1基本値は6.5で、利用者の操作を必要とする評価。Microsoft 365 AppsやOffice LTSCの対象系列などは製品別の修正情報で確認する。数値がCriticalではないことを、悪用されていないことと混同しない。",
+      "implications": [
+        "Outlookを含むOfficeの版と配布チャネルに対応する更新を適用する。利用者が不審なメッセージに注意することだけで代替しない。"
+      ],
+      "uncertainties": [
+        "確認した原典からは攻撃対象、成功件数、すべての悪用経路を確定できない。CVEレコードは取得時点で11月18日まで更新されており、修正・悪用の期間根拠は月例案内を優先。"
+      ],
+      "author": {
+        "name": "Microsoft",
+        "affiliation": "Microsoft",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Microsoft、CVE Program / Microsoft、JPCERT/CC",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "Microsoft本文は11月10日米国時間の公開と記載し、JPCERT/CCは11月11日に注意喚起。ブログの見出し日付は11月9日だが、リリース日は本文に従う。",
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-124194"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "Microsoftが更新前の悪用を公式確認している。CVSS v3.1基本値6.5でも業務用メールの信頼判断に関わり、利用者の注意に依存する前に修正を適用する緊急性がある。",
+          "source_ids": [
+            "s1",
+            "s2",
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "2026年11月のセキュリティ更新プログラム（月例）",
+          "url": "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "publisher": "Microsoft",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:58:14.520Z",
+          "read_status": "page_read",
+          "notes": "本文で11月10日米国時間公開を確認。ヘッダーは11月9日。時刻を確定できない資料は日時欄をnullとした。"
+        },
+        {
+          "id": "s2",
+          "title": "CVE-2026-124194公開レコード",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/124xxx/CVE-2026-124194.json",
+          "publisher": "CVE Program / Microsoft",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:24.865Z",
+          "read_status": "page_read",
+          "notes": "11月10日公開、取得時点では11月18日更新。時刻を確定できない資料は日時欄をnullとした。"
+        },
+        {
+          "id": "s3",
+          "title": "2026年11月マイクロソフトセキュリティ更新プログラムに関する注意喚起",
+          "url": "https://www.jpcert.or.jp/at/2026/at260035.html",
+          "publisher": "JPCERT/CC",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:58:01.806Z",
+          "read_status": "page_read",
+          "notes": "11月11日公開。時刻を確定できない資料は日時欄をnullとした。"
+        }
+      ]
+    },
+    {
+      "id": "a003",
+      "headline": "giftee、認証委託先への不正アクセスで主要機能を停止",
+      "category": "incident",
+      "tags": [
+        "giftee",
+        "認証委託先",
+        "漏えいのおそれ"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "ギフティは会員管理・ログイン認証に使うprismatixへの不正アクセスを受け、個人向けgifteeの主要機能を停止した。11月13日の続報ではメールアドレスや一部会員のパスワード情報などの漏えいのおそれを公表した。",
+      "details": "公式続報によると、委託先プリズマティクスのprismatixで第三者による不正アクセスが発生し、影響拡大防止と安全確認のため11月11日22時ごろから主要機能を停止した。13日時点でメールアドレス、一部会員のパスワード情報等が漏えいしたおそれを確認している。影響範囲の詳細は調査中で、確定した漏えい人数やパスワードの保存形式は示されていない。同社はなりすましメールへの注意と、他サービスで同じパスワードを使っている場合の変更を勧めた。対象期間後の17日の再開見通しは本記事には含めない。",
+      "implications": [
+        "同じパスワードを使う他サービスがあれば変更する。通知を装うメールのURL・添付を不用意に開かず、公式ページから状況を確認する。",
+        "編集上の示唆：認証の委託先で障害・侵害が発生した場合の停止判断、利用者への連絡、再開の条件を事前に整理する。"
+      ],
+      "uncertainties": [
+        "会員ごとの影響項目、漏えい人数、パスワード形式、侵入方法は未確定。漏えいのおそれを、全会員の平文パスワード流出と解釈しない。"
+      ],
+      "author": {
+        "name": "ギフティ",
+        "affiliation": "ギフティ",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "ギフティ",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "11月12日の初報と11月13日の公式続報。停止開始は11月11日。",
+      "update_note": "初報後に、メールアドレスおよび一部会員のパスワード情報等の漏えいのおそれを確認したと公表。",
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "実際の主要機能停止と、ログイン認証に関わる会員情報の漏えいのおそれが同時に生じた。委託先の侵害が利用者のサービス利用と他サービスの使い回しパスワードにも影響し得る点を重視した。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "【続報】外部サービスへの不正アクセスに伴う個人向けサービス「giftee」の会員情報の漏えいのおそれについて",
+          "url": "https://giftee.co.jp/press/news/info20261113/",
+          "publisher": "ギフティ",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:24.865Z",
+          "read_status": "page_read",
+          "notes": "11月13日公開。11月12日初報も併記。時刻を確定できない資料は日時欄をnullとした。"
+        }
+      ]
+    },
+    {
+      "id": "a004",
+      "headline": "SAPの11月更新、NetWeaverの認証不要コード実行などに対応",
+      "category": "vulnerability",
+      "tags": [
+        "SAP",
+        "NetWeaver",
+        "認証不要"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "SAPは11月の修正でNetWeaverやGatewayなどの重大な欠陥に対応した。特にNetWeaver AS ABAPのメモリ破壊は、認証のない攻撃者がコードを実行してシステムを侵害し得るため、製品別の修正確認が必要だ。",
+      "details": "11月10日のSAP公開表では、CVE-2026-76964（NetWeaver AS ABAPのInternet Communication Manager）、CVE-2026-89126（Web Dispatcher）、CVE-2026-89103（Gateway）、CVE-2026-120017（SAML2 Service Provider）を最大10.0と評価している。個別に原典を確認したCVE-2026-76964は、SAP CNAのCVSS v3.1基本値10.0。ネットワーク入力の検証不足により、認証なしでメモリを破壊して任意コード実行へ至り得る。対象のKERNEL系列は7.53、7.54、7.77、7.93、9.16、9.18、9.20等。必要な修正はSecurity Note 3778530など製品別の案内で確認する。",
+      "implications": [
+        "NetWeaver等の導入製品・コンポーネント・版を公開表と照合し、対応するSAP Security Noteを確認して更新する。"
+      ],
+      "uncertainties": [
+        "実悪用を確認する一次情報は得ていない。SAP顧客向けノート本文の認証を要する詳細手順や、全対象の修正版番号は未確認。"
+      ],
+      "author": {
+        "name": "SAP",
+        "affiliation": "SAP",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "SAP、CVE Program / SAP",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "SAP公式表が11月10日のPatch Day公開と明記。",
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-76964"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "SAP CNAのCVSS v3.1基本値10.0に加え、ネットワークから認証なしで業務基盤のコード実行へ至り得ることを確認した。認証や中継を担う他コンポーネントにも同時に重大修正があり、製品単位で優先度を付ける必要がある。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "SAP Security Patch Day - November 2026",
+          "url": "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/november-2026.html",
+          "publisher": "SAP",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:24.865Z",
+          "read_status": "page_read",
+          "notes": "11月10日公開。複数の10.0候補を確認。時刻を確定できない資料は日時欄をnullとした。"
+        },
+        {
+          "id": "s2",
+          "title": "CVE-2026-76964公開レコード",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/76xxx/CVE-2026-76964.json",
+          "publisher": "CVE Program / SAP",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:24.865Z",
+          "read_status": "page_read",
+          "notes": "SAP CNAのCVSS v3.1基本値10.0と影響説明を確認。時刻を確定できない資料は日時欄をnullとした。"
+        }
+      ]
+    },
+    {
+      "id": "a005",
+      "headline": "JPCERT/CC、調査報告書の依頼・受領に使うチェックリストを公開",
+      "category": "defense_operations",
+      "tags": [
+        "インシデント対応",
+        "調査委託",
+        "報告書"
+      ],
+      "content_type": "facts",
+      "priority": "medium",
+      "summary": "JPCERT/CCは、インシデント調査を外部へ依頼する側と報告書を作る側のためのチェックリストを公開した。調査の目的・範囲を事前に合意し、根拠や判断できない事項まで報告書で確認するために使える。",
+      "details": "11月11日に公開された資料は、調査依頼側とレポーター側のチェックリスト、報告書サンプルを用意する。依頼側には目的、優先事項、対象、手法、報告形式、期限の合意と、受領時に根拠・未判断事項・追加調査・再発防止策を確認する流れを示す。一方、チェックを埋めても調査や報告の完全な正しさを保証するものではない。契約やSLAとの調整、証拠の十分性などの専門的なレビューは別に必要で、案件の特性に応じた変更を求めている。",
+      "implications": [
+        "調査発注時と報告書受領時に、それぞれのチェックリストを契約・調査目的に合わせて使う。未確認を問題なしと扱わず、追加調査の判断を残す。"
+      ],
+      "uncertainties": [
+        "実際の案件での品質改善効果を定量評価した資料は確認していない。"
+      ],
+      "author": {
+        "name": "JPCERT/CC",
+        "affiliation": "JPCERT/CC",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "JPCERT/CC、JPCERT/CC、JPCERT/CC",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "JPCERT/CCの公開告知は11月11日。11月18日の解説ブログは対象期間外なので新規事項の根拠にしていない。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "被害組織が調査の妥当性や収束を判断しにくい課題に対し、合意事項と受領時の証拠確認を具体化している。調査委託の意思決定に直結し、単に技術ツールを追加する以外の対応品質を支援する。",
+          "source_ids": [
+            "s1",
+            "s2",
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "インシデント調査報告書チェックリスト公開のお知らせ",
+          "url": "https://www.jpcert.or.jp/ir_report_checklist_20261111.html",
+          "publisher": "JPCERT/CC",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:58:55.727Z",
+          "read_status": "page_read",
+          "notes": "11月11日公開。時刻を確定できない資料は日時欄をnullとした。"
+        },
+        {
+          "id": "s2",
+          "title": "インシデント調査報告書チェックリスト",
+          "url": "https://jpcertcc.github.io/ir_report_checklist/",
+          "publisher": "JPCERT/CC",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:45.213Z",
+          "read_status": "page_read",
+          "notes": "告知から直接参照した公開資料。取得時点版。時刻を確定できない資料は日時欄をnullとした。"
+        },
+        {
+          "id": "s3",
+          "title": "JPCERTCC/ir_report_checklist",
+          "url": "https://github.com/JPCERTCC/ir_report_checklist",
+          "publisher": "JPCERT/CC",
+          "author": null,
+          "role": "tool",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T22:00:07.636Z",
+          "read_status": "page_read",
+          "notes": "公式リポジトリを閲覧。実行していない。時刻を確定できない資料は日時欄をnullとした。"
+        }
+      ]
+    },
+    {
+      "id": "a006",
+      "headline": "OpenAIがAI稼働の集中停止基盤Control Roomを解説",
+      "category": "defense_operations",
+      "tags": [
+        "AIエージェント",
+        "監視",
+        "停止制御"
+      ],
+      "content_type": "mixed",
+      "priority": "medium",
+      "summary": "OpenAIは研究用AIの稼働を追跡し、異常時にまとめて出力を停止するControl Roomを公開解説した。個々のジョブだけに安全策を置かず、推論を提供する側で許可を毎回確認する設計を示している。",
+      "details": "11月9日の発表によると、Control Roomは研究用の推論ワークロードにjob_idを付け、推論エンジンが各リクエストの実行許可を確認する。停止判断後はそのIDの新たな出力を拒否し、同社は停止・一時停止の判断から35秒以内にモデル出力を止めると説明する。研究コードは頻繁に変わるため、重要な制御をワークロード内だけに依存させず、推論層を共通の制御点にする。監視と連携した社内構成の説明であり、任意の他社APIや既に実行された外部操作まで取り消す仕組みとしては示されていない。",
+      "implications": [
+        "編集上の示唆：AIジョブの識別、停止権限、実行許可の共通チェックを設計し、停止要求がどの層まで及ぶかを確認する。出力停止と外部操作の取り消しを区別する。"
+      ],
+      "uncertainties": [
+        "35秒はOpenAI自身の運用上の説明。独立測定や他環境での保証ではない。"
+      ],
+      "author": {
+        "name": "OpenAI",
+        "affiliation": "OpenAI",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "OpenAI",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "OpenAIの公開日表示は11月9日。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "異常なAI稼働を検知しても停止経路がなければ被害抑制に結び付かない。共通IDと推論層での許可確認を組み合わせた具体的な制御点は、エージェント基盤の監督設計に影響する。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Control Room: A central system to track and stop model workloads across our research infrastructure",
+          "url": "https://openai.com/index/control-room/",
+          "publisher": "OpenAI",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:45.213Z",
+          "read_status": "page_read",
+          "notes": "11月9日公開。時刻を確定できない資料は日時欄をnullとした。"
+        }
+      ]
+    },
+    {
+      "id": "a007",
+      "headline": "Google Cloud、Cloud Runイメージ内の脆弱性・秘密情報検出をプレビュー",
+      "category": "defense_operations",
+      "tags": [
+        "Google Cloud",
+        "Cloud Run",
+        "イメージ検査"
+      ],
+      "content_type": "mixed",
+      "priority": "medium",
+      "summary": "Google CloudはSecurity Command Centerで、Cloud Runのサービス・ジョブ・ワーカープールが使うコンテナイメージの脆弱性や露出した秘密情報を検出する機能をプレビュー公開した。検査範囲と実行時の安全性は区別したい。",
+      "details": "11月9日の公式リリースノートは、Vulnerability Assessment for Google CloudのCloud Run対応をPreviewとして案内する。対象としてサービス、ジョブ、ワーカープールのコンテナイメージを挙げ、脆弱性と露出した秘密情報の検出に言及する。これは既存サービスに持ち込まれるイメージの確認範囲を広げる変更であり、アプリ固有の認可・業務ロジックの誤りや、実行後に取得する秘密情報まで網羅するとする発表ではない。適用条件や有効化手順は別の公式文書に案内される。",
+      "implications": [
+        "Cloud Runの資産管理に加える候補として、対象の利用形態、プレビュー条件、有効化方法を確認する。検出を修正・秘密情報の失効手順へつなげる。"
+      ],
+      "uncertainties": [
+        "提供条件の全項目や料金、既存環境での検出成績は確認していない。全コード・設定の安全を保証する機能とは扱わない。"
+      ],
+      "author": {
+        "name": "Google Cloud",
+        "affiliation": "Google Cloud",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Google Cloud",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "公式リリースノートのNovember 09, 2026に記載。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "サーバーレス運用でもコンテナイメージに脆弱な依存物や秘密情報を持ち込む可能性がある。実行形態をまたいで検出範囲を広げる変更として、資産点検と是正の運用判断に直接役立つ。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Security Command Center release notes",
+          "url": "https://docs.cloud.google.com/security-command-center/docs/release-notes",
+          "publisher": "Google Cloud",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:45.213Z",
+          "read_status": "page_read",
+          "notes": "11月9日の項目を使用。ページは随時更新。時刻を確定できない資料は日時欄をnullとした。"
+        }
+      ]
+    },
+    {
+      "id": "a008",
+      "headline": "Anthropicがサイバー能力の評価とアクセス制御を公表",
+      "category": "research_tools",
+      "tags": [
+        "Anthropic",
+        "AI能力評価",
+        "アクセス制御"
+      ],
+      "content_type": "mixed",
+      "priority": "medium",
+      "summary": "AnthropicはClaude Fable 5.2とMythos 5.2の発表で、サイバー用途の能力評価と利用制限の違いを説明した。既知のCVEを再発見する社内評価の成績は示されたが、新たなゼロデイの発見率や実環境の被害率とは異なる。",
+      "details": "11月9日の発表によると、FableとMythosは同じ基礎モデルで、一般提供するFableにはサイバー用途の保護を適用し、Mythosは認定プログラム等で提供する。CVE Rediscoveryは修正前のプロジェクトを与えて既知脆弱性を独立に発見できるかを測る内部評価で、1,829件を使った10月の実験を公表した。Mythos 5.2の掲載値は89.6%、5.1は78.3%。対象や条件が異なる他社ベンチマークと直接比較したり、未知の欠陥の発見率と読み替えたりしない。",
+      "implications": [
+        "導入判断では基礎モデル名だけでなく、提供形態、保護の設定、許可された作業、評価課題を分けて確認する。"
+      ],
+      "uncertainties": [
+        "提供元の社内評価であり、独立再現や一般のコードベースでの成功率は確認していない。"
+      ],
+      "author": {
+        "name": "Anthropic",
+        "affiliation": "Anthropic",
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Anthropic",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "Anthropicの発表日は11月9日。社内評価実施は10月。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "同じ基礎モデルでも保護とアクセス条件が異なり、能力値だけでは実際の利用範囲を判断できない。評価課題と制御方式を具体的に明示したことは、防御利用と権限管理の意思決定に役立つ。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Introducing Claude Fable 5.2 and Claude Mythos 5.2",
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+          "publisher": "Anthropic",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-18T21:59:45.213Z",
+          "read_status": "page_read",
+          "notes": "11月9日公開。時刻を確定できない資料は日時欄をnullとした。"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "source_checks": [
+      {
+        "source_id": "jpcert_alert",
+        "name": "JPCERT/CC 注意喚起",
+        "url": "https://www.jpcert.or.jp/at/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:58:01.806Z",
+        "evidence_urls": [
+          "https://www.jpcert.or.jp/at/2026.html",
+          "https://www.jpcert.or.jp/at/2026/at260035.html"
+        ],
+        "notes": "年次一覧と11月11日のMicrosoft注意喚起を確認。"
+      },
+      {
+        "source_id": "jpcert_weekly",
+        "name": "JPCERT/CC Weekly Report",
+        "url": "https://www.jpcert.or.jp/wr/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:57:40.573Z",
+        "evidence_urls": [
+          "https://www.jpcert.or.jp/wr/"
+        ],
+        "notes": "一覧を確認。11月18日号は期間後の発見補助であり、その発行を今週の初報とは扱わない。"
+      },
+      {
+        "source_id": "ipa",
+        "name": "IPA 情報セキュリティ",
+        "url": "https://www.ipa.go.jp/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:57:40.573Z",
+        "evidence_urls": [
+          "https://www.ipa.go.jp/security/support/incident-support.html",
+          "https://www.ipa.go.jp/security/security-alert/"
+        ],
+        "notes": "セキュリティ入口と日付付き検索結果を確認。11月13日更新の不正アクセス対策特設サイト等も候補化したが、旧記事を新規発表として掲載しない。"
+      },
+      {
+        "source_id": "jvn",
+        "name": "JVN",
+        "url": "https://jvn.jp/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:57:40.573Z",
+        "evidence_urls": [
+          "https://jvn.jp/",
+          "https://jvndb.jvn.jp/search/index.php"
+        ],
+        "notes": "新着一覧を取得。JVN iPedia検索入口は404で、期間と高スコア条件を指定した全件確認を完了できず。"
+      },
+      {
+        "source_id": "nvd",
+        "name": "NIST National Vulnerability Database",
+        "url": "https://nvd.nist.gov/vuln/search",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:58:01.806Z",
+        "evidence_urls": [
+          "https://nvd.nist.gov/vuln/search/results?form_type=Advanced&results_type=overview&pub_start_date=11%2F09%2F2026&pub_end_date=11%2F15%2F2026&cvss_version=3&cvss_v3_severity=CRITICAL",
+          "https://services.nvd.nist.gov/rest/json/cves/2.0?pubStartDate=2026-11-08T15%3A00%3A00.000&pubEndDate=2026-11-15T14%3A59%3A59.999&cvssV4Severity=CRITICAL"
+        ],
+        "notes": "入口は読める本文なし。公開期間とv3 Criticalの検索、公開期間とv4 CriticalのAPIも取得不能。2.0/3.0/3.1/4.0の各版・後続ページ・重要更新候補は網羅未完。個別CVEは原文で補完。"
+      },
+      {
+        "source_id": "cisa_kev",
+        "name": "CISA Known Exploited Vulnerabilities",
+        "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:58:01.806Z",
+        "evidence_urls": [
+          "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+          "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+        ],
+        "notes": "一覧と公式JSONフィードは403。補足検索も実施したが、期間内の全追加・変更を確認できず。"
+      },
+      {
+        "source_id": "sans",
+        "name": "SANS NewsBites",
+        "url": "https://www.sans.org/newsletters/newsbites",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:58:14.520Z",
+        "evidence_urls": [
+          "https://www.sans.org/newsletters/newsbites/xxviii-85"
+        ],
+        "notes": "11月13日号を読み、OpenSSH・GPUStack・Microsoft等の候補を発見。原典や期間内の事実確認に至らない候補は記事化しない。"
+      },
+      {
+        "source_id": "tldrsec",
+        "name": "tl;dr sec",
+        "url": "https://tldrsec.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:59:09.699Z",
+        "evidence_urls": [
+          "https://tldrsec.com/p/tldr-sec-354"
+        ],
+        "notes": "公開アーカイブと11月12日#354でARTEX、パッチの適用時間、バックポートに関する研究を確認。追加の一次確認が足りない候補は不採用。"
+      },
+      {
+        "source_id": "bleeping",
+        "name": "BleepingComputer",
+        "url": "https://www.bleepingcomputer.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:59:09.699Z",
+        "evidence_urls": [
+          "https://www.bleepingcomputer.com/news/security/google-patches-eighth-chrome-zero-day-exploited-in-attacks-this-year/"
+        ],
+        "notes": "トップと11月10日のChrome個別記事を読み、Google公式を照合。"
+      },
+      {
+        "source_id": "thehackernews",
+        "name": "The Hacker News",
+        "url": "https://thehackernews.com/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-11-18T21:57:40.573Z",
+        "evidence_urls": [
+          "https://thehackernews.com/"
+        ],
+        "notes": "トップを取得し候補発見に使用。対象週の個別本文を確認して根拠にした記事はない。"
+      },
+      {
+        "source_id": "itmedia_security",
+        "name": "ITmedia エンタープライズ セキュリティ",
+        "url": "https://www.itmedia.co.jp/enterprise/subtop/security/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-11-18T21:57:40.572Z",
+        "evidence_urls": [
+          "https://www.itmedia.co.jp/enterprise/subtop/security/"
+        ],
+        "notes": "指定入口と期間指定の検索を確認。11月6日の注意喚起記事は対象期間外として除外。期間内個別本文の確認は未完。"
+      },
+      {
+        "source_id": "aws_security",
+        "name": "AWS Security Blog",
+        "url": "https://aws.amazon.com/blogs/security/",
+        "status": "checked_no_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:57:40.573Z",
+        "evidence_urls": [
+          "https://aws.amazon.com/blogs/security/"
+        ],
+        "notes": "公式ブログ入口を確認した範囲では採用に足る期間内の発表を確認できなかった。全記事の更新なしを保証する意味ではない。"
+      },
+      {
+        "source_id": "google_security",
+        "name": "Google Security Blog",
+        "url": "https://blog.google/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:59:45.213Z",
+        "evidence_urls": [
+          "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html",
+          "https://docs.cloud.google.com/security-command-center/docs/release-notes"
+        ],
+        "notes": "指定入口と公式ドメイン補足検索からChromeとSecurity Command Centerを確認。11月16日のGTIGレポートは期間外。"
+      },
+      {
+        "source_id": "jpcert_eyes",
+        "name": "JPCERT/CC Eyes",
+        "url": "https://blogs.jpcert.or.jp/",
+        "status": "checked_no_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:58:14.520Z",
+        "evidence_urls": [
+          "https://blogs.jpcert.or.jp/ja/",
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html"
+        ],
+        "notes": "日本語一覧と公開告知を照合。チェックリストのブログ解説は11月18日で期間外、11月11日の本体告知を採用した。"
+      },
+      {
+        "source_id": "schneier",
+        "name": "Schneier on Security",
+        "url": "https://www.schneier.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:58:01.806Z",
+        "evidence_urls": [
+          "https://www.schneier.com/crypto-gram/archives/2026/1115.html"
+        ],
+        "notes": "本人サイトと11月15日Crypto-Gramの公開発信を確認。個々の見解をニュースの事実に読み替えず、今号では独立記事として採用しない。"
+      },
+      {
+        "source_id": "troyhunt",
+        "name": "Troy Hunt",
+        "url": "https://www.troyhunt.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T22:00:07.636Z",
+        "evidence_urls": [
+          "https://www.troyhunt.com/"
+        ],
+        "notes": "本人ブログ一覧の11月10日・11日の発信を確認。採用基準を満たす今号の独立記事には至らず。"
+      },
+      {
+        "source_id": "github_advisories",
+        "name": "GitHub Advisory Database",
+        "url": "https://github.com/advisories",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:57:40.573Z",
+        "evidence_urls": [
+          "https://github.com/advisories?q=published%3A2026-11-09..2026-11-15+severity%3Acritical",
+          "https://github.com/advisories?q=updated%3A2026-11-09..2026-11-15+severity%3Acritical"
+        ],
+        "notes": "入口は取得したが、公開・更新日指定critical一覧はDisabledError。期間別抽出・各版・全ページの確認は未完。"
+      },
+      {
+        "source_id": "github_tools",
+        "name": "GitHub",
+        "url": "https://github.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T22:00:07.636Z",
+        "evidence_urls": [
+          "https://github.com/JPCERTCC/ir_report_checklist"
+        ],
+        "notes": "JPCERT/CC公式チェックリストのリポジトリを個別確認。実行していない。"
+      },
+      {
+        "source_id": "openai_security",
+        "name": "OpenAI News（Security・Research・Safety）",
+        "url": "https://openai.com/news/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:59:45.213Z",
+        "evidence_urls": [
+          "https://openai.com/index/control-room/"
+        ],
+        "notes": "ニュース入口と公式補足検索から11月9日のControl Roomを読んだ。11月17日以降のモデル発表等は除外。"
+      },
+      {
+        "source_id": "anthropic_news",
+        "name": "Anthropic News",
+        "url": "https://www.anthropic.com/news",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:59:45.213Z",
+        "evidence_urls": [
+          "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+        ],
+        "notes": "Newsと公式補足検索から11月9日のモデル発表のサイバー評価・アクセス制御を確認。"
+      },
+      {
+        "source_id": "anthropic_research",
+        "name": "Anthropic Research",
+        "url": "https://www.anthropic.com/research",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T22:00:07.636Z",
+        "evidence_urls": [
+          "https://www.anthropic.com/research"
+        ],
+        "notes": "Research一覧を対象日まで確認。11月13日の安全性評価一般と11月9日の電子回路設計は、今号のITセキュリティ記事として採用しなかった。11月16日以降のCVD変更は期間外。"
+      },
+      {
+        "source_id": "extra_x_public",
+        "name": "公開X検索",
+        "url": "https://x.com/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-11-18T22:00:07.636Z",
+        "evidence_urls": [],
+        "notes": "公開Web検索を試したが、期間内の本人・原文・日時・反応数まで確定できた投稿を採用しなかった。投稿なしとは判断しない。"
+      },
+      {
+        "source_id": "extra_sap_candidates",
+        "name": "SAPの高スコア候補の個別確認",
+        "url": "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/november-2026.html",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-18T21:59:24.865Z",
+        "evidence_urls": [
+          "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/november-2026.html",
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/76xxx/CVE-2026-76964.json"
+        ],
+        "notes": "公開表の4件の10.0等を候補化し、CVE-2026-76964はSAP CNAのv3.1 10.0・認証不要コード実行を原典で確認。認証が必要な詳細ノートと他候補の全修正版は未確認。"
+      }
+    ],
+    "searches": [
+      {
+        "language": "ja",
+        "topic": "vulnerability",
+        "query": "セキュリティ 脆弱性 悪用 注意喚起 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.572Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/at/2026.html",
+          "https://giftee.co.jp/press/news/info20261113/"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "en",
+        "topic": "vulnerability",
+        "query": "security vulnerability actively exploited advisory 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.572Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/at/2026.html",
+          "https://giftee.co.jp/press/news/info20261113/"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "ja",
+        "topic": "incident",
+        "query": "サイバー攻撃 情報漏えい 調査報告 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.572Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/at/2026.html",
+          "https://giftee.co.jp/press/news/info20261113/"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "en",
+        "topic": "incident",
+        "query": "cyberattack data breach incident investigation 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.572Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/at/2026.html",
+          "https://giftee.co.jp/press/news/info20261113/"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "ja",
+        "topic": "defense",
+        "query": "セキュリティ 脆弱性 対策 修正 緩和策 検知 インシデント対応 復旧 ガイド 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "en",
+        "topic": "defense",
+        "query": "security vulnerability remediation mitigation patch detection incident response recovery guidance 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "ja",
+        "topic": "research_tools",
+        "query": "セキュリティ 研究 発表 ツール 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "en",
+        "topic": "research_tools",
+        "query": "security research paper open source tool released 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "ja",
+        "topic": "policy",
+        "query": "サイバーセキュリティ 政策 標準 ガイドライン 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://www.cyber.go.jp/news/press/tyuuikanki.html",
+          "https://www.schneier.com/crypto-gram/archives/2026/1115.html"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "en",
+        "topic": "policy",
+        "query": "cybersecurity policy standard guidance 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://www.cyber.go.jp/news/press/tyuuikanki.html",
+          "https://www.schneier.com/crypto-gram/archives/2026/1115.html"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "ja",
+        "topic": "expert_views",
+        "query": "セキュリティ 研究者 見解 講演 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://www.cyber.go.jp/news/press/tyuuikanki.html",
+          "https://www.schneier.com/crypto-gram/archives/2026/1115.html"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "language": "en",
+        "topic": "expert_views",
+        "query": "cybersecurity researcher analysis talk opinion 2026-11-09 2026-11-15",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://www.cyber.go.jp/news/press/tyuuikanki.html",
+          "https://www.schneier.com/crypto-gram/archives/2026/1115.html"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:openai.com cybersecurity November 9–15 2026",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://openai.com/index/control-room/",
+          "https://docs.cloud.google.com/security-command-center/docs/release-notes",
+          "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:anthropic.com cybersecurity November 9–15 2026",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://openai.com/index/control-room/",
+          "https://docs.cloud.google.com/security-command-center/docs/release-notes",
+          "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:blog.google OR site:cloud.google.com cybersecurity November 9–15 2026",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://openai.com/index/control-room/",
+          "https://docs.cloud.google.com/security-command-center/docs/release-notes",
+          "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+        ],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "topic": "x",
+        "language": "en",
+        "query": "site:x.com cybersecurity November 9–15 2026",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [],
+        "notes": "日英6群と公式AI企業の発見検索。一括結果と後続リンクからの確認先を記録し、当該1クエリに全URLが直接ヒットしたという意味ではない。政策候補等も公開日と根拠を確認できたものだけ採用。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "November 9 10 11 12 13 2026 critical CVSS 9.8 10.0 vulnerability advisory exploited",
+        "searched_at": "2026-11-18T21:57:40.573Z",
+        "reviewed_urls": [
+          "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/november-2026.html"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:openssh.com CVE-2026-123158 SSHole November 2026 release",
+        "searched_at": "2026-11-18T21:58:01.806Z",
+        "reviewed_urls": [
+          "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html",
+          "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/november-2026.html"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:chromereleases.googleblog.com CVE-2026-125350 November 2026",
+        "searched_at": "2026-11-18T21:58:01.806Z",
+        "reviewed_urls": [
+          "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html",
+          "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/november-2026.html"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:sap.com November 2026 security patch 76964 89126 89103",
+        "searched_at": "2026-11-18T21:58:01.806Z",
+        "reviewed_urls": [
+          "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html",
+          "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/november-2026.html"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:microsoft.com 2026 November 124194 Outlook actively exploited",
+        "searched_at": "2026-11-18T21:58:01.806Z",
+        "reviewed_urls": [
+          "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html",
+          "https://www.microsoft.com/en-us/msrc/blog/2026/11/202611-security-update",
+          "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/november-2026.html"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:openai.com November 9 2026 Control Room workloads security",
+        "searched_at": "2026-11-18T21:58:01.806Z",
+        "reviewed_urls": [
+          "https://giftee.co.jp/press/news/info20261113/",
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html",
+          "https://openai.com/index/control-room/"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:anthropic.com November 10 2026 cyber incident agents July 19",
+        "searched_at": "2026-11-18T21:58:01.806Z",
+        "reviewed_urls": [
+          "https://giftee.co.jp/press/news/info20261113/",
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html",
+          "https://openai.com/index/control-room/"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "site:giftee.co.jp 2026 11 prismatix 不正アクセス",
+        "searched_at": "2026-11-18T21:58:01.806Z",
+        "reviewed_urls": [
+          "https://giftee.co.jp/press/news/info20261113/",
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html",
+          "https://openai.com/index/control-room/"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:content.govdelivery.com USDHSCISA November 9 10 2026 catalog",
+        "searched_at": "2026-11-18T21:58:01.806Z",
+        "reviewed_urls": [
+          "https://docs.cloud.google.com/security-command-center/docs/release-notes"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:openssh.com SSHole 2026 November 10.3 123158",
+        "searched_at": "2026-11-18T21:58:14.520Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "site:jpcert.or.jp インシデント調査報告書チェックリスト 2026 11 11",
+        "searched_at": "2026-11-18T21:58:14.520Z",
+        "reviewed_urls": [
+          "https://www.jpcert.or.jp/ir_report_checklist_20261111.html"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:bleepingcomputer.com \"November\" \"2026\" \"125350\"",
+        "searched_at": "2026-11-18T21:58:55.727Z",
+        "reviewed_urls": [
+          "https://www.bleepingcomputer.com/news/security/google-patches-eighth-chrome-zero-day-exploited-in-attacks-this-year/",
+          "https://tldrsec.com/p/tldr-sec-354"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:tldrsec.com \"354\" \"2026\"",
+        "searched_at": "2026-11-18T21:58:55.727Z",
+        "reviewed_urls": [
+          "https://www.bleepingcomputer.com/news/security/google-patches-eighth-chrome-zero-day-exploited-in-attacks-this-year/",
+          "https://tldrsec.com/p/tldr-sec-354"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "x",
+        "language": "en",
+        "query": "site:x.com \"CVE-2026-125350\" November 2026",
+        "searched_at": "2026-11-18T22:00:07.636Z",
+        "reviewed_urls": [],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "ja",
+        "query": "site:itmedia.co.jp \"2026年11月\" \"Chrome\" \"125350\"",
+        "searched_at": "2026-11-18T22:00:07.636Z",
+        "reviewed_urls": [
+          "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html"
+        ],
+        "notes": "追加の候補発見と一次情報確認。一括結果の後続追跡先を含む。取得できない原典や期間外の記事は掲載事実の根拠に使わない。"
+      }
+    ],
+    "limitations": [
+      "NVD入口は本文なし、期間指定v3検索とv4 APIは取得不能。JVN iPediaは404、GitHubの公開・更新日指定critical一覧はDisabledError。CVSS 2.0/3.0/3.1/4.0の全版、新規・重要更新の全候補、後続ページを網羅できていない。個別のSAP CNA評価等で補完したが未発見候補の不在を保証しない。",
+      "CISA KEVの一覧と公式JSONフィードは403。期間内全追加・変更は未確認。ChromeのCISA-ADP情報は個別公開CVEレコードの取得範囲に限る。",
+      "ITmedia・The Hacker Newsの期間内個別本文と、Xの本人・原文・日時・反応指標の確認は未完。各サイトの一覧も取得可能な範囲に限る。",
+      "公開日が日単位の資料は日時を捏造せずnullとし、period_basisと出典注記に日付を記録。随時更新の資料は期間後の内容を今週の新規事項として扱わない。Microsoft CVEレコード等の取得時点版の限界は記事に明記。",
+      "SAPの認証が必要な詳細修正ノート、実被害の全件数、AI企業の内部評価の独立再現は確認できていない。"
+    ]
+  },
+  "validation": {
+    "editorial_review": "completed",
+    "notes": [
+      "main先頭SHAを固定して必須4ファイルを全文読み込み、版・対象期間・保存名・8記事ID・ピックアップID・出典参照を編集上照合した。サンプルの架空記事・数値・SHAは使っていない。",
+      "掲載対象はITセキュリティに限定し、掲載理由は重要度・注目度のみとした。初報・更新・事件発生日、実悪用と危険性、自己評価と独立報道を区別した。",
+      "テスト・検証プログラムは作成・実行していない。editorial_reviewはAIによる見直しであり、人間の監修を意味しない。"
+    ]
+  }
+}
