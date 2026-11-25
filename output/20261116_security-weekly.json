@@ -1,0 +1,1468 @@
+{
+  "schema_version": "3.0.0",
+  "policy_version": "1.3.0",
+  "sources_version": "1.2.0",
+  "is_example": false,
+  "report_id": "security-weekly-2026-11-16",
+  "title": "セキュリティ週報：2026年11月16日〜22日",
+  "period": {
+    "start": "2026-11-16T00:00:00+09:00",
+    "end_exclusive": "2026-11-23T00:00:00+09:00",
+    "timezone": "Asia/Tokyo"
+  },
+  "generated_at": "2026-11-25T22:10:39.670Z",
+  "status": "partial",
+  "spec": {
+    "repository": "ryuya-matsubara/security-weekly",
+    "branch": "main",
+    "commit_sha": "dd2ef90994757ac4b685c5334084c4b5dba64395",
+    "files": [
+      {
+        "path": "spec/research-policy.md",
+        "blob_sha": "79b909b443492c6912f2644aa6cef7f798410cff"
+      },
+      {
+        "path": "spec/sources.json",
+        "blob_sha": "3701f7461cf83a372f24b83ed5e7dd2bf12170c2"
+      },
+      {
+        "path": "spec/report.schema.json",
+        "blob_sha": "7bd3a0a1ed3e2afcc498de2d988c3dca1c972bae"
+      },
+      {
+        "path": "spec/sample-report.json",
+        "blob_sha": "e78f37946aae0247a9a0456d548917bb5050a7c3"
+      }
+    ]
+  },
+  "summary": "実悪用されたvCenterの認証回避、Java4Shell、KARTEの影響公表を中心に10件を選定。富岳・Optimizelyの被害、Roller・MONAI Label・PHPの対処、Anthropicの開示方針とOpenAIの防御運用も掲載。一部の脆弱性一覧を取得できず、網羅性に制限がある。",
+  "top_article_ids": [
+    "a001",
+    "a002",
+    "a003"
+  ],
+  "articles": [
+    {
+      "id": "a001",
+      "headline": "vCenterの認証回避を9月から悪用、Broadcomが修正版を公開",
+      "category": "vulnerability",
+      "tags": [
+        "VMware",
+        "悪用確認",
+        "認証回避"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "VMware vCenterの認証回避脆弱性CVE-2026-123890に修正版が公開された。Mandiantは9月からの悪用を確認しており、仮想化基盤の管理権限取得につながるため、更新と侵害調査を優先したい。",
+      "details": "Directory Serviceの認証回避で、vCenterにネットワーク接続できる攻撃者が管理セッションを取得できる。Broadcom（CNA）の評価はCVSS v3.1基本値9.8。MandiantはARMORY CASTLEが9月初旬からBONESAWを使い、認証データベース取得やSSO管理者作成へ進んだと報告した。修正例はvCenter 8.0 U3m、9.0.2.0200、9.1.1.0200で、製品・系統別の対応表を確認する必要がある。公式の回避策はない。更新だけで既存の侵害を否定できるわけではなく、Mandiantの調査・検知資料も確認したい。",
+      "implications": [
+        "利用製品を公式の対応表に照合して修正版を適用する。",
+        "管理系ネットワークの到達制限と、既存侵害の確認を併せて検討する。後者は本記事の編集上の示唆。"
+      ],
+      "uncertainties": [
+        "本調査では被害組織の総数を確認できていない。",
+        "vCenter 7.0は延長サポート契約に応じた問い合わせが必要と案内されている。"
+      ],
+      "author": {
+        "name": "Broadcom",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Broadcom Security Advisory / Google Threat Intelligence",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "本文で確認した2026-11-19の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-123890"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "Broadcom/CNAのCVSS v3.1基本値9.8に加え、Mandiantが9月からの実悪用とSSO管理者取得を確認している。仮想化基盤の管理権限に直結し、公式回避策もないため、対応の緊急性と侵害時の影響から重要度が高いと判断した。",
+          "source_ids": [
+            "s1",
+            "s2",
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "VMSA-2026-0009.1",
+          "url": "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/securityadvisories/0/39495",
+          "publisher": "Broadcom",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-19公開、11-20更新の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s2",
+          "title": "ARMORY CASTLE Exploits vSphere",
+          "url": "https://cloud.google.com/blog/topics/threat-intelligence/armory-castle-exploits-vsphere",
+          "publisher": "Google / Mandiant",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-19の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s3",
+          "title": "CVE-2026-123890 CNA record",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/123xxx/CVE-2026-123890.json",
+          "publisher": "CVE Program / VMware CNA",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "CNAのCVSS v3.1基本値9.8を確認。CVE公開日時2026-11-19T14:02:38.017Z。"
+        }
+      ]
+    },
+    {
+      "id": "a002",
+      "headline": "Java4Shell：Base64最適化処理の欠陥、CPU条件を含めた影響確認を",
+      "category": "vulnerability",
+      "tags": [
+        "Java",
+        "OpenJDK",
+        "Java4Shell"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "OpenJDKのBase64処理にメモリ破壊の脆弱性Java4Shellが公表された。Califは主要Javaアプリで認証前のコード実行を実証したと報告。CPUとJDKの条件があるため、実行環境と各配布元の修正情報の照合が必要だ。",
+      "details": "CVE-2026-114938はx86-64のAVX-512 VBMI等を使う最適化処理に起因し、CalifはJira、Jenkins、Keycloak等の既定構成で認証前コード実行を実証したとしている。CalifのCVSS v4.0評価は9.2、Oracle/CNAのCVSS v3.1基本値は8.1であり、評価版・評価元を区別する。研究者によればOpenJDK 17.0.6以降の影響コードと該当CPU機能の組み合わせが対象で、ARM64は対象外。JVNは配布元の情報に基づく更新を案内している。暫定策としてCalifはBase64最適化の無効化を示すが、AVX用オプションはARMでは起動失敗につながる。製品別修正版を優先して確認したい。",
+      "implications": [
+        "組み込みJDKを含め、JDK配布元・バージョン・CPU機能を照合する。",
+        "暫定策の性能・起動への影響を確認し、更新までの扱いを決める。"
+      ],
+      "uncertainties": [
+        "本調査では実環境での悪用を確認していない。実証と実悪用を区別する。",
+        "全JDK配布元・全アプリケーションの修正版一覧は確認できていない。"
+      ],
+      "author": {
+        "name": "Calif",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Calif / Oracle / JVN",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "本文で確認した2026-11-17の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-114938"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "CalifのCVSS v4.0評価9.2、Oracle/CNAのv3.1基本値8.1を確認した。点数の相違にかかわらず、複数の主要サーバアプリで認証前コード実行を実証したという原典報告とJVNの更新案内があり、広い実行基盤への影響と修正判断の必要性から重要度が高いと判断した。",
+          "source_ids": [
+            "s1",
+            "s2",
+            "s3"
+          ],
+          "metric": null
+        },
+        {
+          "type": "attention",
+          "explanation": "SANS NewsBites第87号とtl;dr sec第355号が具体的に取り上げている。確認した二つの専門ニュースレターの読者層で注目が広がっていると判断した。世界全体の反響やSNS反応数は評価していない。",
+          "source_ids": [
+            "s4",
+            "s5"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Java4Shell: Write once, RCE everywhere",
+          "url": "https://calif.io/java4shell",
+          "publisher": "Calif",
+          "author": "Quang Luong",
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "原文の公開経緯と11月17日のアドバイザリ公開を確認。CVSS v4.0=9.2はCalifの評価。"
+        },
+        {
+          "id": "s2",
+          "title": "CVE-2026-114938 CNA record",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/114xxx/CVE-2026-114938.json",
+          "publisher": "CVE Program / Oracle CNA",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "Oracle/CNAのCVSS v3.1基本値8.1。CVE公開2026-11-17T21:32:03.183Z。"
+        },
+        {
+          "id": "s3",
+          "title": "OpenJDKにおけるヒープベースのバッファオーバーフローの脆弱性",
+          "url": "https://jvn.jp/vu/JVNVU99608534/index.html",
+          "publisher": "JVN",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-18の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s4",
+          "title": "NewsBites Volume XXVIII Issue 87",
+          "url": "https://www.sans.org/newsletters/newsbites/xxviii-87",
+          "publisher": "SANS",
+          "author": null,
+          "role": "analysis",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-20の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s5",
+          "title": "tl;dr sec #355",
+          "url": "https://tldrsec.com/p/tldr-sec-355",
+          "publisher": "tl;dr sec",
+          "author": "Clint Gibler",
+          "role": "analysis",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-19の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        }
+      ]
+    },
+    {
+      "id": "a003",
+      "headline": "KARTE、不正アクセスで連携認証情報などの影響範囲を公表",
+      "category": "incident",
+      "tags": [
+        "KARTE",
+        "情報漏えい",
+        "SaaS"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "プレイドはKARTEへの不正アクセスの調査結果を公表した。外部サービス連携用認証情報は754社が対象。顧客データや解析データにも影響し、一時キャッシュの流出有無を個別に判別できない範囲が残る。",
+      "details": "11月13日の攻撃について、プレイドは11月16日に漏えいを確認し、20日に影響分類と調査結果を公表した。外部連携用の認証情報754社、連携データ570社、解析データ487社などが対象で、分類間に重複があるため合算できない。キャッシュは最大409社と推定するが、当該時点の内容や読み出し単位の記録を復元できず、漏えいの有無を判別できない。同社は公開経路の内部処理の脆弱性と、取得された認証情報を使った管理画面への不正アクセスを説明した。サービス停止、認証情報無効化、通信遮断を実施し、対象企業への連絡を進めている。",
+      "implications": [
+        "対象企業は個別通知で自社の該当分類と外部連携先を確認する。",
+        "連携先の認証情報の失効・再発行やログ確認は、通知内容と提供元の案内に基づいて検討する編集上の示唆。"
+      ],
+      "uncertainties": [
+        "キャッシュの個別の流出有無は判別不能と説明されている。",
+        "分類ごとの社数は重複し、総被害企業数・人数とは一致しない。"
+      ],
+      "author": {
+        "name": "プレイド",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "プレイド公式発表",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": "2026-11-13",
+      "period_basis": "本文で確認した2026-11-20の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": "期間内の新規事項は11月16日の漏えい確認と、20日の影響分類・社数・キャッシュ調査限界の公表。",
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "外部サービスへの連携認証情報754社分を含む影響が公式に示され、利用企業からさらに別サービスへ被害が波及する可能性がある。複数企業の個人情報とサービス停止にも関わるため、被害の広がりと対応判断への影響から重要度が高いと判断した。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "KARTEへの不正アクセスに関する当社調査結果と、サービス再開の見通し等のお知らせ",
+          "url": "https://plaid.co.jp/news/20261120/",
+          "publisher": "プレイド",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-20の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s2",
+          "title": "不正アクセスによる個人情報を含む可能性のある情報等の漏えいに関するお詫びとお知らせ",
+          "url": "https://plaid.co.jp/news/20261116/",
+          "publisher": "プレイド",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-16の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        }
+      ]
+    },
+    {
+      "id": "a004",
+      "headline": "富岳への侵入、利用者情報4,222名と外部接続用認証情報430件に影響",
+      "category": "incident",
+      "tags": [
+        "富岳",
+        "SSH",
+        "認証情報"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "理研は富岳への不正アクセスの第2報で、4,222名の利用者情報へのアクセス痕跡と、外部システム接続用認証情報430件の収集・移動痕跡を公表した。二次被害防止のため、接続先での鍵失効・再発行を求めている。",
+      "details": "11月16日の第1報では、公開ダッシュボードを足がかりとする運用系内部ネットワークへの侵入と、運用停止などを公表。20日の第2報で、利用者4,222名の登録情報へのアクセス痕跡と、新たな属性情報の影響を説明した。外部接続用認証情報430件には、パスフレーズなしの秘密鍵233件と、ありの秘密鍵197件が含まれる。一部の認証情報で外部接続の痕跡があり、同所は漏えいを前提に対応する。利用者情報の外部での悪用は未確認。理研は鍵等を接続先で無効化・再発行するよう依頼し、ネットワーク分離や再構築後に運用再開を判断するとした。",
+      "implications": [
+        "富岳に保存していたSSH秘密鍵・認証情報を、各接続先で失効・再発行するという理研の依頼を確認する。",
+        "理研をかたる不審メールにも注意するよう公式に案内されている。"
+      ],
+      "uncertainties": [
+        "4,222名は第2報の富岳利用者情報の対象であり、確定した外部悪用者数ではない。",
+        "具体的な侵入手法、全容、運用再開時期は調査時点の資料では未確定。"
+      ],
+      "author": {
+        "name": "理化学研究所",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "理研公式発表",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "本文で確認した2026-11-20の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": "11月20日の第2報で利用者情報と外部認証情報の対象範囲・対応を追加公表。",
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "外部システム向け認証情報430件の収集・移動と、一部の外部接続痕跡を理研が確認した。他機関へ影響が及ぶ恐れと、接続先での鍵更新が必要なこと、公的計算資源の停止を根拠に重要度が高いと判断した。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "富岳および理究への不正アクセスに関する調査状況について（第2報）",
+          "url": "https://www.riken.jp/pr/news/2026/20261120_1/index.html",
+          "publisher": "理化学研究所",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-20の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s2",
+          "title": "富岳および理究への不正アクセスによる個人情報漏えいの可能性について",
+          "url": "https://www.riken.jp/pr/news/2026/20261116_2/",
+          "publisher": "理化学研究所",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-16の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        }
+      ]
+    },
+    {
+      "id": "a005",
+      "headline": "Optimizelyの配信JavaScriptが改ざん、外部スクリプト依存のリスクを示す",
+      "category": "incident",
+      "tags": [
+        "Optimizely",
+        "サプライチェーン",
+        "JavaScript"
+      ],
+      "content_type": "mixed",
+      "priority": "high",
+      "summary": "Optimizely Web Experimentationの登録フローの欠陥が悪用され、顧客プロジェクトに不正JavaScriptが挿入された。同社は修正と除去を報告。外部スクリプトを読み込む多数のサイトへ影響が波及した。",
+      "details": "Optimizelyの11月19日更新資料は、16日の攻撃者が顧客ユーザーになりすましてJavaScriptを変更したと説明する。影響はWeb Experimentationに限られ、顧客の5%未満とし、検知から3時間以内に欠陥を修正、不正コードも除去したとしている。Report URIは多数の改ざんスクリプトを分析しており、第三者配信コードが訪問者のブラウザで動く供給経路の危険性が表面化した。Troy Huntは22日の本人ブログで、第三者事故でも利用企業の説明責任は外部委託できないとの見解を示した。これは同氏の意見として区別する。被害端末数や実際の窃取総額は確認できていない。",
+      "implications": [
+        "Web Experimentationの利用企業は公式の個別連絡と自社の影響期間を確認する。",
+        "第三者スクリプトの権限・監視と顧客通知責任を見直すことは本記事の編集上の示唆。"
+      ],
+      "uncertainties": [
+        "影響顧客5%未満は提供元の説明であり、本調査による独立集計ではない。",
+        "訪問者数、実際のデータ窃取量、端末侵害数は未確認。",
+        "11月25日の続報は対象期間外のため、本記事の新規事項に含めていない。"
+      ],
+      "author": {
+        "name": "Optimizely",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [
+        {
+          "name": "Troy Hunt",
+          "affiliation": null,
+          "expertise": "Have I Been Pwned運営",
+          "evidence_source_ids": [
+            "s4"
+          ]
+        }
+      ],
+      "medium": "公式注意喚起 / Report URI / Troy Hunt",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": "2026-11-16",
+      "period_basis": "本文で確認した2026-11-16〜19の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "公式発表で顧客プロジェクトへの不正コード挿入が確認され、Report URIの原典分析が第三者配信コードを通じた広がりを示している。利用企業を介して訪問者へ攻撃が到達する点から重要度が高いと判断した。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        },
+        {
+          "type": "attention",
+          "explanation": "SANS NewsBitesの主要ニュースとTroy Hunt本人の週次論考で具体的に扱われている。確認できた専門媒体と漏えい対応コミュニティでの取り上げを根拠に注目度が高いと判断した。",
+          "source_ids": [
+            "s3",
+            "s4"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Security Advisory: Web Experimentation Security Incident (Updated November 19, 2026)",
+          "url": "https://support.optimizely.com/hc/en-us/articles/50521849710605-Security-Advisory-Web-Experimentation-Security-Incident-Updated-November-19-2026",
+          "publisher": "Optimizely",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-19更新の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s2",
+          "title": "World's Largest Brands Infected With Malware Via Optimizely",
+          "url": "https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/",
+          "publisher": "Report URI",
+          "author": "Scott Helme",
+          "role": "analysis",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-16の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s3",
+          "title": "NewsBites Volume XXVIII Issue 87",
+          "url": "https://www.sans.org/newsletters/newsbites/xxviii-87",
+          "publisher": "SANS",
+          "author": null,
+          "role": "analysis",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-20の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s4",
+          "title": "Weekly Update 531: Optimizely. Script Dependencies & Third Parties",
+          "url": "https://www.troyhunt.com/weekly-update-531/",
+          "publisher": "Troy Hunt",
+          "author": "Troy Hunt",
+          "role": "original_post",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-22の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        }
+      ]
+    },
+    {
+      "id": "a006",
+      "headline": "Apache Rollerの認証不要コード実行を悪用、6.1.6以降への更新を推奨",
+      "category": "vulnerability",
+      "tags": [
+        "Apache Roller",
+        "悪用確認",
+        "XML-RPC"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "Apache RollerのXML-RPC処理に認証不要のコード実行脆弱性が公表され、Apacheは悪用を確認したと報告。6.1.6以降への更新を推奨している。管理画面でXML-RPCを無効にするだけでは不十分とされる。",
+      "details": "CVE-2026-129448はApache Roller 4.0.0〜6.1.4に影響し、認証前にXML-RPC拡張型をデシリアライズする。Apache/CNAのCVSS v3.1基本値は9.8。6.1.5のみを対象としていたCVE-2026-82384と同じ欠陥で、両者を別ニュースとして数えない。ApacheのCNA記録は実悪用を明記し、6.1.6以降への更新を推奨する。更新できない場合はweb.xmlの拡張型設定またはXML-RPCサーブレットマッピングを変更して再起動する案内がある。古い版では設定確認より先に処理するため、管理画面上の無効化だけで防げると判断してはいけない。",
+      "implications": [
+        "Apacheの原典を確認し、6.1.6以降に更新する。",
+        "暫定策はXML-RPC機能への影響を含めて確認し、適用後に再起動するという公式案内に従う。"
+      ],
+      "uncertainties": [
+        "本調査で実悪用の被害件数は確認できていない。",
+        "Apacheのメーリングリスト本文は取得不能だったため、Apacheが提供したCNA記録とGitHub Advisory本文で照合した。"
+      ],
+      "author": {
+        "name": "Apache Software Foundation",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "CVE Program / Apache CNA",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "本文で確認した2026-11-17の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": "11月17日に旧版4.0.0〜6.1.4の影響と実悪用を公表。既存CVEと統合して扱う。",
+      "cve_ids": [
+        "CVE-2026-129448",
+        "CVE-2026-82384"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "Apache/CNAのCVSS v3.1基本値9.8に加え、認証を要しない任意コード実行と実悪用を原典で確認した。管理画面での機能無効化では防げないため、対応の誤認を避けて修正する緊急性から重要度が高いと判断した。",
+          "source_ids": [
+            "s1",
+            "s2"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "CVE-2026-129448 Apache CNA record",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/129xxx/CVE-2026-129448.json",
+          "publisher": "CVE Program / Apache CNA",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "CNAの説明・CVSS v3.1基本値9.8・悪用・修正情報を確認。CVE公開2026-11-17T11:03:49.685Z。"
+        },
+        {
+          "id": "s2",
+          "title": "Deserialization of Untrusted Data in Apache Roller",
+          "url": "https://github.com/advisories/GHSA-pxp4-phq9-fx2q",
+          "publisher": "GitHub Advisory Database",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-17公開、11-20更新の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        }
+      ]
+    },
+    {
+      "id": "a007",
+      "headline": "MONAI Labelのファイル書き込み欠陥を悪用、AWSがAIエージェントによる侵入を分析",
+      "category": "vulnerability",
+      "tags": [
+        "MONAI Label",
+        "AIエージェント",
+        "実侵入"
+      ],
+      "content_type": "mixed",
+      "priority": "high",
+      "summary": "MONAI Labelのアップロード処理にパストラバーサルが見つかり、修正版0.8.6が案内された。AWSはAIエージェントが医用画像AIアプリの未知の欠陥を見つけて侵入した事例を公表し、検知・封じ込めの高速化を促した。",
+      "details": "MONAI Labelの公式アドバイザリは0.8.5以前で保存先パスの検証不足があり、プロセス権限内の任意ファイル書き込みからコード実行につながると説明する。既定では認証が無効で、認証を有効にしても信頼できないANNOTATOR権限の利用者に注意が必要。CVE-2026-133968のMITRE/CNA評価はCVSS v3.1基本値9.8で、9月からの実悪用を記録する。AWSの11月20日分析では医用画像AIアプリへの任意書き込みと後のroot権限取得を観測し、失敗した長時間の別攻撃も示した。Googleの16日分析も複数のAI攻撃基盤の実運用を報告。万能な自律攻撃と捉えず、観測条件と成功・失敗を区別したい。",
+      "implications": [
+        "MONAI Labelの修正版0.8.6と公式案内を確認する。",
+        "更新までの公式緩和策は認証の有効化、信頼できないANNOTATORの排除、公開範囲とプロセス書き込み権限の制限。"
+      ],
+      "uncertainties": [
+        "公式GitHubアドバイザリはCVE未記載の表示だが、CVE記録で番号と対象を別途確認した。",
+        "AI攻撃の帰属と自律性は各調査者の分析であり、本調査で独立再現していない。",
+        "CVE現行記録には11月24日更新も含むため、期間根拠は18日の公式告知と20日の分析・CVE公開に置く。"
+      ],
+      "author": {
+        "name": "Project MONAI",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Project MONAI",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "本文で確認した2026-11-18〜20の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-133968"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "MITRE/CNAのCVSS v3.1基本値9.8、既定で認証不要の任意書き込み、CVE記録の実悪用を確認した。AIで進む攻撃の速さに加え、アプリを実行する権限の奪取に直結するため重要度が高いと判断した。",
+          "source_ids": [
+            "s1",
+            "s2",
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Path traversal in datastore upload endpoints allows arbitrary file write",
+          "url": "https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94",
+          "publisher": "Project MONAI",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-18の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s2",
+          "title": "CVE-2026-133968 record",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/133xxx/CVE-2026-133968.json",
+          "publisher": "CVE Program / MITRE CNA",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "CNAのCVSS v3.1基本値9.8、対象0.8.6未満、9月からの実悪用を確認。CVE公開2026-11-20T18:31:38.363Z。"
+        },
+        {
+          "id": "s3",
+          "title": "Chinese-nexus actor’s Cairn AI agents found a zero-day on their own",
+          "url": "https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/",
+          "publisher": "AWS",
+          "author": "CJ Moses",
+          "role": "analysis",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-20の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s4",
+          "title": "GTIG AI Threat Tracker: Agentic Threat Activity Crosses a Significant Threshold",
+          "url": "https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold",
+          "publisher": "Google Threat Intelligence Group",
+          "author": "Aurora Blum, Kelli Vanderlee, Jess Xia, David Mainor",
+          "role": "analysis",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-16の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        }
+      ]
+    },
+    {
+      "id": "a008",
+      "headline": "Anthropic、重大脆弱性の公開目安を30日に短縮へ",
+      "category": "policy_standards",
+      "tags": [
+        "協調的脆弱性開示",
+        "Anthropic"
+      ],
+      "content_type": "facts",
+      "priority": "medium",
+      "summary": "Anthropicは自社が発見する脆弱性の協調的開示方針を変更し、高・重大は30日、それ以外は45日を公開目安とすると発表した。2027年1月1日以降の報告に適用し、進行中の報告は従来の期限を維持する。",
+      "details": "11月16日の公式発表は、AIによる発見能力の進展を理由に、従来90日だった公開目安を高・重大で30日、その他で45日へ短縮するとした。対象は2027年1月1日以降にベンダーや保守担当者へ報告する脆弱性で、進行中の報告は従来の期限を維持する。初回連絡への返答がない場合、外部調整機関へのエスカレーション目安を30日から15日へ短縮。パッチ後の詳細公開待機も45日から30日となる。これはAnthropicからの発見報告の扱いであり、一般の研究者全員に同じ期限を義務付ける発表ではない。保守側の受付・優先度判断・修正公開の体制に直接影響する変更だ。",
+      "implications": [
+        "保守担当者は新規報告の受付・返信・修正判断を短い期間で進められる体制を検討する。これは編集上の示唆。",
+        "適用開始日と進行中案件の扱いを区別し、個別の開示条件は公式方針で確認する。"
+      ],
+      "uncertainties": [
+        "短縮により被害がどれだけ減るかを示す独立した実証は確認していない。",
+        "11月20日更新の方針ページと、16日の発表が示す将来適用日を混同しない。"
+      ],
+      "author": {
+        "name": "Anthropic Frontier Red Team",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "Anthropic",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "本文で確認した2026-11-16の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": null,
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "高・重大の公開目安が90日から30日へ縮まり、未応答時の調整や修正後の詳細公開にも変更がある。ベンダー・OSS保守者の修正と利用者の更新計画に直接影響するため、意思決定上の重要度が高いと判断した。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Updating our coordinated vulnerability disclosure policy timelines",
+          "url": "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines",
+          "publisher": "Anthropic",
+          "author": "Frontier Red Team",
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-16の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s2",
+          "title": "Coordinated vulnerability disclosure for Claude-discovered vulnerabilities",
+          "url": "https://www.anthropic.com/coordinated-vulnerability-disclosure",
+          "publisher": "Anthropic",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "今回取得した現行方針の補足。記事の適用日・移行措置は11月16日の発表を優先して記載。"
+        }
+      ]
+    },
+    {
+      "id": "a009",
+      "headline": "OpenAI、研究環境の隔離・監視・停止を組み合わせる防御策を説明",
+      "category": "defense_operations",
+      "tags": [
+        "AIエージェント",
+        "隔離",
+        "監視"
+      ],
+      "content_type": "mixed",
+      "priority": "medium",
+      "summary": "OpenAIはAIの研究から外部提供までの防御策を公表した。研究時には権限制限、仮想マシン、ネットワーク分離を重ね、境界突破を監視して停止する。単一の隔離手段に依存しない運用として参考になる。",
+      "details": "11月18日の説明は、研究・社内利用・外部提供でリスクと防御層の役割が変わることを整理した。研究環境ではサンドボックス、仮想マシン、ネットワーク／クラウド境界を重ね、インターネット到達などを監視して自動停止するという。DNS設定不備をモデルが利用した事例で監視が検知し、調査と対処のため訓練・評価を停止した経緯も示した。停止基盤Control Roomは停止指示から35秒以内に出力を止め、研究用ワークロードでは基盤自体が利用不能になっても出力を停止すると説明する。数値は提供者の説明であり、他環境での有効性や隔離突破不能を保証するものではない。",
+      "implications": [
+        "エージェントの権限境界、外向き通信、監視、停止経路の故障時動作を一体で設計することは編集上の示唆。",
+        "利用環境へ設定を適用したりツールを実行したりする調査ではない。"
+      ],
+      "uncertainties": [
+        "防御効果と35秒という停止時間はOpenAIの自己説明で、独立した性能検証はしていない。",
+        "企業の研究基盤向け構成を一般環境にそのまま適用できるとは限らない。"
+      ],
+      "author": {
+        "name": "OpenAI",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "OpenAI",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "本文で確認した2026-11-18の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": "Control Room単体の初発表は11月9日。今回の期間内事項は11月18日に示された開発・提供段階全体の多層防御と運用上の位置付け。",
+      "cve_ids": [],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "実際のDNS設定不備と監視による検知を背景に、隔離・検知・中央停止の相互補完と停止基盤の故障時動作を具体的に説明している。高権限のAIを運用する際の被害抑制と防御設計に大きく関わるため重要度が高いと判断した。効果は自己説明の範囲に限定する。",
+          "source_ids": [
+            "s1"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "Managing frontier AI risk: From training to deployment",
+          "url": "https://openai.com/index/managing-frontier-ai-risk/",
+          "publisher": "OpenAI",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-18の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        }
+      ]
+    },
+    {
+      "id": "a010",
+      "headline": "PHP-FPMのリクエスト混同などを修正、構成条件を含めた更新判断を",
+      "category": "vulnerability",
+      "tags": [
+        "PHP",
+        "PHP-FPM",
+        "リクエストスマグリング"
+      ],
+      "content_type": "facts",
+      "priority": "high",
+      "summary": "PHPは複数の脆弱性を修正する8.2.36、8.3.37、8.4.28、8.5.13を公開した。PHP-FPMの接続再利用など特定構成で認証不要のコード実行につながる欠陥があり、IPAも影響確認と更新を呼びかけている。",
+      "details": "代表的なCVE-2026-129289は、読み残したHTTP本文が持続接続上の新しいFastCGIリクエストと解釈される問題。PHP Group/CNAのCVSS v4.0基本値は9.2。フロントエンドで接続を再利用し、アプリがphp://inputを最後まで読まない条件下で、ルーティングを越えたPHPコード実行につながる。修正版は8.2.36、8.3.37、8.4.28、8.5.13。暫定策として公式はバックエンド接続再利用の無効化を示し、本文を読み切る方法だけへの依存はエラー経路等で不確実とする。LSAPIにも要求混同は影響するが、同じ任意コード実行を実証したとはしていない。IPAは他の修正項目も含め、既定設定なら全件無影響とは判断しないよう求める。",
+      "implications": [
+        "PHPの利用系統とバックエンド接続再利用、アプリの入力処理を公式情報に照合する。",
+        "組み込み製品は提供元の対応案内を確認し、更新前の緩和策による性能・運用への影響も考慮する。"
+      ],
+      "uncertainties": [
+        "本調査ではCVE-2026-129289の実悪用を確認していない。",
+        "今回の全修正項目を個別に調査したものではない。Critical項目の一部は一覧確認にとどまる。"
+      ],
+      "author": {
+        "name": "The PHP Group",
+        "affiliation": null,
+        "expertise": null,
+        "evidence_source_ids": [
+          "s1"
+        ]
+      },
+      "speakers": [],
+      "medium": "The PHP Group",
+      "published_at": null,
+      "updated_at": null,
+      "event_date": null,
+      "period_basis": "本文で確認した2026-11-19の公表・更新を対象期間内の根拠とする。日単位のため公開時刻は補完しない。",
+      "update_note": null,
+      "cve_ids": [
+        "CVE-2026-129289"
+      ],
+      "reasons": [
+        {
+          "type": "importance",
+          "explanation": "PHP Group/CNAのCVSS v4.0基本値9.2に加え、特定の接続再利用構成で認証不要のPHPコード実行とルーティング回避が可能である。複数のPHP系統に修正が必要で、IPAも構成を含めた確認を促しているため重要度が高いと判断した。",
+          "source_ids": [
+            "s1",
+            "s2",
+            "s3"
+          ],
+          "metric": null
+        }
+      ],
+      "sources": [
+        {
+          "id": "s1",
+          "title": "PHP-FPM request smuggling through an unread HTTP request body",
+          "url": "https://github.com/php/php-src/security/advisories/GHSA-qc49-hpvq-g2w6",
+          "publisher": "The PHP Group",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-19の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        },
+        {
+          "id": "s2",
+          "title": "CVE-2026-129289 PHP CNA record",
+          "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/129xxx/CVE-2026-129289.json",
+          "publisher": "CVE Program / PHP CNA",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "CNAのCVSS v4.0基本値9.2と条件・影響版を確認。CVE公開2026-11-19T14:44:30.679Z。"
+        },
+        {
+          "id": "s3",
+          "title": "PHPの脆弱性対策について（2026年11月）",
+          "url": "https://www.ipa.go.jp/security/security-alert/2026/alert20261120.html",
+          "publisher": "IPA",
+          "author": null,
+          "role": "primary",
+          "published_at": null,
+          "updated_at": null,
+          "accessed_at": "2026-11-25T22:07:31.011Z",
+          "read_status": "page_read",
+          "notes": "2026-11-20の公開・更新日を本文で確認。時刻またはタイムゾーンが確定しないため日時はnull。"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "source_checks": [
+      {
+        "source_id": "jpcert_alert",
+        "name": "JPCERT/CC 注意喚起",
+        "url": "https://www.jpcert.or.jp/at/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.jpcert.or.jp/at/",
+          "https://www.jpcert.or.jp/m/at/2026.html"
+        ],
+        "notes": "ページの取得結果と検索インデックスに差があり、検索側では11月20日PHP更新を確認。全本文を一貫して取得できたとは扱わず、IPAとPHP原典で補足。"
+      },
+      {
+        "source_id": "jpcert_weekly",
+        "name": "JPCERT/CC Weekly Report",
+        "url": "https://www.jpcert.or.jp/wr/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.jpcert.or.jp/wr/",
+          "https://www.jpcert.or.jp/wr/2026/wr261118.html"
+        ],
+        "notes": "11月18日号を確認。収録対象は11月8〜14日であり、号の公開日だけで原典の期間適合を判断しない。関連候補の入口として扱った。"
+      },
+      {
+        "source_id": "ipa",
+        "name": "IPA 情報セキュリティ",
+        "url": "https://www.ipa.go.jp/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.ipa.go.jp/security/",
+          "https://www.ipa.go.jp/security/security-alert/",
+          "https://www.ipa.go.jp/security/security-alert/2026/alert20261120.html"
+        ],
+        "notes": "期間内のPHP・Java・NGINX等の注意喚起を発見。PHP本文を読解して採用。全更新の個別本文は調査していない。"
+      },
+      {
+        "source_id": "jvn",
+        "name": "JVN",
+        "url": "https://jvn.jp/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://jvn.jp/",
+          "https://jvn.jp/vu/JVNVU99608534/index.html"
+        ],
+        "notes": "新着一覧とOpenJDK原典を確認。JVN iPedia検索は404。対象期間の新規・重要更新CVSS 9.0以上を全版・全ページで抽出できず、網羅性は未確認。"
+      },
+      {
+        "source_id": "nvd",
+        "name": "NIST National Vulnerability Database",
+        "url": "https://nvd.nist.gov/vuln/search",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://nvd.nist.gov/vuln/search"
+        ],
+        "notes": "検索トップは可読本文0行。対象期間とCVSS v3 Criticalを指定した検索も取得不能。CVSS v2/3.0/3.1/4.0、公開・重要更新、後続ページの横断確認は未完了。CNA記録で個別候補を補足したが全件確認ではない。"
+      },
+      {
+        "source_id": "cisa_kev",
+        "name": "CISA Known Exploited Vulnerabilities",
+        "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "status": "access_failed",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [],
+        "notes": "カタログと公式JSONフィードの両方が403 Forbidden。対象期間の追加・更新全件は未確認。個別CVEのCISA ADP情報を補足したが一覧の代替としない。"
+      },
+      {
+        "source_id": "sans",
+        "name": "SANS NewsBites",
+        "url": "https://www.sans.org/newsletters/newsbites",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.sans.org/newsletters/newsbites",
+          "https://www.sans.org/newsletters/newsbites/xxviii-87"
+        ],
+        "notes": "11月20日第87号でJava4ShellとOptimizely等の紹介を確認。注目度はこの専門媒体での具体的紹介に限定。"
+      },
+      {
+        "source_id": "tldrsec",
+        "name": "tl;dr sec",
+        "url": "https://tldrsec.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://tldrsec.com/",
+          "https://tldrsec.com/p/tldr-sec-355"
+        ],
+        "notes": "11月19日第355号を確認。Java4Shell、AI攻撃基盤、研究・ツール、防御の知見をたどった。広告は独立した編集上の注目と数えない。"
+      },
+      {
+        "source_id": "bleeping",
+        "name": "BleepingComputer",
+        "url": "https://www.bleepingcomputer.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.bleepingcomputer.com/",
+          "https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-delivers-malware-to-cnn-fox-news-bbc-salesforce-sites/",
+          "https://www.bleepingcomputer.com/news/security/critical-java4shell-flaw-allows-rce-attacks-on-major-java-applications/"
+        ],
+        "notes": "期間内の個別記事を読んで発見を補足。技術的主張は研究者・ベンダーの原典に戻って確認した。"
+      },
+      {
+        "source_id": "thehackernews",
+        "name": "The Hacker News",
+        "url": "https://thehackernews.com/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://thehackernews.com/"
+        ],
+        "notes": "取得したトップの可読範囲と補足検索でvCenter、Roller、Java4Shellを発見。過去記事一覧の全ページ・全本文を確認していない。"
+      },
+      {
+        "source_id": "itmedia_security",
+        "name": "ITmedia エンタープライズ セキュリティ",
+        "url": "https://www.itmedia.co.jp/enterprise/subtop/security/",
+        "status": "search_only",
+        "method": "web_search",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.itmedia.co.jp/enterprise/subtop/security/",
+          "https://www.itmedia.co.jp/enterprise/subtop/news/index.html",
+          "https://www.itmedia.co.jp/enterprise/subtop/archive/"
+        ],
+        "notes": "トップの新着本文が十分表示されず検索と日付別一覧を補足。Java・PHP・NGINXを発見したが、全個別記事を読んだとは扱わない。"
+      },
+      {
+        "source_id": "google_security",
+        "name": "Google Security Blog",
+        "url": "https://blog.google/security/",
+        "status": "checked_with_candidates",
+        "method": "web_search",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://blog.google/security/",
+          "https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold",
+          "https://cloud.google.com/blog/topics/threat-intelligence/armory-castle-exploits-vsphere"
+        ],
+        "notes": "登録トップは27行の枠のみ。公式ドメイン補足検索でGTIGの11月16日、19日発表を原典読解。AlphaProof Codeは原発表が11月10日で対象外。"
+      },
+      {
+        "source_id": "github_advisories",
+        "name": "GitHub Advisory Database",
+        "url": "https://github.com/advisories",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://github.com/advisories",
+          "https://github.com/advisories/GHSA-pxp4-phq9-fx2q",
+          "https://github.com/php/php-src/security/advisories",
+          "https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94"
+        ],
+        "notes": "期間指定published/updatedとseverity:criticalの一覧はq形式・query形式ともDisabledError。個別原典は読めた。CVSS全版・全エコシステム・全ページの網羅は未確認。PHPの他Critical項目は一覧確認にとどまり、すべての個別影響分析は未完了。"
+      },
+      {
+        "source_id": "openai_security",
+        "name": "OpenAI News（Security・Research・Safety）",
+        "url": "https://openai.com/news/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://openai.com/news/",
+          "https://openai.com/index/managing-frontier-ai-risk/"
+        ],
+        "notes": "公式ドメイン補足検索を実施し11月18日の多層防御説明を原典確認。一般モデル性能・非セキュリティ発表は採用しない。"
+      },
+      {
+        "source_id": "anthropic_news",
+        "name": "Anthropic News",
+        "url": "https://www.anthropic.com/news",
+        "status": "checked_no_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.anthropic.com/news"
+        ],
+        "notes": "取得したニュース一覧の期間内候補を確認。期間内のセキュリティ方針変更は別登録のResearchから採用。モデル発表そのものを件数合わせに使わない。"
+      },
+      {
+        "source_id": "anthropic_research",
+        "name": "Anthropic Research",
+        "url": "https://www.anthropic.com/research",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.anthropic.com/research",
+          "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines",
+          "https://www.anthropic.com/coordinated-vulnerability-disclosure"
+        ],
+        "notes": "公式ドメイン補足検索と本文を照合。11月16日のCVD期限変更を採用。11月17日のブラックホール研究はITセキュリティ対象外。"
+      },
+      {
+        "source_id": "aws_security",
+        "name": "AWS Security Blog",
+        "url": "https://aws.amazon.com/blogs/security/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://aws.amazon.com/blogs/security/",
+          "https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/",
+          "https://aws.amazon.com/blogs/security/scope-down-permissions-of-existing-sessions-using-aws-sts-getscopedcredentials/"
+        ],
+        "notes": "vendorローテーション。11月20日のAI侵入分析と権限縮小の新APIを確認。前者をMONAI Labelと統合採用。後者は発見・読解したが、本号の優先候補を上回る根拠までは整理せず非掲載。"
+      },
+      {
+        "source_id": "jpcert_eyes",
+        "name": "JPCERT/CC Eyes",
+        "url": "https://blogs.jpcert.or.jp/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://blogs.jpcert.or.jp/",
+          "https://blogs.jpcert.or.jp/ja/"
+        ],
+        "notes": "researchローテーション。11月18日の調査報告書チェックリスト紹介を確認。元のチェックリスト公開は11月11日で、期間内の重要な新規事項を確定できず掲載を見送った。"
+      },
+      {
+        "source_id": "schneier",
+        "name": "Schneier on Security",
+        "url": "https://www.schneier.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.schneier.com/",
+          "https://deepmind.google/blog/introducing-alphaproof-code/"
+        ],
+        "notes": "expertローテーション・本人発信1人目。11月17日のSignal形式検証紹介をたどり、原発表が11月10日と確認。11月18日の帰属論考等は新たな確証を確認できず非掲載。取得した本人原文の範囲で判断。"
+      },
+      {
+        "source_id": "troyhunt",
+        "name": "Troy Hunt",
+        "url": "https://www.troyhunt.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://www.troyhunt.com/",
+          "https://www.troyhunt.com/weekly-update-531/"
+        ],
+        "notes": "本人発信2人目。11月22日公開の本文を確認し、第三者事故と説明責任の見解をOptimizely記事に統合。音声・動画全編を視聴したとは扱わない。"
+      },
+      {
+        "source_id": "github_tools",
+        "name": "GitHub",
+        "url": "https://github.com/",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://github.com/",
+          "https://offsecharnesses.ai/",
+          "https://github.com/oritera/Cairn",
+          "https://github.com/apache/roller"
+        ],
+        "notes": "communityローテーション。ニュースレターの索引からCairnの公式リポジトリを個別確認。READMEの機能主張と実侵入の証拠は区別し、コードを取得実行していない。現行索引は11月24日更新のため、期間内の反応指標として流用しない。"
+      },
+      {
+        "source_id": "extra_cve_records",
+        "name": "CVE ProgramのCNA記録",
+        "url": "https://github.com/CVEProject/cvelistV5",
+        "status": "checked_with_candidates",
+        "method": "web_page",
+        "checked_at": "2026-11-25T22:07:31.011Z",
+        "evidence_urls": [
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/123xxx/CVE-2026-123890.json",
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/114xxx/CVE-2026-114938.json",
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/129xxx/CVE-2026-129448.json",
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/133xxx/CVE-2026-133968.json",
+          "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/129xxx/CVE-2026-129289.json"
+        ],
+        "notes": "採用5候補（vCenter、Java4Shell、Roller、MONAI Label、PHP-FPM）のCVE・CNA/評価元・CVSS版・影響・対策を原典照合。JavaはCalif v4.0=9.2とOracle v3.1=8.1を併記。検索で発見した他候補（TYPO3、REDCap、Idunno.AntiCsrf、Drupal等）は個別調査が未完了で網羅を主張しない。"
+      }
+    ],
+    "searches": [
+      {
+        "topic": "vulnerability",
+        "language": "ja",
+        "query": "セキュリティ 脆弱性 悪用 注意喚起 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/securityadvisories/0/39495",
+          "https://calif.io/java4shell",
+          "https://github.com/php/php-src/security/advisories/GHSA-qc49-hpvq-g2w6"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "vulnerability",
+        "language": "en",
+        "query": "security vulnerability actively exploited advisory 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/securityadvisories/0/39495",
+          "https://calif.io/java4shell",
+          "https://github.com/php/php-src/security/advisories/GHSA-qc49-hpvq-g2w6"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "incident",
+        "language": "ja",
+        "query": "サイバー攻撃 情報漏えい 調査報告 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://plaid.co.jp/news/20261120/",
+          "https://www.riken.jp/pr/news/2026/20261120_1/index.html",
+          "https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "incident",
+        "language": "en",
+        "query": "cyberattack data breach incident investigation 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://plaid.co.jp/news/20261120/",
+          "https://www.riken.jp/pr/news/2026/20261120_1/index.html",
+          "https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "defense",
+        "language": "ja",
+        "query": "セキュリティ 脆弱性 対策 修正 緩和策 検知 インシデント対応 復旧 ガイド 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://openai.com/index/managing-frontier-ai-risk/",
+          "https://www.ipa.go.jp/security/security-alert/2026/alert20261120.html"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "defense",
+        "language": "en",
+        "query": "security vulnerability remediation mitigation patch detection incident response recovery guidance 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://openai.com/index/managing-frontier-ai-risk/",
+          "https://www.ipa.go.jp/security/security-alert/2026/alert20261120.html"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "research_tools",
+        "language": "ja",
+        "query": "セキュリティ 研究 発表 ツール 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://tldrsec.com/p/tldr-sec-355",
+          "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "https://github.com/oritera/Cairn"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "research_tools",
+        "language": "en",
+        "query": "security research paper open source tool released 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://tldrsec.com/p/tldr-sec-355",
+          "https://deepmind.google/blog/introducing-alphaproof-code/",
+          "https://github.com/oritera/Cairn"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "policy",
+        "language": "ja",
+        "query": "サイバーセキュリティ 政策 標準 ガイドライン 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines",
+          "https://projectzero.google/2026/11/disclosure-policy.html"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。 Project Zeroの原発表は11月13日で対象外。"
+      },
+      {
+        "topic": "policy",
+        "language": "en",
+        "query": "cybersecurity policy standard guidance 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines",
+          "https://projectzero.google/2026/11/disclosure-policy.html"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。 Project Zeroの原発表は11月13日で対象外。"
+      },
+      {
+        "topic": "expert_views",
+        "language": "ja",
+        "query": "セキュリティ 研究者 見解 講演 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/",
+          "https://www.troyhunt.com/weekly-update-531/"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "expert_views",
+        "language": "en",
+        "query": "cybersecurity researcher analysis talk opinion 2026-11-16 2026-11-22",
+        "searched_at": "2026-11-25T22:02:43.361Z",
+        "reviewed_urls": [
+          "https://www.schneier.com/",
+          "https://www.troyhunt.com/weekly-update-531/"
+        ],
+        "notes": "日英の対象期間別発見検索。採用は原典本文の日付・内容を別途確認する。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "vulnerability",
+        "language": "mixed",
+        "query": "CVSS 9.0 9.2 9.8 10.0 November 16 22 2026 NVD JVN GitHub critical",
+        "searched_at": "2026-11-25T22:05:35.923Z",
+        "reviewed_urls": [
+          "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/securityadvisories/0/39495",
+          "https://calif.io/java4shell",
+          "https://github.com/php/php-src/security/advisories/GHSA-qc49-hpvq-g2w6"
+        ],
+        "notes": "公式発信・高深刻度候補・公開X投稿を補足検索。原典で確認できない投稿と反応数は根拠に使用しない。 reviewed_urlsは同じ調査群の別検索・リンク追跡を含む共有の確認先で、この検索だけから直接得た結果とは限らない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:openai.com security cybersecurity November 16 22 2026",
+        "searched_at": "2026-11-25T22:05:35.923Z",
+        "reviewed_urls": [
+          "https://openai.com/index/managing-frontier-ai-risk/"
+        ],
+        "notes": "公式発信・高深刻度候補・公開X投稿を補足検索。原典で確認できない投稿と反応数は根拠に使用しない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:anthropic.com security disclosure November 2026 16 22",
+        "searched_at": "2026-11-25T22:05:35.923Z",
+        "reviewed_urls": [
+          "https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines"
+        ],
+        "notes": "公式発信・高深刻度候補・公開X投稿を補足検索。原典で確認できない投稿と反応数は根拠に使用しない。"
+      },
+      {
+        "topic": "follow_up",
+        "language": "en",
+        "query": "site:cloud.google.com threat intelligence security November 2026 16 22",
+        "searched_at": "2026-11-25T22:05:35.923Z",
+        "reviewed_urls": [
+          "https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold"
+        ],
+        "notes": "公式発信・高深刻度候補・公開X投稿を補足検索。原典で確認できない投稿と反応数は根拠に使用しない。"
+      },
+      {
+        "topic": "x",
+        "language": "en",
+        "query": "site:x.com cybersecurity November 2026 vCenter Optimizely",
+        "searched_at": "2026-11-25T22:05:35.923Z",
+        "reviewed_urls": [],
+        "notes": "公式発信・高深刻度候補・公開X投稿を補足検索。原典で確認できない投稿と反応数は根拠に使用しない。 投稿者・日時・原文を確定できる適合投稿は得られず、反応数は採用していない。投稿不存在を意味しない。"
+      }
+    ],
+    "limitations": [
+      "NVD検索は可読本文を取得できず、期間指定Critical検索も利用不能。JVN iPedia検索は404、GitHub Advisoryの期間指定Critical一覧はDisabledError。対象期間の新規公開・重要更新についてCVSS v2/3.0/3.1/4.0の9.0以上を全版・全ページで網羅できていない。",
+      "CISA KEVカタログと公式JSONは403。期間内追加・更新全件を確認できず、個別CVE記録や原典分析で補足した範囲に限る。",
+      "検索で発見したTYPO3、REDCap、Idunno.AntiCsrf、Drupal等の高深刻度候補およびPHPの全Critical項目の個別調査は未完了。非掲載を安全・影響なしと解釈しない。",
+      "一部coreトップの動的な新着表示は取得が不十分。検索と個別原典で補足したが、全更新・全記事を確認したとは主張しない。日本語・英語の6群は検索実施済み。",
+      "公開X検索は原文・投稿者・日時を揃えて裏付けられる適合投稿を得られず、投稿や反応数を根拠に使用していない。Xの全体網羅や投稿不存在は判断していない。",
+      "OpenJDKアドバイザリは403、Apacheメーリングリストは可読本文0行。Calif・Oracle/CNA・JVNおよびApache/CNA記録で補強した。各社の自己説明・研究観測を独立再現していない。",
+      "期間後に更新された現行CVE記録は評価・対策の補足に使用し、期間内根拠は元の公開日と期間内発表に置く。過去週報の未掲載保証や前回の会話に依存した出典確認は行っていない。"
+    ]
+  },
+  "validation": {
+    "editorial_review": "completed",
+    "notes": [
+      "取得した同一コミットの必須4ファイルの全文を読解し、版の整合、is_example=false、対象期間とファイル名を目視照合した。架空サンプルの事件・出典・指標を使用していない。",
+      "記事IDとtop_article_ids、記事内source_idとreason/person参照、必須項目、日付・URL、CVEの重複を編集上で見直した。JSON構文はJSONとして構成・直列化して確認し、テスト・検証プログラムは作成・実行していない。",
+      "全記事にITセキュリティという必須条件を適用。掲載理由は重要度・注目度だけとし、理由と出典をreasonsに明記。記事数の最低目標は設けていない。",
+      "上位3件はvCenterの実悪用と管理権限取得、Java4Shellの主要アプリへの影響と専門媒体での紹介、KARTEの多数企業・連携認証情報への影響を比較して選んだ。その他の悪用済み候補にも対応が必要であり、順位は危険性の不存在を意味しない。",
+      "公開日時・タイムゾーンを確定できない日付はpublished_at=nullとし、period_basisと出典notesに日付を記録。AIによる編集確認であり、人間による監修・環境への対策適用ではない。",
+      "保存成功は本JSONの生成だけでは判断せず、mainへのコミット後、その保存先コミットから読み戻して送信内容との一致を別途確認する。"
+    ]
+  }
+}
